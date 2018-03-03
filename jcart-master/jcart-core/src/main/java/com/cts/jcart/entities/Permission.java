@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Entity

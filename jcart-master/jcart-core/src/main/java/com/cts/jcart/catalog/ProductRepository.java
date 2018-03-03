@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.cts.jcart.entities.Product;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public interface ProductRepository extends JpaRepository<Product, Integer>{

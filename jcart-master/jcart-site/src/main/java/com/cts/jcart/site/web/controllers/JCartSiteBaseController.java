@@ -16,7 +16,7 @@ import com.cts.jcart.site.security.AuthenticatedUser;
 import com.cts.jcart.site.web.models.Cart;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public abstract class JCartSiteBaseController

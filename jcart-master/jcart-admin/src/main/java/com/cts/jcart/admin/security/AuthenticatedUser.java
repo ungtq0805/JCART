@@ -16,7 +16,7 @@ import com.cts.jcart.entities.Role;
 import com.cts.jcart.entities.User;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public class AuthenticatedUser extends org.springframework.security.core.userdetails.User

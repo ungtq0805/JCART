@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cts.jcart.common.services.EmailService;
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)

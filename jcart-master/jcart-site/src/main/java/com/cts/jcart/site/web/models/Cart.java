@@ -13,7 +13,7 @@ import com.cts.jcart.entities.Payment;
 import com.cts.jcart.entities.Product;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public class Cart

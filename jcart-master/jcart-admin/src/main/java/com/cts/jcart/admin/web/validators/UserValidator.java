@@ -13,7 +13,7 @@ import com.cts.jcart.entities.User;
 import com.cts.jcart.security.SecurityService;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Component

@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Entity

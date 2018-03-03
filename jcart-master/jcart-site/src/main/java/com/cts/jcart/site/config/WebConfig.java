@@ -23,7 +23,7 @@ import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Configuration

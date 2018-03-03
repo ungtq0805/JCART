@@ -29,7 +29,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import com.cts.jcart.admin.security.PostAuthorizationFilter;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Configuration

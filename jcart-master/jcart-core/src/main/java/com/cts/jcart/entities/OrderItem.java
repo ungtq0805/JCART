@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Entity

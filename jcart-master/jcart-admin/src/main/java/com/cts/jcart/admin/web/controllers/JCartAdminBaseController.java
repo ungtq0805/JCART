@@ -13,7 +13,7 @@ import com.cts.jcart.admin.security.AuthenticatedUser;
 import com.cts.jcart.common.services.JCLogger;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public abstract class JCartAdminBaseController

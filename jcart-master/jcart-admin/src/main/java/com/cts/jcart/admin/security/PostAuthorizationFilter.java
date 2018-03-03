@@ -17,7 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.cts.jcart.security.SecurityService;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Component

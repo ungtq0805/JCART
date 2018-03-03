@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
 
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Entity

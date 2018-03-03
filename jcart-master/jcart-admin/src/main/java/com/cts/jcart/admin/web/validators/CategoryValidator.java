@@ -13,7 +13,7 @@ import com.cts.jcart.catalog.CatalogService;
 import com.cts.jcart.entities.Category;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Component

@@ -6,7 +6,7 @@ package com.cts.jcart.admin.web.utils;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public class WebUtils

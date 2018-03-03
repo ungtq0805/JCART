@@ -23,7 +23,7 @@ import com.cts.jcart.entities.Product;
 import com.cts.jcart.site.web.utils.WebUtils;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Controller

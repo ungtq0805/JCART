@@ -4,7 +4,7 @@
 package com.cts.jcart.admin.security;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public class SecurityUtil

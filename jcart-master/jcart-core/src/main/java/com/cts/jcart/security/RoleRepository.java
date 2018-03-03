@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.cts.jcart.entities.Role;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public interface RoleRepository extends JpaRepository<Role, Integer>

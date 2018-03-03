@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cts.jcart.JCartAdminApplication;
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import com.cts.jcart.entities.Product;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public class LineItem

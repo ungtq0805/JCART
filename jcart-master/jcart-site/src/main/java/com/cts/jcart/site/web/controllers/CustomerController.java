@@ -23,7 +23,7 @@ import com.cts.jcart.entities.Order;
 import com.cts.jcart.site.web.validators.CustomerValidator;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Controller

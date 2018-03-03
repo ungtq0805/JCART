@@ -12,7 +12,7 @@ import com.cts.jcart.entities.Customer;
 import com.cts.jcart.entities.Order;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public interface CustomerRepository extends JpaRepository<Customer, Integer>{

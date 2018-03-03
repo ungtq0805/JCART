@@ -12,7 +12,7 @@ import com.cts.jcart.customers.CustomerService;
 import com.cts.jcart.entities.Customer;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 @Component

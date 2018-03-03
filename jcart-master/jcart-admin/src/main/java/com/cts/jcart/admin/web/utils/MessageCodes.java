@@ -4,7 +4,7 @@
 package com.cts.jcart.admin.web.utils;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public interface MessageCodes

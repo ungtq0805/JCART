@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.cts.jcart.entities.Permission;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public interface PermissionRepository extends JpaRepository<Permission, Integer>

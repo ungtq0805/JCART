@@ -1,7 +1,7 @@
 package com.cts.jcart.entities;
 
 /**
- * @author Siva
+ * @author ungtq
  *
  */
 public enum OrderStatus
