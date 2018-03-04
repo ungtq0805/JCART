@@ -22,11 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cts.jcart.admin.security.CustomUserDetailsService;
 import com.cts.jcart.admin.security.SecurityUtil;
 import com.cts.jcart.admin.web.validators.UserValidator;
 import com.cts.jcart.entities.Role;
 import com.cts.jcart.entities.User;
 import com.cts.jcart.security.SecurityService;
+import com.cts.jcart.security.UserRepository;
 
 /**
  * @author ungtq
@@ -38,8 +40,10 @@ public class UserController extends JCartAdminBaseController
 {
 	private static final String viewPrefix = "users/";
 	@Autowired protected SecurityService securityService;
+	@Autowired private CustomUserDetailsService customUserDetailsService;
 	@Autowired private UserValidator userValidator;
 	@Autowired protected PasswordEncoder passwordEncoder;
+	@Autowired UserRepository userRepository;
 	
 	@Override
 	protected String getHeaderTitle()
@@ -81,6 +85,22 @@ public class UserController extends JCartAdminBaseController
 		User persistedUser = securityService.createUser(user);
 		logger.debug("Created new User with id : {} and name : {}", persistedUser.getId(), persistedUser.getName());
 		redirectAttributes.addFlashAttribute("info", "User created successfully");
+		return "redirect:/users";
+	}
+	
+	/**
+	 * @author ungtq
+	 * Remove user 
+	 * @param user
+	 * @param result
+	 * @param model
+	 * @param redirectAttributes
+	 * @return URL
+	 */
+	@RequestMapping(value="/users/remove", method=RequestMethod.GET)
+	public String removeUser(@Valid @ModelAttribute("user") User user, BindingResult result, 
+			Model model, RedirectAttributes redirectAttributes) {
+		customUserDetailsService.removeUserById(user.getId());
 		return "redirect:/users";
 	}
 	

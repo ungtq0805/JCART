@@ -15,5 +15,11 @@ public interface UserRepository extends JpaRepository<User, Integer>
 {
 
 	User findByEmail(String email);
-
+	
+	/**
+	 * @author UNGTQ
+	 * remove user by id
+	 * @param id
+	 */
+	void deleteById(Integer id);
 }
