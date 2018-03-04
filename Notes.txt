@@ -1,4 +1,7 @@
 http://www.baeldung.com/spring-security-authentication-with-a-database
 
 
+Pass data to a Bootstrap modal dialog using angular.
+https://embed.plnkr.co/plunk/8U4TIT
+
 ungtq
