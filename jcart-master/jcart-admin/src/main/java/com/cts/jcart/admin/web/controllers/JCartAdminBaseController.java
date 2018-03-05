@@ -35,8 +35,7 @@ public abstract class JCartAdminBaseController
 	}
 	
 	@ModelAttribute("authenticatedUser")
-    public AuthenticatedUser authenticatedUser(@AuthenticationPrincipal AuthenticatedUser authenticatedUser)
-    {
+    public AuthenticatedUser authenticatedUser(@AuthenticationPrincipal AuthenticatedUser authenticatedUser){
         return authenticatedUser;
     }
 	

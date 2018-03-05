@@ -139,5 +139,40 @@ public class UserController extends JCartAdminBaseController
 		redirectAttributes.addFlashAttribute("info", "User updates successfully");
 		return "redirect:/users";
 	}
+	
+	/**
+	 * edit user account only with user login
+	 * @author ungtq
+	 * @param id
+	 * @param model
+	 * @return String
+	 */
+	@RequestMapping(value="/myAccount/{id}", method=RequestMethod.GET)
+	public String editMyAccount(@PathVariable Integer id, Model model) {
+		User user = securityService.getUserById(id);
+		Map<Integer, Role> assignedRoleMap = new HashMap<>();
+		List<Role> roles = user.getRoles();
+		for (Role role : roles){
+			assignedRoleMap.put(role.getId(), role);
+		}
+		
+		List<Role> userRoles = new ArrayList<>();
+		List<Role> allRoles = securityService.getAllRoles();
+		for (Role role : allRoles)
+		{
+			if(assignedRoleMap.containsKey(role.getId())){
+				userRoles.add(role);
+			} else {
+				userRoles.add(null);
+			}
+		}
+		
+		user.setRoles(userRoles);
+		model.addAttribute("user",user);
+		//model.addAttribute("rolesList",allRoles);		
+		return viewPrefix+"edit_user";
+	}
+	
+	
 
 }

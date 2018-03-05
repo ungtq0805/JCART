@@ -117,9 +117,10 @@ public class ProductController extends JCartAdminBaseController
 	public String updateProduct(@Valid @ModelAttribute("product") ProductForm productForm, BindingResult result, 
 			Model model, RedirectAttributes redirectAttributes) {
 		//productFormValidator.validate(productForm, result);
-		if(result.hasErrors()){
-			return viewPrefix+"edit_product";
-		}
+		//if(result.hasErrors()){
+		//	return viewPrefix+"edit_product";
+		//}
+		
 		Product product = productForm.toProduct();
 		Product persistedProduct = catalogService.updateProduct(product);
 		this.saveProductImageToDisk(productForm);

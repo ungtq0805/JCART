@@ -20,11 +20,7 @@ public class HomeController extends JCartAdminBaseController
 	}
 	
 	@RequestMapping("/home")
-	public String home(Model model)
-	{
+	public String home(Model model){
 		return "home";
 	}
-
-	
-
 }
