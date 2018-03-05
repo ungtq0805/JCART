@@ -91,4 +91,13 @@ public class CatalogService {
 	public List<Product> searchProducts(String query) {
 		return productRepository.search("%"+query+"%");
 	}
+	
+	/**
+	 * @author UNGTQ
+	 * remove user by id
+	 * @param id
+	 */
+	public void deleteCatById(Integer id) {
+		categoryRepository.deleteById(id);
+	}
 }

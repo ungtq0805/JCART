@@ -14,5 +14,11 @@ import com.cts.jcart.entities.Category;
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
 
 	Category getByName(String name);
-
+	
+	/**
+	 * @author UNGTQ
+	 * remove user by id
+	 * @param id
+	 */
+	void deleteById(Integer id);
 }

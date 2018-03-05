@@ -86,5 +86,19 @@ public class CategoryController extends JCartAdminBaseController
 		redirectAttributes.addFlashAttribute("info", "Category updated successfully");
 		return "redirect:/categories";
 	}
-
+	
+	/**
+	 * @author ungtq
+	 * Remove category 
+	 * @param user
+	 * @param result
+	 * @param model
+	 * @param redirectAttributes
+	 * @return URL
+	 */
+	@RequestMapping(value="/categories/remove/{id}", method=RequestMethod.GET)
+	public String removeCat(@PathVariable Integer id, Model model) {
+		catalogService.deleteCatById(id);
+		return "redirect:/categories";
+	}
 }
