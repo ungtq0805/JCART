@@ -61,6 +61,12 @@
 			                      	  	th:onclick="'showDeleteModal(' + ${product.id} + ')'">
 			                      	  	<i class="fa fa-trash"></i> Del
 		                      	  	</a>
+		                      	  	
+		                      	  	<a th:href="@{/products/copy/{id}(id=${product.id})}"
+										class="btn btn-sm btn-default"><i class="fa fa-copy"></i>
+										Copy
+									</a>
+		                      	  	
 								</td>
 							</tr>
 

@@ -5,6 +5,7 @@ package com.cts.jcart.catalog;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -108,5 +109,21 @@ public class CatalogService {
 	 */
 	public void deleteProductById(Integer id) {
 		productRepository.deleteById(id);
+	}
+	
+	/**
+	 * @author ungtq
+	 * Clone the new Product
+	 * @param id
+	 * @return Product
+	 */
+	public Product cloneProductById(Integer id) {
+		Product productSource = productRepository.findOne(id);
+		Product productTarget = new Product();
+		
+		BeanUtils.copyProperties(productSource, productTarget);
+		productTarget.setId(null);
+		
+		return productTarget;
 	}
 }

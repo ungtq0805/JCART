@@ -113,26 +113,6 @@ public class ProductController extends JCartAdminBaseController
 		}	      
 	}*/
 	
-	/**
-	 * ungtq fix bug load image
-	 * @param productId
-	 * @param request
-	 * @param response
-	 * @return byte[]
-	 */
-	@RequestMapping(value="/products/images/{productId}", method=RequestMethod.GET)
-	@ResponseBody
-	public byte[] showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
-		try {
-			File serverFile = new File(WebUtils.IMAGES_DIR +productId+".jpg");
-		    return Files.readAllBytes(serverFile.toPath());
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	
 	@RequestMapping(value="/products/{id}", method=RequestMethod.POST)
 	public String updateProduct(@Valid @ModelAttribute("product") ProductForm productForm, BindingResult result, 
 			Model model, RedirectAttributes redirectAttributes) {
@@ -176,5 +156,38 @@ public class ProductController extends JCartAdminBaseController
 	public String removeProduct(@PathVariable Integer id, Model model) {
 		catalogService.deleteProductById(id);
 		return "redirect:/products";
+	}
+	
+	/**
+	 * ungtq fix bug load image
+	 * @param productId
+	 * @param request
+	 * @param response
+	 * @return byte[]
+	 */
+	@RequestMapping(value="/products/images/{productId}", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			File serverFile = new File(WebUtils.IMAGES_DIR +productId+".jpg");
+		    return Files.readAllBytes(serverFile.toPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * @author ungtq
+	 * copy the product with mode new and refer
+	 * @param id
+	 * @param model
+	 * @return 
+	 */
+	@RequestMapping(value="/products/copy/{id}", method=RequestMethod.GET)
+	public String editProductFormCopy(@PathVariable Integer id, Model model) {
+		Product product = catalogService.cloneProductById(id);
+		model.addAttribute("product",ProductForm.fromProduct(product));
+		return viewPrefix+"create_product";
 	}
 }
