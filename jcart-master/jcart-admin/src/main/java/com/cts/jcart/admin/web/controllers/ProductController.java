@@ -7,6 +7,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -99,7 +101,7 @@ public class ProductController extends JCartAdminBaseController
 		return viewPrefix+"edit_product";
 	}
 	
-	@RequestMapping(value="/products/images/{productId}", method=RequestMethod.GET)
+	/*@RequestMapping(value="/products/images/{productId}", method=RequestMethod.GET)
 	public void showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			FileSystemResource file = new FileSystemResource(WebUtils.IMAGES_DIR +productId+".jpg");     
@@ -109,12 +111,25 @@ public class ProductController extends JCartAdminBaseController
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	      
+	}*/
+	
+	@RequestMapping(value="/products/images/{productId}", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			File serverFile = new File(WebUtils.IMAGES_DIR +productId+".jpg");
+		    return Files.readAllBytes(serverFile.toPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
+	
 	
 	@RequestMapping(value="/products/{id}", method=RequestMethod.POST)
 	public String updateProduct(@Valid @ModelAttribute("product") ProductForm productForm, BindingResult result, 
 			Model model, RedirectAttributes redirectAttributes) {
-		productFormValidator.validate(productForm, result);
+		//productFormValidator.validate(productForm, result);
 		if(result.hasErrors()){
 			return viewPrefix+"edit_product";
 		}
