@@ -6,4 +6,6 @@ https://embed.plnkr.co/plunk/8U4TIT
 
 ungtq
 
+GIT reference project
+https://github.com/bndynet/web-framework-for-java
 https://github.com/Kvark900/spring-jpa-thymeleaf-bootstrap
