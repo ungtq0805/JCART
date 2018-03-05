@@ -113,6 +113,13 @@ public class ProductController extends JCartAdminBaseController
 		}	      
 	}*/
 	
+	/**
+	 * ungtq fix bug load image
+	 * @param productId
+	 * @param request
+	 * @param response
+	 * @return byte[]
+	 */
 	@RequestMapping(value="/products/images/{productId}", method=RequestMethod.GET)
 	@ResponseBody
 	public byte[] showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
