@@ -100,4 +100,13 @@ public class CatalogService {
 	public void deleteCatById(Integer id) {
 		categoryRepository.deleteById(id);
 	}
+	
+	/**
+	 * @author UNGTQ
+	 * remove user by id
+	 * @param id
+	 */
+	public void deleteProductById(Integer id) {
+		productRepository.deleteById(id);
+	}
 }

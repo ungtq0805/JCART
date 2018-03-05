@@ -6,6 +6,20 @@
 
 <head>
 <title>Products</title>
+ 	<script type="text/javascript">
+	        
+       function showDeleteModal(catId) {
+       	$('#productId').val(catId);
+       }
+       
+       function deleteProduct() {
+       	 var productId = $('#productId').val();
+       	 var url = '/products/remove/' + productId;
+		 window.location = url;
+       }
+       
+ 	</script>
+ 	
 </head>
 <body>
 
@@ -35,14 +49,51 @@
 								<td th:text="${iterStat.count}">1</td>
 								<td th:text="${product.name}">Product Name</td>
 								<td th:text="${product.description}">Product Description</td>
-								<td><a th:href="@{/products/{id}(id=${product.id})}"
-									class="btn btn-sm btn-default"><i class="fa fa-edit"></i>
-										Edit</a></td>
+								<td>
+									<a th:href="@{/products/{id}(id=${product.id})}"
+										class="btn btn-sm btn-default"><i class="fa fa-edit"></i>
+										Edit
+									</a>
+									
+									<a class="btn btn-sm btn-default open-AddBookDialog" 
+			                      	  	data-toggle="modal" 
+			                      	  	data-target="#deleteModal"
+			                      	  	th:onclick="'showDeleteModal(' + ${product.id} + ')'">
+			                      	  	<i class="fa fa-trash"></i> Del
+		                      	  	</a>
+								</td>
 							</tr>
 
 						</table>
 					</div>
 
+				</div>
+				
+				<div id="deleteModal" class="modal fade" role="dialog">
+				  <div class="modal-dialog">
+				
+				    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title" th:text="#{label.confirm.title}"></h4>
+				      </div>
+				      <div class="modal-body">
+				        <p th:text="#{label.confirm.delete.products}"></p>
+				      </div>
+			    	  <input type="hidden" id="productId"/>
+				      <div class="modal-footer">
+				     	<a type="button" class="btn btn-danger" 
+				     		style="text-decoration: none;  color: #ffffff;" th:text="#{label.confirm.ok}"
+		                   	onclick="deleteProduct()">
+		                </a>
+				        <a type="button" class="btn btn-danger" data-dismiss="modal"
+	                		style="color: #ffffff;" th:text="#{label.confirm.cancel}">
+		                </a>
+				      </div>
+				    </div>
+				
+				  </div>
 				</div>
 			</div>
 		</div>

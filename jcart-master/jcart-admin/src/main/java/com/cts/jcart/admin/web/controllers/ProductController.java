@@ -140,4 +140,19 @@ public class ProductController extends JCartAdminBaseController
 			}
 		}
 	}
+	
+	/**
+	 * @author ungtq
+	 * Remove Product 
+	 * @param user
+	 * @param result
+	 * @param model
+	 * @param redirectAttributes
+	 * @return URL
+	 */
+	@RequestMapping(value="/products/remove/{id}", method=RequestMethod.GET)
+	public String removeProduct(@PathVariable Integer id, Model model) {
+		catalogService.deleteProductById(id);
+		return "redirect:/products";
+	}
 }
