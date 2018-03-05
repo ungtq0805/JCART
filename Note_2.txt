@@ -1,0 +1,1 @@
+https://github.com/Kvark900/spring-jpa-thymeleaf-bootstrap
