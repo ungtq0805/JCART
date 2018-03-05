@@ -5,3 +5,5 @@ Pass data to a Bootstrap modal dialog using angular.
 https://embed.plnkr.co/plunk/8U4TIT
 
 ungtq
+
+https://github.com/Kvark900/spring-jpa-thymeleaf-bootstrap
