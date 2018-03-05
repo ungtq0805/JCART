@@ -67,7 +67,7 @@
 							<div>
 								<label>Order Status</label> <select th:field="*{status}">
 									<option
-										th:each="status: ${T(com.sivalabs.jcart.entities.OrderStatus).values()}"
+										th:each="status: ${T(com.cts.jcart.entities.OrderStatus).values()}"
 										th:value="${status}" th:text="${status}">Status</option>
 								</select>
 							</div>
