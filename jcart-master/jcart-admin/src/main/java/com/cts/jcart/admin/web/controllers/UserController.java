@@ -97,10 +97,9 @@ public class UserController extends JCartAdminBaseController
 	 * @param redirectAttributes
 	 * @return URL
 	 */
-	@RequestMapping(value="/users/remove", method=RequestMethod.GET)
-	public String removeUser(@Valid @ModelAttribute("user") User user, BindingResult result, 
-			Model model, RedirectAttributes redirectAttributes) {
-		customUserDetailsService.removeUserById(user.getId());
+	@RequestMapping(value="/users/remove/{id}", method=RequestMethod.GET)
+	public String removeUser(@PathVariable Integer id, Model model) {
+		customUserDetailsService.removeUserById(id);
 		return "redirect:/users";
 	}
 	
