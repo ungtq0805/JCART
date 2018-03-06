@@ -35,22 +35,22 @@ public class HomeController extends JCartAdminBaseController
 		return "home";
 	}
 	
-//	/**
-//	 * load image with login user
-//	 * @param productId
-//	 * @param request
-//	 * @param response
-//	 * @return byte[]
-//	 */
-//	@RequestMapping(value="/users/images/{imageUrl}", method=RequestMethod.GET)
-//	@ResponseBody
-//	public static byte[] showUserImage(HttpServletRequest request, HttpServletResponse response) {
-//		try {
-//			File serverFile = new File(WebUtils.IMAGES_USER_DIR +getCurrentUser().getUser().getId()+".jpg");
-//		    return Files.readAllBytes(serverFile.toPath());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+	/**
+	 * load image with login user
+	 * @param productId
+	 * @param request
+	 * @param response
+	 * @return byte[]
+	 */
+	@RequestMapping(value="/user/login/image", method=RequestMethod.GET)
+	@ResponseBody
+	public static byte[] showUserImage(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			File serverFile = new File(WebUtils.IMAGES_USER_DIR +getCurrentUser().getUser().getId()+".jpg");
+		    return Files.readAllBytes(serverFile.toPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
