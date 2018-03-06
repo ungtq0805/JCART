@@ -9,3 +9,22 @@ ungtq
 GIT reference project
 https://github.com/bndynet/web-framework-for-java
 https://github.com/Kvark900/spring-jpa-thymeleaf-bootstrap
+
+http://www.baeldung.com/spring-security-authentication-with-a-database
+
+
+Pass data to a Bootstrap modal dialog using angular.
+https://embed.plnkr.co/plunk/8U4TIT
+
+ungtq
+
+https://github.com/Kvark900/spring-jpa-thymeleaf-bootstrap
+
+Dữ liệu trước khi thay đổi 	変更前のデータ
+Dữ liệu sau khi thay đổi	変更後のデータ
+Dữ liệu thêm bằng tay		手動で追加するテータ
+
+fullName
+phoneNo
+imageUrl
+	
