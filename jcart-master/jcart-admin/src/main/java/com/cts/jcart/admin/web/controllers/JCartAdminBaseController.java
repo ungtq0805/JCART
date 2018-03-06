@@ -64,15 +64,15 @@ public abstract class JCartAdminBaseController
 	    return getCurrentUser() != null;
 	}
 	
-	@ModelAttribute("userLoginImage")
-	@ResponseBody
-	public byte[] showUserImage(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			File serverFile = new File(WebUtils.IMAGES_USER_DIR +getCurrentUser().getUser().getId()+".jpg");
-		    return Files.readAllBytes(serverFile.toPath());
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+//	@ModelAttribute("userLoginImage")
+//	@ResponseBody
+//	public byte[] showUserImage(HttpServletRequest request, HttpServletResponse response) {
+//		try {
+//			File serverFile = new File(WebUtils.IMAGES_USER_DIR +getCurrentUser().getUser().getId()+".jpg");
+//		    return Files.readAllBytes(serverFile.toPath());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 }

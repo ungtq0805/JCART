@@ -6,11 +6,15 @@ package com.cts.jcart.admin.web.controllers;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +27,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cts.jcart.JCartException;
 import com.cts.jcart.admin.security.CustomUserDetailsService;
 import com.cts.jcart.admin.security.SecurityUtil;
-import com.cts.jcart.admin.web.models.ProductForm;
 import com.cts.jcart.admin.web.models.UserForm;
 import com.cts.jcart.admin.web.utils.WebUtils;
 import com.cts.jcart.admin.web.validators.UserValidator;
-import com.cts.jcart.entities.Product;
 import com.cts.jcart.entities.Role;
 import com.cts.jcart.entities.User;
 import com.cts.jcart.security.SecurityService;
@@ -217,6 +220,27 @@ public class UserController extends JCartAdminBaseController
 			} catch (Exception e) {
 				throw new JCartException(e);
 			}
+		}
+	}
+	
+	/**
+	 * ungtq fix bug load image
+	 * @param productId
+	 * @param request
+	 * @param response
+	 * @return byte[]
+	 */
+	@RequestMapping(value="/users/images/{id}", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] showUserImage(@PathVariable String id, 
+			HttpServletRequest request, 
+			HttpServletResponse response) {
+		try {
+			File serverFile = new File(WebUtils.IMAGES_USER_DIR +id+".jpg");
+		    return Files.readAllBytes(serverFile.toPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

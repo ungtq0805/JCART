@@ -15,7 +15,8 @@
                   <h3 class="box-title">Edit User</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" th:action="@{/users/{id}(id=${user.id})}" th:object="${user}" method="post">
+                  <form role="form" th:action="@{/users/{id}(id=${user.id})}" 
+                  	th:object="${user}" method="post" enctype="multipart/form-data">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                     <!-- text input -->
                     <div class="form-group">
@@ -23,9 +24,40 @@
                       <input type="text" class="form-control" name="name" th:field="*{name}" readonly="readonly"/>
                     </div>
                     
+                     <!-- Full Name -->
+                    <div class="form-group" th:classappend="${#fields.hasErrors('fullName')}? 'has-error'">
+                      <label>Full Name</label>
+                      <input type="text" class="form-control" name="fullName" th:field="*{fullName}" placeholder="Enter User Full Name"/>
+                      <p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" th:class="text-red">Incorrect data</p>
+                    </div>
+                    
                     <div class="form-group">
                       <label>Email</label>
                       <input type="text" class="form-control" name="email" th:field="*{email}" readonly="readonly"/>
+                    </div>
+                    
+                    <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+                      <label>Password</label>
+                      <input type="password" class="form-control" name="password" th:field="*{password}"  placeholder="Enter password"/>
+                      <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:class="text-red">Incorrect data</p>
+                    </div>
+                    
+                     <!-- phone No -->
+                    <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+                      <label>Phone Number</label>
+                      <input type="text" class="form-control" name="phoneNo" th:field="*{phoneNo}"  placeholder="Enter Phone Number"/>
+                      <p th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}" th:class="text-red">Incorrect data</p>
+                    </div>
+                    
+                    <!-- Image URL -->
+                    <div class="form-group" th:classappend="${#fields.hasErrors('image')}? 'has-error'">
+                      <label for="image">Image</label>
+                      <input type="file" class="form-control" name="image" th:field="*{image}"/>
+                      <p th:if="${#fields.hasErrors('image')}" th:errors="*{image}" th:class="text-red">Incorrect data</p>
+                      <p class="help-block">Select JPG Image</p>
+                      <p>
+                      	<img alt="" src="image.jpg" th:src="@{'/users/images/{imageUrl}.jpg'(imageUrl=${user.id})}" height="200" width="250"/>
+                      </p>
                     </div>
                     					
 					<div class="form-group">

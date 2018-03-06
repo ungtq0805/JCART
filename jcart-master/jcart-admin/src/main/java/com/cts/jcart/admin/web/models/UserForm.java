@@ -16,7 +16,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cts.jcart.entities.Product;
 import com.cts.jcart.entities.Role;
 import com.cts.jcart.entities.User;
 
