@@ -13,8 +13,6 @@ import org.springframework.context.MessageSource;
  *
  */
 public class WebUtils{
-	@Autowired 
-	private static MessageSource messageSource;
 	
 	private WebUtils(){
 		
@@ -22,14 +20,10 @@ public class WebUtils{
 	
 	public static final String IMAGES_PREFIX = "/products/images/";
 	public static final String IMAGES_DIR =  "D:/jcart/products/";
-			//getMessageSource().getMessage("spring.jcart.dir.path.image", null, null); // "D:/jcart/products/";
+	public static final String IMAGES_USER_DIR =  "D:/jcart/user/";
 	
 	public static String getURLWithContextPath(HttpServletRequest request){
 		return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 				+ request.getContextPath();
 	}
-	
-//	private static MessageSource getMessageSource() {
-//		return messageSource;
-//	}
 }

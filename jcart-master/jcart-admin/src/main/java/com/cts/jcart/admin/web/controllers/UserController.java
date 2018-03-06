@@ -3,6 +3,9 @@
  */
 package com.cts.jcart.admin.web.controllers;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +23,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cts.jcart.JCartException;
 import com.cts.jcart.admin.security.CustomUserDetailsService;
 import com.cts.jcart.admin.security.SecurityUtil;
+import com.cts.jcart.admin.web.models.ProductForm;
+import com.cts.jcart.admin.web.models.UserForm;
+import com.cts.jcart.admin.web.utils.WebUtils;
 import com.cts.jcart.admin.web.validators.UserValidator;
+import com.cts.jcart.entities.Product;
 import com.cts.jcart.entities.Role;
 import com.cts.jcart.entities.User;
 import com.cts.jcart.security.SecurityService;
@@ -65,24 +74,34 @@ public class UserController extends JCartAdminBaseController
 	
 	@RequestMapping(value="/users/new", method=RequestMethod.GET)
 	public String createUserForm(Model model) {
-		User user = new User();
+		UserForm user = new UserForm();
 		model.addAttribute("user",user);
-		//model.addAttribute("rolesList",securityService.getAllRoles());		
 		
 		return viewPrefix+"create_user";
 	}
 
 	@RequestMapping(value="/users", method=RequestMethod.POST)
-	public String createUser(@Valid @ModelAttribute("user") User user, BindingResult result, 
+	public String createUser(@Valid @ModelAttribute("user") UserForm userForm, BindingResult result, 
 			Model model, RedirectAttributes redirectAttributes) {
-		userValidator.validate(user, result);
+		userValidator.validateWithForm(userForm, result);
 		if(result.hasErrors()){
 			return viewPrefix+"create_user";
 		}
-		String password = user.getPassword();
+		
+		//encode password
+		String password = userForm.getPassword();
 		String encodedPwd = passwordEncoder.encode(password);
-		user.setPassword(encodedPwd);
+		userForm.setPassword(encodedPwd);
+		
+		//convert from Form to Entity
+		User user = userForm.toUser();
+		
 		User persistedUser = securityService.createUser(user);
+		
+		//save image path
+		userForm.setId(user.getId());
+		saveUserImageToDisk(userForm);
+		
 		logger.debug("Created new User with id : {} and name : {}", persistedUser.getId(), persistedUser.getName());
 		redirectAttributes.addFlashAttribute("info", "User created successfully");
 		return "redirect:/users";
@@ -123,18 +142,27 @@ public class UserController extends JCartAdminBaseController
 			}
 		}
 		user.setRoles(userRoles);
-		model.addAttribute("user",user);
-		//model.addAttribute("rolesList",allRoles);		
+		model.addAttribute("user", UserForm.fromUser(user));
+
 		return viewPrefix+"edit_user";
 	}
 	
 	@RequestMapping(value="/users/{id}", method=RequestMethod.POST)
-	public String updateUser(@ModelAttribute("user") User user, BindingResult result, 
+	public String updateUser(@ModelAttribute("user") UserForm userForm, BindingResult result, 
 			Model model, RedirectAttributes redirectAttributes) {
 		if(result.hasErrors()){
 			return viewPrefix+"edit_user";
 		}
+		
+		//convert to entity
+		User user = userForm.toUser();
+		
+		//update DB
 		User persistedUser = securityService.updateUser(user);
+		
+		//save image to Disk
+		saveUserImageToDisk(userForm);
+		
 		logger.debug("Updated user with id : {} and name : {}", persistedUser.getId(), persistedUser.getName());
 		redirectAttributes.addFlashAttribute("info", "User updates successfully");
 		return "redirect:/users";
@@ -173,6 +201,22 @@ public class UserController extends JCartAdminBaseController
 		return viewPrefix+"edit_user";
 	}
 	
-	
-
+	/**
+	 * 
+	 * @param productForm
+	 */
+	private void saveUserImageToDisk(UserForm userForm) {
+		MultipartFile file = userForm.getImage();
+		if (file!= null && !file.isEmpty()) {
+			String name = WebUtils.IMAGES_USER_DIR + userForm.getId() + ".jpg";
+			try {
+				byte[] bytes = file.getBytes();
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(name)));
+				stream.write(bytes);
+				stream.close();
+			} catch (Exception e) {
+				throw new JCartException(e);
+			}
+		}
+	}
 }

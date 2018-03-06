@@ -30,13 +30,25 @@ public class User
 {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
 	@Column(nullable=false)
 	@NotEmpty()
 	private String name;
+	
+	@Column(nullable=true)
+	private String fullName;
+	
+	@Column(nullable=true)
+	private String phoneNo;
+	
+	@Column(nullable=true)
+	private String imageUrl;
+	
 	@Column(nullable=false, unique=true)
 	@NotEmpty
 	@Email(message="{errors.invalid_email}")
 	private String email;
+	
 	@Column(nullable=false)
 	@NotEmpty
 	@Size(min=4)
@@ -98,6 +110,22 @@ public class User
 	{
 		this.passwordResetToken = passwordResetToken;
 	}
-	
-	
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 }

@@ -21,17 +21,22 @@ import com.cts.jcart.entities.Product;
 public class ProductForm 
 {
 	private Integer id;
+	
 	@NotEmpty
 	private String sku;
+	
 	@NotEmpty
 	private String name;
 	private String description;
+	
 	@NotNull
 	@DecimalMin("0.1")
 	private BigDecimal price = new BigDecimal("0.0");
+	
 	private String imageUrl;
 	private MultipartFile image;
 	private boolean disabled;
+	
 	@NotNull
 	private Integer categoryId;
 	

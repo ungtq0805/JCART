@@ -24,7 +24,14 @@ Dữ liệu trước khi thay đổi 	変更前のデータ
 Dữ liệu sau khi thay đổi	変更後のデータ
 Dữ liệu thêm bằng tay		手動で追加するテータ
 
+id
+name
 fullName
 phoneNo
 imageUrl
-	
+email
+password
+passwordResetToken
+roles
+
+
