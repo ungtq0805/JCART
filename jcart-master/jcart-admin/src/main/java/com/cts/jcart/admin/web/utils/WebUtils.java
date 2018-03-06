@@ -5,9 +5,6 @@ package com.cts.jcart.admin.web.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-
 /**
  * @author ungtq
  *
