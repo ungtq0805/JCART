@@ -24,6 +24,9 @@ Dữ liệu trước khi thay đổi 	変更前のデータ
 Dữ liệu sau khi thay đổi	変更後のデータ
 Dữ liệu thêm bằng tay		手動で追加するテータ
 
+ 「データベース_B_1723」のデータベスになっている。
+
+ 
 id
 name
 fullName
@@ -34,4 +37,34 @@ password
 passwordResetToken
 roles
 
+Inventory
+https://github.com/SumitBisht/InventoryMgt
+https://github.com/achabill/optimusinventory
+https://github.com/RackHD/smi-service-dell-chassis-inventory
+https://github.com/mukhtiarahmed/pwi (recommend)
+https://github.com/ysrbdlgn/springboot-inventory-webapp
+https://github.com/Hasna1/InventoryManagement
+https://github.com/vickydepasupil/InventoryDatabase
+https://github.com/fahrurben/Inventory-Backend
+https://github.com/SujanHavocHyoju/SpringInventoryManagementSystem
+https://github.com/PatilKetan/SpringBoot-Inventory
+https://github.com/pavikumbhar/SpringMVCJMSOrderInventory
+https://github.com/zubayer-ahamed/spring_inventory_jdbc
+https://github.com/chiangs/InventoryMGRSpringMVCCRUD
+https://github.com/mehmetkoca/Inventory-Tracking
+https://github.com/keslerm/site-inventory-tracker
+https://github.com/cruizg93/InventoryAppWithSpringSample
+https://github.com/raza30492/ekanban2
+https://github.com/ataneo/SoftShop
+https://github.com/huschlen/Toy-Store-angular-spring
+https://github.com/dolmengate/New-Leaf-Bookstore
+https://github.com/konsoletyper/warehouse(recommend)
+https://github.com/akalynovska/java_warehouse
+https://github.com/Colptha/spring-warehouse-demo(recommend)
+https://github.com/michal21386/OrderingSystem
+
+
+JAVAFX
+https://github.com/playerony/Warehouse-Desktop
+https://github.com/playerony/Warehouse.JavaFX-Hibernate
 
