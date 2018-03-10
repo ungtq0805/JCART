@@ -58,6 +58,7 @@ public class HomeController extends JCartSiteBaseController
 			previewCategories.add(category);
 		}
 		model.addAttribute("categories", previewCategories);
+		model.addAttribute("dispatch", "home");
 		return "home";
 	}
 	

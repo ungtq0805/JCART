@@ -51,6 +51,7 @@ public class ProductController extends JCartSiteBaseController
 	{
 		List<Product> products = catalogService.searchProducts(query);
 		model.addAttribute("products", products);
+		model.addAttribute("dispatch", "product");
 		return "products";
 	}
 

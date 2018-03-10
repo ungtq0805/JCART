@@ -87,15 +87,24 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#" th:href="@{/}">Home</a></li>
-                       <!--  <li><a th:href="@{/}">New Arrivals</a></li>
-                        <li><a th:href="@{/}">Best Sellers</a></li> -->
+                    	
+                        <li class="active" id="navHome" th:if="${dispatch == 'home'}"><a href="#" th:href="@{/}">Home</a></li>
+                        <li id="navProduct" th:if="${dispatch == 'home'}"><a th:href="@{/products}">Product</a></li>
+                        <li id="navBestSellers" th:if="${dispatch == 'home'}"><a th:href="@{/}">Best Sellers</a></li>
+                        
+                        <li id="navHome1" th:if="${dispatch == 'product'}"><a href="#" th:href="@{/}">Home</a></li>
+                        <li class="active" id="navProduct1" th:if="${dispatch == 'product'}"><a th:href="@{/products}">Product</a></li>
+                        <li id="navBestSellers1" th:if="${dispatch == 'product'}"><a th:href="@{/}">Best Sellers</a></li>
+                        
+                        <li id="navHome2" th:if="${dispatch == 'sellers'}"><a href="#" th:href="@{/}">Home</a></li>
+                        <li id="navProduct2" th:if="${dispatch == 'sellers'}"><a th:href="@{/products}">Product</a></li>
+                        <li class="active" id="navBestSellers2" th:if="${dispatch == 'sellers'}"><a th:href="@{/}">Best Sellers</a></li>
                         
                     </ul>
                     <form class="navbar-form navbar-right" action="#" th:action="@{/products}">
-			            <input type="text" name="q" placeholder="Search products..."/>
-                        <input type="submit" value="Search"/>
-			          </form>
+						<input type="text" name="q" placeholder="Search products..."/>
+						<input type="submit" value="Search"/>
+			        </form>
                 </div>  
             </div>
         </div>
