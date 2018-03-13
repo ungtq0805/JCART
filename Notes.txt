@@ -68,3 +68,17 @@ JAVAFX
 https://github.com/playerony/Warehouse-Desktop
 https://github.com/playerony/Warehouse.JavaFX-Hibernate
 
+
+D:\Exkeihi\properties,D:\Exkeihi\resources,D:\PE_GIT\pe4j_order_check\pe4j\properties,D:\PE_GIT\pe4j_order_check\pe4j\resources
+
+ungtq [20180313] 2728 ORDERBY点検 start
+ungtq [20180313] 2728 ORDERBY end
+
+ungtq [20180313] 3382 ORDERBY点検 start
+ungtq [20180313] 3382 ORDERBY点検 end
+
+ungtq [20180313] 3384 ORDERBY点検 start
+ungtq [20180313] 3384 ORDERBY点検 end
+
+
+
