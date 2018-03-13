@@ -18,6 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.jcart.entities.Role;
 import com.cts.jcart.entities.User;
+import com.cts.jcart.utils.StringUtils;
+
+import ch.qos.logback.core.pattern.ConverterUtil;
 
 /**
  * @author ungtq
@@ -41,11 +44,11 @@ public class UserForm
 	@Email(message="{errors.invalid_email}")
 	private String email;
 	
-	@Column(nullable=false)
-	@NotEmpty
-	@Size(min=4)
 	private String password;
 	private String passwordResetToken;
+	
+	private String passwordConfirm;
+	private String passwordConfirmLast;
 	
 	@ManyToMany(cascade=CascadeType.MERGE)
 	@JoinTable(
@@ -127,6 +130,19 @@ public class UserForm
 		this.image = image;
 	}
 	
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
+	public String getPasswordConfirmLast() {
+		return passwordConfirmLast;
+	}
+	public void setPasswordConfirmLast(String passwordConfirmLast) {
+		this.passwordConfirmLast = passwordConfirmLast;
+	}
+	
 	public User toUser() {
 		User p = new User();
 		p.setId(id);
@@ -136,19 +152,49 @@ public class UserForm
 		p.setPassword(password);
 		p.setPasswordResetToken(passwordResetToken);
 		p.setRoles(roles);
+		p.setPhoneNo(phoneNo);
 		return p;
 	}
 	
-	public static UserForm fromUser(User user)
-	{
+	public static UserForm fromUser(User user){
 		UserForm p = new UserForm();
 		p.setId(user.getId());
 		p.setName(user.getName());
 		p.setFullName(user.getFullName());
 		p.setEmail(user.getEmail());
+		
+		//password
 		p.setPassword(user.getPassword());
+		p.setPasswordConfirm(user.getPassword());
+		p.setPasswordConfirmLast(user.getPassword());
 		p.setPasswordResetToken(user.getPasswordResetToken());
+		
 		p.setRoles(user.getRoles());
+		
+		p.setPhoneNo(user.getPhoneNo());
+		
 		return p;
+	}
+	
+	/**
+	 * update my account object
+	 * @author ungtq
+	 * @param user
+	 * @return
+	 */
+	public User updateMyAccount(User user) {
+		user.setId(id);
+		user.setName(name);
+		user.setFullName(fullName);
+		user.setEmail(email);
+		
+		if (!StringUtils.isEmpty(this.password)) {
+			user.setPassword(password);
+			user.setPasswordResetToken(passwordResetToken);
+		}
+		
+		user.setPhoneNo(phoneNo);
+		
+		return user;
 	}
 }

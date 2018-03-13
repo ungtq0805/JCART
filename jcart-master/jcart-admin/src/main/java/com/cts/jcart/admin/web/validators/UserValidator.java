@@ -119,4 +119,14 @@ public class UserValidator implements Validator
 		}
 		return true;
 	}
+	
+	/**
+	 * validate with my account page
+	 * @param target
+	 * @param errors
+	 */
+	public void validateWithMyAccount(Object target, Errors errors){
+		
+		
+	}
 }

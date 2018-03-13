@@ -4,7 +4,10 @@
       layout:decorator="layout/mainLayout">
       
       <head>
-        <title>Users - Edit</title>
+      	<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet"></link>
+      	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+      	<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <title>My Account - Edit</title>
     </head>
     <body>
         
@@ -21,7 +24,7 @@
                     <!-- text input -->
                     <div class="form-group">
                       <label>Name</label>
-                      <input type="text" class="form-control" name="name" th:field="*{name}" readonly="readonly"/>
+                      <input type="text" class="form-control" name="name" th:field="*{name}"/>
                     </div>
                     
                      <!-- Full Name -->

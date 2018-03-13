@@ -130,8 +130,7 @@ public class UserController extends JCartAdminBaseController
 		User user = securityService.getUserById(id);
 		Map<Integer, Role> assignedRoleMap = new HashMap<>();
 		List<Role> roles = user.getRoles();
-		for (Role role : roles)
-		{
+		for (Role role : roles){
 			assignedRoleMap.put(role.getId(), role);
 		}
 		List<Role> userRoles = new ArrayList<>();
@@ -181,27 +180,42 @@ public class UserController extends JCartAdminBaseController
 	@RequestMapping(value="/myAccount/{id}", method=RequestMethod.GET)
 	public String editMyAccount(@PathVariable Integer id, Model model) {
 		User user = securityService.getUserById(id);
-		Map<Integer, Role> assignedRoleMap = new HashMap<>();
-		List<Role> roles = user.getRoles();
-		for (Role role : roles){
-			assignedRoleMap.put(role.getId(), role);
+		model.addAttribute("user", UserForm.fromUser(user));
+		return viewPrefix + "my_account";
+	}
+	
+	/**
+	 * update my account page
+	 * @param userForm
+	 * @param result
+	 * @param model
+	 * @param redirectAttributes
+	 * @return String
+	 */
+	@RequestMapping(value="/myAccount/update/{id}", method=RequestMethod.POST)
+	public String updateMyAccount(@ModelAttribute("user") UserForm userForm, BindingResult result, 
+			Model model, RedirectAttributes redirectAttributes) {
+		
+		userValidator.validateWithMyAccount(userForm, result);
+		
+		if(result.hasErrors()){
+			return viewPrefix + "my_account";
 		}
 		
-		List<Role> userRoles = new ArrayList<>();
-		List<Role> allRoles = securityService.getAllRoles();
-		for (Role role : allRoles)
-		{
-			if(assignedRoleMap.containsKey(role.getId())){
-				userRoles.add(role);
-			} else {
-				userRoles.add(null);
-			}
-		}
+		User myAccount = securityService.getUserById(userForm.getId());
 		
-		user.setRoles(userRoles);
-		model.addAttribute("user",user);
-		//model.addAttribute("rolesList",allRoles);		
-		return viewPrefix+"edit_user";
+		//convert to entity
+		User user = userForm.updateMyAccount(myAccount);
+		
+		//update DB
+		User persistedUser = securityService.updateUser(user);
+		
+		//save image to Disk
+		saveUserImageToDisk(userForm);
+		
+		logger.debug("Updated user with id : {} and name : {}", persistedUser.getId(), persistedUser.getName());
+		redirectAttributes.addFlashAttribute("info", "Your account updates successfully");
+		return "redirect:/home";
 	}
 	
 	/**
