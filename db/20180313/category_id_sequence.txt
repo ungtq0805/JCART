@@ -1,0 +1,12 @@
+-- Sequence: category_id_seq
+
+-- DROP SEQUENCE category_id_seq;
+
+CREATE SEQUENCE category_id_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 999999999999999999
+  START 6
+  CACHE 1;
+ALTER TABLE category_id_seq
+  OWNER TO postgres;
