@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -23,7 +24,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="categories")
 public class Category
 {
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id 
+	@SequenceGenerator(name = "category_id_seq", sequenceName = "category_id_seq", initialValue = 6, allocationSize = 100)
+    @GeneratedValue(generator = "category_id_seq")
 	private Integer id;
 	
 	@Column(nullable=false, unique=true)
