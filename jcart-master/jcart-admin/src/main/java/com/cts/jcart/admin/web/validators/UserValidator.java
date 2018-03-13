@@ -30,8 +30,7 @@ public class UserValidator implements Validator
 	@Autowired protected SecurityService securityService;
 	
 	@Override
-	public boolean supports(Class<?> clazz)
-	{
+	public boolean supports(Class<?> clazz){
 		return User.class.isAssignableFrom(clazz);
 	}
 	
@@ -125,8 +124,72 @@ public class UserValidator implements Validator
 	 * @param target
 	 * @param errors
 	 */
-	public void validateWithMyAccount(Object target, Errors errors){
+	public boolean validateWithMyAccount(Object target, Errors errors, User user){
+		boolean isValid = true;
+		UserForm userForm = (UserForm) target;
 		
+		String password = userForm.getPassword();
+		String passwordConfirm1 = userForm.getPasswordConfirm();
+		String passwordConfirm2 = userForm.getPasswordConfirmLast();
 		
+		if (StringUtils.isEmpty(password) 
+			&& StringUtils.isEmpty(passwordConfirm1)
+			&& StringUtils.isEmpty(passwordConfirm2)) {
+			return true;
+		}
+		
+		//check required input password
+		isValid = checkRequiredPasswordInputMyAccount(errors, userForm);
+		
+		//check current password
+		if (!userForm.getPassword().equals(user.getPassword())) {
+			errors.rejectValue("password", "error.myaccount.password.incorrect");
+			isValid = false;
+		}
+		
+		//check password confirm 1 and password confirm 2
+		if (!userForm.getPasswordConfirm().equals(userForm.getPasswordConfirmLast())) {
+			errors.rejectValue("passwordConfirm", "error.myaccount.password.confirm.incorrect");
+			isValid = false;
+		}
+		
+		//check current pass and new pass
+		if (userForm.getPasswordConfirm().equals(userForm.getPassword())) {
+			errors.rejectValue("passwordConfirmLast", "error.myaccount.password.and.password.confirm.incorrect");
+			isValid = false;
+		}
+		
+		return isValid;
+	}
+	
+	/**
+	 * require input password my account
+	 * @param errors
+	 * @param userForm
+	 * @return boolean
+	 */
+	private boolean checkRequiredPasswordInputMyAccount(Errors errors,
+			UserForm userForm) {
+		String password = userForm.getPassword();
+		String passwordConfirm1 = userForm.getPasswordConfirm();
+		String passwordConfirm2 = userForm.getPasswordConfirmLast();
+		
+		boolean isValid = true;
+		if (StringUtils.isEmpty(password)) {
+			errors.rejectValue("password", "error.required", new Object[]{password}, "error.required.default");
+			isValid = false;
+		}
+		
+		if (StringUtils.isEmpty(passwordConfirm1)) {
+			errors.rejectValue("passwordConfirm", "error.required", new Object[]{passwordConfirm1}, "error.required.default");
+			isValid = false;
+		}
+		
+		if (StringUtils.isEmpty(passwordConfirm2)) {
+			errors.rejectValue("passwordConfirmLast", "error.required", new Object[]{passwordConfirm2}, "error.required.default");
+			isValid = false;
+		}
+		
+		return isValid;
 	}
 }

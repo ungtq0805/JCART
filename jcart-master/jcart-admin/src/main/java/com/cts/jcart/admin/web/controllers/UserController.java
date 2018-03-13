@@ -41,6 +41,7 @@ import com.cts.jcart.entities.Role;
 import com.cts.jcart.entities.User;
 import com.cts.jcart.security.SecurityService;
 import com.cts.jcart.security.UserRepository;
+import com.cts.jcart.utils.StringUtils;
 
 /**
  * @author ungtq
@@ -159,6 +160,11 @@ public class UserController extends JCartAdminBaseController
 		//convert to entity
 		User user = userForm.toUser();
 		
+		//encode password
+		String password = userForm.getPassword();
+		String encodedPwd = passwordEncoder.encode(password);
+		user.setPassword(encodedPwd);
+		
 		//update DB
 		User persistedUser = securityService.updateUser(user);
 		
@@ -195,15 +201,21 @@ public class UserController extends JCartAdminBaseController
 	@RequestMapping(value="/myAccount/update/{id}", method=RequestMethod.POST)
 	public String updateMyAccount(@ModelAttribute("user") UserForm userForm, BindingResult result, 
 			Model model, RedirectAttributes redirectAttributes) {
+		User myAccount = securityService.getUserById(userForm.getId());
 		
-		userValidator.validateWithMyAccount(userForm, result);
+		//encode password
+		String password = userForm.getPassword();
+		if (!StringUtils.isEmpty(password)) {
+			String encodedPwd = passwordEncoder.encode(password);
+			userForm.setPassword(encodedPwd);
+		}
+		
+		userValidator.validateWithMyAccount(userForm, result, myAccount);
 		
 		if(result.hasErrors()){
 			return viewPrefix + "my_account";
 		}
-		
-		User myAccount = securityService.getUserById(userForm.getId());
-		
+				
 		//convert to entity
 		User user = userForm.updateMyAccount(myAccount);
 		

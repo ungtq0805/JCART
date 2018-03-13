@@ -162,19 +162,23 @@ public class SecurityService
 		return userRepository.save(user);
 	}
 	
-	public User updateUser(User user)
-	{
+	public User updateUser(User user){
 		User persistedUser = getUserById(user.getId());
 		if(persistedUser == null){
 			throw new JCartException("User "+user.getId()+" doesn't exist");
+		}
+		
+		persistedUser.setFullName(user.getFullName());
+		persistedUser.setPhoneNo(user.getPhoneNo());
+		if (!StringUtils.isEmpty(user.getPassword())) {
+			persistedUser.setPassword(user.getPassword());
 		}
 		
 		List<Role> updatedRoles = new ArrayList<>();
 		List<Role> roles = user.getRoles();
 		if(roles != null){
 			for (Role role : roles) {
-				if(role.getId() != null)
-				{
+				if(role.getId() != null) {
 					updatedRoles.add(roleRepository.findOne(role.getId()));
 				}
 			}
@@ -182,5 +186,4 @@ public class SecurityService
 		persistedUser.setRoles(updatedRoles);
 		return userRepository.save(persistedUser);
 	}
-
 }
