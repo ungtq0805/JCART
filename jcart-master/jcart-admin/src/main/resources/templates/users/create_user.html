@@ -69,8 +69,11 @@
 						<label>Roles</label>
 						<div>
 						  <p th:each="role,rowStat : ${rolesList}">
-						    <input type="checkbox" th:field="*{roles[__${rowStat.index}__].id}" th:value="${role.id}" />
-						    <label th:text="${role.name}">Role</label>
+						    <input type="checkbox" 
+						    th:field="*{roles[__${rowStat.index}__].id}" 
+						    th:value="${role.id}" 
+						    th:id="''+ ${role.id}"/>
+						    <label th:text="${role.name}" th:for="''+ ${role.id}">Role</label>
 						  </p>
 						</div>
 						
