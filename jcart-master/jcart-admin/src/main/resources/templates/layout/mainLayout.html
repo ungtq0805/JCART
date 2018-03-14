@@ -170,5 +170,22 @@
     <script th:src="@{'/assets/bootstrap/js/bootstrap.min.js'}"></script>
     <script th:src="@{'/assets/dist/js/app.min.js'}"></script>
     
+    <!-- Modal dialog waiting window -->
+    <div id="waitingModal" role="dialog" class="modal fade in" data-keyboard="false" data-backdrop="static" >
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Waiting window</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p th:text="WAITING...."></p>
+	      </div>
+	    </div>
+	  </div>
+   </div>
+   
+   
   </body>
 </html>
