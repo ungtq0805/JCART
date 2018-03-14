@@ -68,6 +68,13 @@ JAVAFX
 https://github.com/playerony/Warehouse-Desktop
 https://github.com/playerony/Warehouse.JavaFX-Hibernate
 
+https://github.com/ko7fuku3/InventoryControllSystem
+https://github.com/ysrbdlgn/springboot-inventory-webapp
+https://github.com/PatilKetan/SpringBoot-Inventory
+https://github.com/andela-Kshittu/SalesOrder-SpringBoot-Swing-MySql-Hibernate
+
+
+
 
 D:\Exkeihi\properties,D:\Exkeihi\resources,D:\PE_GIT\pe4j_order_check\pe4j\properties,D:\PE_GIT\pe4j_order_check\pe4j\resources
 
@@ -93,3 +100,5 @@ ungtq [20180313] 3996 ORDERBY点検
 
 ungtq [20180313] 4007 ORDERBY点検
 ungtq [20180313] 4048 ORDERBY点検
+
+ungtq [20180313] 3591 ORDERBY点検
