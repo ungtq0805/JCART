@@ -1,4 +1,4 @@
-http://www.baeldung.com/spring-security-authentication-with-a-database
+﻿http://www.baeldung.com/spring-security-authentication-with-a-database
 
 
 Pass data to a Bootstrap modal dialog using angular.
@@ -74,7 +74,8 @@ https://github.com/PatilKetan/SpringBoot-Inventory
 https://github.com/andela-Kshittu/SalesOrder-SpringBoot-Swing-MySql-Hibernate
 https://github.com/mehmetkoca/Inventory-Tracking
 
-
+RichText editor
+https://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Bootstrap-LineControl-Editor.html
 
 
 D:\Exkeihi\properties,D:\Exkeihi\resources,D:\PE_GIT\pe4j_order_check\pe4j\properties,D:\PE_GIT\pe4j_order_check\pe4j\resources
