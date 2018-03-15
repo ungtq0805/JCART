@@ -72,6 +72,7 @@ https://github.com/ko7fuku3/InventoryControllSystem
 https://github.com/ysrbdlgn/springboot-inventory-webapp
 https://github.com/PatilKetan/SpringBoot-Inventory
 https://github.com/andela-Kshittu/SalesOrder-SpringBoot-Swing-MySql-Hibernate
+https://github.com/mehmetkoca/Inventory-Tracking
 
 
 
