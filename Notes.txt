@@ -77,6 +77,8 @@ https://github.com/mehmetkoca/Inventory-Tracking
 RichText editor
 https://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Bootstrap-LineControl-Editor.html
 
+https://github.com/ZhiyuanYao93/Spring-Stock-App
+
 
 D:\Exkeihi\properties,D:\Exkeihi\resources,D:\PE_GIT\pe4j_order_check\pe4j\properties,D:\PE_GIT\pe4j_order_check\pe4j\resources
 
