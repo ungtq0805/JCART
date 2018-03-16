@@ -203,17 +203,17 @@ public class UserController extends JCartAdminBaseController
 			Model model, RedirectAttributes redirectAttributes) {
 		User myAccount = securityService.getUserById(userForm.getId());
 		
-		//encode password
-		String password = userForm.getPassword();
-		if (!StringUtils.isEmpty(password)) {
-			String encodedPwd = passwordEncoder.encode(password);
-			userForm.setPassword(encodedPwd);
-		}
-		
-		userValidator.validateWithMyAccount(userForm, result, myAccount);
+		userValidator.validateWithMyAccount(userForm, result, myAccount, passwordEncoder);
 		
 		if(result.hasErrors()){
 			return viewPrefix + "my_account";
+		}
+
+		//encode password
+		String password = userForm.getPasswordConfirm();
+		if (!StringUtils.isEmpty(password)) {
+			String encodedPwd = passwordEncoder.encode(password);
+			userForm.setPassword(encodedPwd);
 		}
 				
 		//convert to entity

@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -127,7 +128,8 @@ public class UserValidator implements Validator
 	 * @param target
 	 * @param errors
 	 */
-	public boolean validateWithMyAccount(Object target, Errors errors, User user){
+	public boolean validateWithMyAccount(Object target, Errors errors, User user,
+			PasswordEncoder passwordEncoder){
 		boolean isValid = true;
 		UserForm userForm = (UserForm) target;
 		
@@ -145,7 +147,7 @@ public class UserValidator implements Validator
 		isValid = checkRequiredPasswordInputMyAccount(errors, userForm);
 		
 		//check current password
-		if (!userForm.getPassword().equals(user.getPassword())) {
+		if (!passwordEncoder.matches(userForm.getPassword(), user.getPassword())) {
 			errors.rejectValue("password", "error.myaccount.password.incorrect");
 			isValid = false;
 		}
