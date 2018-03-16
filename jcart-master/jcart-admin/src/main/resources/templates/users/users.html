@@ -45,7 +45,7 @@
                     </tr>
                     <tr th:each="user,iterStat : ${users}">
                       <td><a th:href="@{/users/{id}(id=${user.id})}"><span th:text="${iterStat.count}">1</span></a></td>
-                      <td th:text="${user.name}">Name</td>
+                      <td th:text="${user.userName}">Name</td>
                       <td th:text="${user.email}">Email</td>
                       <td><a id="editLink" th:href="@{/users/{id}(id=${user.id})}" class="btn btn-sm btn-default"><i class="fa fa-edit"></i> Edit</a>
                       	  <a class="btn btn-sm btn-default open-AddBookDialog" 

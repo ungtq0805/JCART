@@ -106,7 +106,7 @@ public class UserController extends JCartAdminBaseController
 		userForm.setId(user.getId());
 		saveUserImageToDisk(userForm);
 		
-		logger.debug("Created new User with id : {} and name : {}", persistedUser.getId(), persistedUser.getName());
+		logger.debug("Created new User with id : {} and name : {}", persistedUser.getId(), persistedUser.getUserName());
 		redirectAttributes.addFlashAttribute("info", "User created successfully");
 		return "redirect:/users";
 	}
@@ -171,7 +171,7 @@ public class UserController extends JCartAdminBaseController
 		//save image to Disk
 		saveUserImageToDisk(userForm);
 		
-		logger.debug("Updated user with id : {} and name : {}", persistedUser.getId(), persistedUser.getName());
+		logger.debug("Updated user with id : {} and name : {}", persistedUser.getId(), persistedUser.getUserName());
 		redirectAttributes.addFlashAttribute("info", "User updates successfully");
 		return "redirect:/users";
 	}
@@ -225,7 +225,7 @@ public class UserController extends JCartAdminBaseController
 		//save image to Disk
 		saveUserImageToDisk(userForm);
 		
-		logger.debug("Updated user with id : {} and name : {}", persistedUser.getId(), persistedUser.getName());
+		logger.debug("Updated user with id : {} and name : {}", persistedUser.getId(), persistedUser.getUserName());
 		redirectAttributes.addFlashAttribute("info", "Your account updates successfully");
 		return "redirect:/home";
 	}

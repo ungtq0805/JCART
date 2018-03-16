@@ -25,10 +25,10 @@
                   <form role="form" th:action="@{/users}" th:object="${user}" method="post" enctype="multipart/form-data">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                     <!-- text input -->
-                    <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
-                      <label>Name</label>
-                      <input type="text" class="form-control" name="name" th:field="*{name}" placeholder="Enter User Name"/>
-                      <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="text-red">Incorrect data</p>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('userName')}? 'has-error'">
+                      <label>User Name</label>
+                      <input type="text" class="form-control" name="userName" th:field="*{userName}" placeholder="Enter User Name"/>
+                      <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" th:class="text-red">Incorrect data</p>
                     </div>
                     
                     <!-- Full Name -->

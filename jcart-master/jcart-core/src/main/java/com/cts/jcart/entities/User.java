@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -35,7 +34,7 @@ public class User
 	
 	@Column(nullable=false)
 	@NotEmpty()
-	private String name;
+	private String userName;
 	
 	@Column(nullable=true)
 	private String fullName;
@@ -71,14 +70,6 @@ public class User
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-	public String getName()
-	{
-		return name;
-	}
-	public void setName(String name)
-	{
-		this.name = name;
 	}
 	public String getEmail()
 	{
@@ -129,5 +120,11 @@ public class User
 	}
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }

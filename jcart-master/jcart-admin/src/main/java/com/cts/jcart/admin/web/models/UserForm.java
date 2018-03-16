@@ -6,11 +6,9 @@ package com.cts.jcart.admin.web.models;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -19,8 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cts.jcart.entities.Role;
 import com.cts.jcart.entities.User;
 import com.cts.jcart.utils.StringUtils;
-
-import ch.qos.logback.core.pattern.ConverterUtil;
 
 /**
  * @author ungtq
@@ -31,7 +27,7 @@ public class UserForm
 	private Integer id;
 	
 	@NotEmpty()
-	private String name;
+	private String userName;
 	
 	private String fullName;
 	
@@ -64,14 +60,6 @@ public class UserForm
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-	public String getName()
-	{
-		return name;
-	}
-	public void setName(String name)
-	{
-		this.name = name;
 	}
 	public String getEmail()
 	{
@@ -143,10 +131,17 @@ public class UserForm
 		this.passwordConfirmLast = passwordConfirmLast;
 	}
 	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
 	public User toUser() {
 		User p = new User();
 		p.setId(id);
-		p.setName(name);
+		p.setUserName(userName);
 		p.setFullName(fullName);
 		p.setEmail(email);
 		p.setPassword(password);
@@ -159,7 +154,7 @@ public class UserForm
 	public static UserForm fromUser(User user){
 		UserForm p = new UserForm();
 		p.setId(user.getId());
-		p.setName(user.getName());
+		p.setUserName(user.getUserName());
 		p.setFullName(user.getFullName());
 		p.setEmail(user.getEmail());
 		
@@ -184,7 +179,7 @@ public class UserForm
 	 */
 	public User updateMyAccount(User user) {
 		user.setId(id);
-		user.setName(name);
+		user.setUserName(userName);
 		user.setFullName(fullName);
 		user.setEmail(email);
 		

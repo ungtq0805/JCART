@@ -25,9 +25,9 @@ public class AuthenticatedUser extends org.springframework.security.core.userdet
 	private static final long serialVersionUID = 1L;
 	private User user;
 	
-	public AuthenticatedUser(User user)
-	{
-		super(user.getEmail(), user.getPassword(), getAuthorities(user));
+	public AuthenticatedUser(User user){
+		//super(user.getEmail(), user.getPassword(), getAuthorities(user));
+		super(user.getUserName(), user.getPassword(), getAuthorities(user));
 		this.user = user;
 	}
 	

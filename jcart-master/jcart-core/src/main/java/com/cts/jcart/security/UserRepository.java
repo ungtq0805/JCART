@@ -22,4 +22,12 @@ public interface UserRepository extends JpaRepository<User, Integer>
 	 * @param id
 	 */
 	void deleteById(Integer id);
+	
+	/**
+	 * @author ungtq
+	 * find by userName
+	 * @param userName
+	 * @return User
+	 */
+	User findByUserName(String userName);
 }

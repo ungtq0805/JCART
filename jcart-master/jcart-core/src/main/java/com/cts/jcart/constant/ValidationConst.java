@@ -15,4 +15,9 @@ public class ValidationConst {
 	 */
 	public static final String REGEX_PHONE_NO = "^\\+(?:[0-9] ?){6,14}[0-9]$";
 	
+	/**
+	 * Regex for validation UserName input
+	 */
+	public static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
+	
 }

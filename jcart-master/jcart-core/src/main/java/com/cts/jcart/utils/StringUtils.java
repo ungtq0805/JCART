@@ -31,8 +31,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.w3c.dom.Node;
-
 /**
  *
  * @author ungtq
@@ -74,7 +72,7 @@ public class StringUtils {
     public static final String BLANK = " ";
     //phapnv-End
     
-    private static final String UTF_8 =  "UTF-8"; 
+//    private static final String UTF_8 =  "UTF-8"; 
 
     /**
      * nullまたは空文字、空白のみ（半角、全角）の場合はtrueを、それ以外はfalseを返す
@@ -810,70 +808,70 @@ public class StringUtils {
 //
 //	}
 
-    private static boolean isNewLineNode(Node node) {
-        if (node != null
-                && (node.getNodeName().equalsIgnoreCase("br"))) {
-            return true;
-        }
-        return false;
-    }
+//    private static boolean isNewLineNode(Node node) {
+//        if (node != null
+//                && (node.getNodeName().equalsIgnoreCase("br"))) {
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    private static boolean isBlockNode(Node node) {
+//        Node targetNode = node.getPreviousSibling() != null ? node.getPreviousSibling() : node.getParentNode();
+//        if (targetNode != null
+//                && (targetNode.getNodeName().equalsIgnoreCase("div")
+//                        || targetNode.getNodeName().equalsIgnoreCase("dd")
+//                        || targetNode.getNodeName().equalsIgnoreCase("dt")
+//                        || targetNode.getNodeName().equalsIgnoreCase("h1")
+//                        || targetNode.getNodeName().equalsIgnoreCase("h2")
+//                        || targetNode.getNodeName().equalsIgnoreCase("h3")
+//                        || targetNode.getNodeName().equalsIgnoreCase("h4")
+//                        || targetNode.getNodeName().equalsIgnoreCase("h5")
+//                        || targetNode.getNodeName().equalsIgnoreCase("h6")
+//                        || targetNode.getNodeName().equalsIgnoreCase("li")
+//                        || targetNode.getNodeName().equalsIgnoreCase("p")
+//                        || targetNode.getNodeName().equalsIgnoreCase("td")
+//                        || targetNode.getNodeName().equalsIgnoreCase("th"))) {
+//            return true;
+//        }
+//        return false;
+//    }
+//    private static boolean isIgnoreNode(Node node) {
+//        if (node.getNodeName().equalsIgnoreCase("style")
+//                || node.getNodeName().equalsIgnoreCase("script")) {
+//            return true;
+//        }
+//        return false;
+//    }
 
-    private static boolean isBlockNode(Node node) {
-        Node targetNode = node.getPreviousSibling() != null ? node.getPreviousSibling() : node.getParentNode();
-        if (targetNode != null
-                && (targetNode.getNodeName().equalsIgnoreCase("div")
-                        || targetNode.getNodeName().equalsIgnoreCase("dd")
-                        || targetNode.getNodeName().equalsIgnoreCase("dt")
-                        || targetNode.getNodeName().equalsIgnoreCase("h1")
-                        || targetNode.getNodeName().equalsIgnoreCase("h2")
-                        || targetNode.getNodeName().equalsIgnoreCase("h3")
-                        || targetNode.getNodeName().equalsIgnoreCase("h4")
-                        || targetNode.getNodeName().equalsIgnoreCase("h5")
-                        || targetNode.getNodeName().equalsIgnoreCase("h6")
-                        || targetNode.getNodeName().equalsIgnoreCase("li")
-                        || targetNode.getNodeName().equalsIgnoreCase("p")
-                        || targetNode.getNodeName().equalsIgnoreCase("td")
-                        || targetNode.getNodeName().equalsIgnoreCase("th"))) {
-            return true;
-        }
-        return false;
-    }
-    private static boolean isIgnoreNode(Node node) {
-        if (node.getNodeName().equalsIgnoreCase("style")
-                || node.getNodeName().equalsIgnoreCase("script")) {
-            return true;
-        }
-        return false;
-    }
-
-    private static String getTextNodes(Node node, String message) {
-        StringBuffer resultString = new StringBuffer();
-        for (
-                Node child = node.getFirstChild();
-                child != null;
-                child = child.getNextSibling()) {
-            if (child.getNodeType() == Node.TEXT_NODE) {
-                if (isBlockNode(child)
-                        || isNewLineNode(child)) {
-                    resultString.append("\r\n");
-                }
-                if (child.getNodeValue().equals("&nbsp;")
-                        || child.getNodeValue().equals(" ")
-                        || child.getNodeValue().equals("\t")
-                        || child.getNodeValue().equals("\n")
-                        || child.getNodeValue().getBytes().equals(0xa0)
-                        || child.getNodeValue().getBytes().equals(0x3f)
-                        || (child.getNodeValue().getBytes().length == 1 && child.getNodeValue().getBytes()[0] == 63)
-                        ) {
-                } else {
-                    resultString.append(child.getNodeValue());
-                }
-            } else if (!isIgnoreNode(child)) {
-                resultString.append(getTextNodes(child, message));
-            }
-        }
-        return resultString.toString();
-    }
+//    private static String getTextNodes(Node node, String message) {
+//        StringBuffer resultString = new StringBuffer();
+//        for (
+//                Node child = node.getFirstChild();
+//                child != null;
+//                child = child.getNextSibling()) {
+//            if (child.getNodeType() == Node.TEXT_NODE) {
+//                if (isBlockNode(child)
+//                        || isNewLineNode(child)) {
+//                    resultString.append("\r\n");
+//                }
+//                if (child.getNodeValue().equals("&nbsp;")
+//                        || child.getNodeValue().equals(" ")
+//                        || child.getNodeValue().equals("\t")
+//                        || child.getNodeValue().equals("\n")
+//                        || child.getNodeValue().getBytes().equals(0xa0)
+//                        || child.getNodeValue().getBytes().equals(0x3f)
+//                        || (child.getNodeValue().getBytes().length == 1 && child.getNodeValue().getBytes()[0] == 63)
+//                        ) {
+//                } else {
+//                    resultString.append(child.getNodeValue());
+//                }
+//            } else if (!isIgnoreNode(child)) {
+//                resultString.append(getTextNodes(child, message));
+//            }
+//        }
+//        return resultString.toString();
+//    }
 
     public static final String escapeHTML(String s){
         StringBuffer sb = new StringBuffer();

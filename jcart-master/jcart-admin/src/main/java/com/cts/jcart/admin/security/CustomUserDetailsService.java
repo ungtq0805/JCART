@@ -33,7 +33,8 @@ public class CustomUserDetailsService implements UserDetailsService
 	@Override
 	public UserDetails loadUserByUsername(String userName)
 			throws UsernameNotFoundException {
-		User user = securityService.findUserByEmail(userName);
+		//User user = securityService.findUserByEmail(userName);
+		User user = securityService.findUserByUserName(userName);
 		if(user == null){
 			throw new UsernameNotFoundException("Email "+userName+" not found");
 		}

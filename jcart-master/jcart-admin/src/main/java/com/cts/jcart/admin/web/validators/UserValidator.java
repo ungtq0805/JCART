@@ -6,7 +6,6 @@ package com.cts.jcart.admin.web.validators;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.h2.value.ValueStringIgnoreCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
@@ -35,6 +34,10 @@ public class UserValidator implements Validator
 	}
 	
 	public void validateWithForm(Object target, Errors errors){
+		//check input pattern userName
+		if(!isValidUsername(target, errors)) {
+			return;
+		}
 		
 		//check is valid with email
 		if (!isValidEmail(target, errors, true)) {
@@ -191,5 +194,23 @@ public class UserValidator implements Validator
 		}
 		
 		return isValid;
+	}
+	
+	/**
+	 * check input pattern userName
+	 * @param errors
+	 * @param userForm
+	 * @return boolean
+	 */
+	private boolean isValidUsername(Object target, Errors errors) {
+		UserForm userForm = (UserForm) target;
+		Pattern pattern = Pattern.compile(ValidationConst.USERNAME_PATTERN);
+		Matcher matcher = pattern.matcher(userForm.getUserName());
+		
+		boolean match = matcher.matches();
+		if (!match) {
+			errors.rejectValue("userName", "error.check.validate.input.username");
+		}
+		return match;
 	}
 }

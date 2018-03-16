@@ -3,8 +3,6 @@
  */
 package com.cts.jcart;
 
-import static org.junit.Assert.*;
-
 import java.sql.SQLException;
 
 import javax.sql.DataSource;

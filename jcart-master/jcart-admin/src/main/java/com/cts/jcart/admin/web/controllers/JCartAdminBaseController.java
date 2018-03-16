@@ -3,23 +3,13 @@
  */
 package com.cts.jcart.admin.web.controllers;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cts.jcart.admin.security.AuthenticatedUser;
-import com.cts.jcart.admin.web.utils.WebUtils;
 import com.cts.jcart.common.services.JCLogger;
 
 /**

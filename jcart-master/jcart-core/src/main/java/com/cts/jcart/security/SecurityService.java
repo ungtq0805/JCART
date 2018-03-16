@@ -29,9 +29,18 @@ public class SecurityService
 	@Autowired PermissionRepository permissionRepository;
 	@Autowired RoleRepository roleRepository;
 	
-	public User findUserByEmail(String email)
-	{
+	public User findUserByEmail(String email){
 		return userRepository.findByEmail(email);
+	}
+	
+	/**
+	 * find by userName
+	 * @author ungtq
+	 * @param userName
+	 * @return user
+	 */
+	public User findUserByUserName(String userName){
+		return userRepository.findByUserName(userName);
 	}
 	
 	public String resetPassword(String email)
