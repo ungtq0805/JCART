@@ -76,25 +76,25 @@ public class MstCommon
 	private BigDecimal numData6;
 	
 	@Column(name="flg_data_1", nullable=true)
-	private boolean flgData1;
+	private Boolean flgData1;
 	
 	@Column(name="flg_data_2", nullable=true)
-	private boolean flgData2;
+	private Boolean flgData2;
 	
 	@Column(name="flg_data_3", nullable=true)
-	private boolean flgData3;
+	private Boolean flgData3;
 	
 	@Column(name="flg_data_4", nullable=true)
-	private boolean flgData4;
+	private Boolean flgData4;
 	
 	@Column(name="flg_data_5", nullable=true)
-	private boolean flgData5;
+	private Boolean flgData5;
 	
 	@Column(name="flg_data_6", nullable=true)
-	private boolean flgData6;
+	private Boolean flgData6;
 	
 	@Column(name="last_update_emp_id", nullable=true)
-	private int lastUpdateEmpId;
+	private Integer lastUpdateEmpId;
 	
 	@Column(name="last_update_time",nullable=true)
 	private Timestamp lastUpdateTime;
