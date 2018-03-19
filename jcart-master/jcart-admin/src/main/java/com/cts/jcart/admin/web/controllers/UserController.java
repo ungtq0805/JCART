@@ -59,8 +59,7 @@ public class UserController extends JCartAdminBaseController
 	@Autowired UserRepository userRepository;
 	
 	@Override
-	protected String getHeaderTitle()
-	{
+	protected String getHeaderTitle(){
 		return "Manage Users";
 	}
 	

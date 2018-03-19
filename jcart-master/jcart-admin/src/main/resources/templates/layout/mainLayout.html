@@ -18,6 +18,16 @@
     -->
     <link rel="stylesheet" href="assets/dist/css/skins/skin-blue.min.css" th:href="@{/assets/dist/css/skins/skin-blue.min.css}"/>
 
+	<!-- Editor -->
+	
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
+	<link href="assets/plugins/editor/editor.css" type="text/css" rel="stylesheet"/>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -117,6 +127,7 @@
             <li th:class="${CURRENT_MENU == 'Users'}? 'active' : ''"  sec:authorize="hasRole('ROLE_MANAGE_USERS')"><a href="#" th:href="@{'/users'}"><i class="fa fa-users"></i> Users</a></li>
             <li th:class="${CURRENT_MENU == 'Roles'}? 'active' : ''"  sec:authorize="hasRole('ROLE_MANAGE_ROLES')"><a href="#" th:href="@{'/roles'}"><i class="fa fa-user"></i> Roles</a></li>
             <li th:class="${CURRENT_MENU == 'Permissions'}? 'active' : ''"  sec:authorize="hasRole('ROLE_MANAGE_PERMISSIONS')"><a href="#" th:href="@{'/permissions'}"><i class="fa fa-shield"></i> Permissions</a></li>
+            <li><a href="#" th:href="@{'/edit/companyInfo'}"><i class="fa fa-shield"></i> Settings</a></li>
             
           </ul><!-- /.sidebar-menu -->
         </section>
@@ -169,6 +180,7 @@
     <script th:src="@{'/assets/plugins/jQuery/jQuery-2.1.4.min.js'}"></script>
     <script th:src="@{'/assets/bootstrap/js/bootstrap.min.js'}"></script>
     <script th:src="@{'/assets/dist/js/app.min.js'}"></script>
+    <script th:src="@{'/assets/plugins/editor/editor.js'}"></script>
     
     <!-- Modal dialog waiting window -->
     <div id="waitingModal" role="dialog" class="modal fade in" data-keyboard="false" data-backdrop="static" >
