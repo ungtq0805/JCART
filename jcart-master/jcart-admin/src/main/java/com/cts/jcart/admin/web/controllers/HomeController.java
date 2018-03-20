@@ -53,4 +53,9 @@ public class HomeController extends JCartAdminBaseController
 			return null;
 		}
 	}
+	
+	@RequestMapping(value = "/locale", method = RequestMethod.GET)
+	public String getLocalePage(Model model) {
+		return "home";
+	}
 }

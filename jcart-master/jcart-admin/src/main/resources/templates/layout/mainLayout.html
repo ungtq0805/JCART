@@ -34,6 +34,25 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#locales").change(function () {
+                var selectedOption = $('#locales').val();
+                if (selectedOption !== ''){
+                    window.location.replace('locale?lang=' + selectedOption);
+                }
+            });
+        });
+        
+        function onClickIconVn() {
+        	window.location.replace('locale?lang=');
+        }
+        
+        function onClickIconJa() {
+        	window.location.replace('locale?lang=ja');
+        }
+    </script>
   </head>
   
   <body class="hold-transition skin-blue sidebar-mini">
@@ -51,21 +70,38 @@
         </a>
 
         <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top" role="navigation">
+        <nav class="navbar navbar-static-top" role="navigation" style="white-space: nowrap;">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
+          
+          <!-- 
+	       	<span th:text="#{lang.change}"></span>:
+			<select id="locales">
+			    <option value=""></option>
+			    <option value="en" th:text="#{lang.eng}"></option>
+			    <option value="ja" th:text="#{lang.ja}"></option>
+			</select>
+		  -->
+		  
+		  <div id="divVnFlg" style="white-space: nowrap; vertical-align: middle;" >
+		  	<img th:src="@{/assets/dist/img/vn_flg_24x24.png}" id="locale_vn" onclick="onClickIconVn()"/>
+		  	<img th:src="@{/assets/dist/img/ja_flg_24x24.png}" id="locale_ja" onclick="onClickIconJa()"/>
+		  </div>
+		
+			   
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-              
               <!-- User Account Menu -->
               <li class="dropdown user user-menu">
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				  
                   <!-- The user image in the navbar-->
                   <img th:src="@{/assets/dist/img/user.png}" class="user-image" alt="User Image"/>
+                  
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
                   <span class="hidden-xs" sec:authentication="principal.user.userName">User</span>
                 </a>
@@ -119,7 +155,7 @@
           <ul class="sidebar-menu">
             <!-- <li class="header">HEADER</li> -->
             <!-- Optionally, you can add icons to the links -->
-            <li th:class="${CURRENT_MENU == 'Home'}? 'active' : ''" ><a href="#" th:href="@{'/home'}"><i class="fa fa-home"></i> <span>Home</span></a></li>
+            <li th:class="${CURRENT_MENU == 'Home'}? 'active' : ''" ><a href="#" th:href="@{'/home'}"><i class="fa fa-home"></i> <span th:text="#{label.home}"></span></a></li>
             <li th:class="${CURRENT_MENU == 'Categories'}? 'active' : ''"  sec:authorize="hasRole('ROLE_MANAGE_CATEGORIES')"><a href="#" th:href="@{'/categories'}"><i class="fa fa-folder-open"></i> <span>Categories</span></a></li>
             <li th:class="${CURRENT_MENU == 'Products'}? 'active' : ''"  sec:authorize="hasRole('ROLE_MANAGE_PRODUCTS')"><a href="#" th:href="@{'/products'}"><i class="fa fa-file"></i> <span>Products</span></a></li>
             <li th:class="${CURRENT_MENU == 'Orders'}? 'active' : ''"  sec:authorize="hasRole('ROLE_MANAGE_ORDERS')"><a href="#" th:href="@{'/orders'}"><i class="fa fa-cart-arrow-down"></i> <span>Orders</span></a></li>
