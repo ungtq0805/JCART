@@ -79,6 +79,19 @@ https://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Boo
 
 https://github.com/ZhiyuanYao93/Spring-Stock-App
 
+(SQL NATIVE QUERY)
+https://howtodoinjava.com/jpa/jpa-native-select-sql-query-example/
+
+
+
+id
+companyName
+phoneNo
+directorName
+webUrl
+email
+description
+
 
 D:\Exkeihi\properties,D:\Exkeihi\resources,D:\PE_GIT\pe4j_order_check\pe4j\properties,D:\PE_GIT\pe4j_order_check\pe4j\resources
 
@@ -112,3 +125,8 @@ ungtq [20180313] 4173 ORDERBY点検
 ungtq [20180313] 4174 ORDERBY点検
 ungtq [20180313] 4176 ORDERBY点検
 ungtq [20180313] 4220 ORDERBY点検
+
+https://tech.d-circle.com/redmine/issues/25668#change-162415 => Bug nay em sua xong roi nha chi, commit rui
+https://tech.d-circle.com/redmine/issues/25680#change-162480 => cai nay thi em update rui, dang de trong thu muc \\192.168.136.1\data-ait\(BiMat)Projects\POWER EGG Add-on\DC PE getResultList\Hardcopy\20180319
+https://tech.d-circle.com/redmine/issues/25674#change-162483 => Em da chup xong case 1 + 3, con case 2 thi con cho chi Trang confirm, , dang de trong thu muc \\192.168.136.1\data-ait\(BiMat)Projects\POWER EGG Add-on\DC PE getResultList\Hardcopy\20180319
+Cai 444 em dang xem cai file cua chi trang gui
