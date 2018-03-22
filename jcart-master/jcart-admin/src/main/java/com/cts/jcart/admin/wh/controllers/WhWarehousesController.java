@@ -6,9 +6,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -73,4 +75,50 @@ public class WhWarehousesController extends WhAbstractController {
         }
     }
     
+    /**
+     * edit warehouse form with mode edit 
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/wh/edit/{id}", method=RequestMethod.GET)
+	public String editWarehouseForm(@PathVariable Integer id, Model model) {
+    	WhWarehouse warehouse = warehousesData.getById((long)id);
+		model.addAttribute("warehouse", warehouse);
+		return viewPrefix + "edit_warehouse";
+	}
+    
+    /**
+     * Handles the submit action for a update warehouse
+     * @param warehouse object with all product input information
+     * @param result validation information about the current action
+     * @return name which will be resolved into the jsp page using
+     * apache tiles configuration in the warehouses.xml file
+     */
+    @RequestMapping(value = "/wh/update/{id}", method = RequestMethod.POST)
+    public String updateWarehouse(
+    		@Valid @ModelAttribute("warehouse") WhWarehouse warehouse,
+    		BindingResult result) {
+        if (result.hasErrors()) {
+            return viewPrefix + "edit_warehouse";
+        } else {
+            warehousesData.update(warehouse);
+            return "redirect:/warehouses";
+        }
+    }
+    
+    /**
+     * Handles the submit action for a delete warehouse
+     * @param warehouse object with all product input information
+     * @param result validation information about the current action
+     * @return name which will be resolved into the jsp page using
+     * apache tiles configuration in the warehouses.xml file
+     */
+    @RequestMapping(value = "/wh/delete/{id}", method = RequestMethod.GET)
+    public String delWarehouseById(
+    		@PathVariable Integer id,
+    		Model model) {
+        warehousesData.removeById((long)id);
+        return "redirect:/warehouses";
+    }
 }
