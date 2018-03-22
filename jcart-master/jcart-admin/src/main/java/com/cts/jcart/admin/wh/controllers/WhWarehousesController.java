@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -49,8 +50,8 @@ public class WhWarehousesController extends WhAbstractController {
     @RequestMapping(value="/wh/init/create", method = RequestMethod.GET)
     public String showWarehouseForm(ModelMap model) {
     	WhWarehouse warehouse = new WhWarehouse();
-        model.addAttribute(warehouse);
-        return "warehouse";
+        model.addAttribute("warehouse", warehouse);
+        return viewPrefix + "create_warehouse";
     }
     
     /**
@@ -61,9 +62,11 @@ public class WhWarehousesController extends WhAbstractController {
      * apache tiles configuration in the warehouses.xml file
      */
     @RequestMapping(value = "/wh/create", method = RequestMethod.POST)
-    public String createWarehouse(@Valid WhWarehouse warehouse, BindingResult result) {
+    public String createWarehouse(
+    		@Valid @ModelAttribute("warehouse") WhWarehouse warehouse,
+    		BindingResult result) {
         if (result.hasErrors()) {
-            return "warehouse";
+            return viewPrefix + "create_warehouse";
         } else {
             warehousesData.add(warehouse);
             return "redirect:/warehouses";
