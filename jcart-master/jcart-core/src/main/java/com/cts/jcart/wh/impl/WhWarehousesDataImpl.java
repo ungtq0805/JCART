@@ -3,10 +3,10 @@ package com.cts.jcart.wh.impl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.hibernate.criterion.Order;
 
 import com.cts.jcart.wh.entities.WhWarehouse;
 
@@ -41,5 +41,35 @@ public class WhWarehousesDataImpl implements WhWarehousesData {
     public void add(WhWarehouse warehouse) {
         sessionFactory.getCurrentSession()
                 .save(warehouse);
+    }
+    
+    /**
+     * get warehouse by id
+     * @author ungtq
+     * @param id
+     * @return WhWarehouse
+     */
+    public WhWarehouse getById(Long id) {
+    	return (WhWarehouse)sessionFactory.getCurrentSession().get(WhWarehouse.class, id);
+    }
+    
+    /**
+     * Update a warehouse into the database
+     * @param warehouse object that needs to be saved
+     */
+    public void update(WhWarehouse warehouse) {
+        sessionFactory.getCurrentSession()
+                .update(warehouse);
+    }
+    
+    /**
+     * remove warehouse by id
+     * @author ungtq
+     * @param id
+     * @return WhWarehouse
+     */
+    public void removeById(Long id) {
+    	WhWarehouse wh = getById(id);
+    	sessionFactory.getCurrentSession().delete(wh);
     }
 }
