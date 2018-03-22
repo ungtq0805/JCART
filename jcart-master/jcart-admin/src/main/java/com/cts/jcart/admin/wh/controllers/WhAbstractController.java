@@ -4,11 +4,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 
+import com.cts.jcart.admin.web.controllers.JCartAdminBaseController;
+
 /**
  *
  * Base controller class, used for exeption handling
  */
-public class WhAbstractController {
+public class WhAbstractController extends JCartAdminBaseController {
     
     /**
      * If some of the methods of the derived classes
@@ -34,5 +36,10 @@ public class WhAbstractController {
                 RequestAttributes.SCOPE_REQUEST);
         return "exception";
     }
+    
+    @Override
+	protected String getHeaderTitle(){
+		return "WhAbstractController";
+	}
     
 }

@@ -20,9 +20,10 @@ import com.cts.jcart.wh.impl.WhWarehousesData;
  * and handle user's actions
  */
 @Controller
-@RequestMapping(value = "/warehouses")
 public class WhWarehousesController extends WhAbstractController {
     
+	private static final String viewPrefix = "wh/";
+	
     @Autowired
     WhWarehousesData warehousesData;
     
@@ -32,11 +33,11 @@ public class WhWarehousesController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the warehouses.xml file
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/warehouses", method = RequestMethod.GET)
     public String showWarehouses(ModelMap model) {
         List<WhWarehouse> warehouses = warehousesData.get();
         model.addAttribute("warehouses", warehouses);
-        return "warehouses";
+        return viewPrefix + "warehouses";
     }
     
     /**
@@ -45,7 +46,7 @@ public class WhWarehousesController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the warehouses.xml file
      */
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value="/wh/init/create", method = RequestMethod.GET)
     public String showWarehouseForm(ModelMap model) {
     	WhWarehouse warehouse = new WhWarehouse();
         model.addAttribute(warehouse);
@@ -59,7 +60,7 @@ public class WhWarehousesController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the warehouses.xml file
      */
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/wh/create", method = RequestMethod.POST)
     public String createWarehouse(@Valid WhWarehouse warehouse, BindingResult result) {
         if (result.hasErrors()) {
             return "warehouse";

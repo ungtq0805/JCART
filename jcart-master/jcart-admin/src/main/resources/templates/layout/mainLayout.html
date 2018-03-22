@@ -164,6 +164,7 @@
             <li th:class="${CURRENT_MENU == 'Roles'}? 'active' : ''"  sec:authorize="hasRole('ROLE_MANAGE_ROLES')"><a href="#" th:href="@{'/roles'}"><i class="fa fa-user"></i> Roles</a></li>
             <li th:class="${CURRENT_MENU == 'Permissions'}? 'active' : ''"  sec:authorize="hasRole('ROLE_MANAGE_PERMISSIONS')"><a href="#" th:href="@{'/permissions'}"><i class="fa fa-shield"></i> Permissions</a></li>
             <li><a href="#" th:href="@{'/edit/companyInfo'}"><i class="fa fa-gear"></i> Settings</a></li>
+            <li><a href="#" th:href="@{'/warehouses'}"><i class="fa fa-gear"></i> WareHouse</a></li>
             
           </ul><!-- /.sidebar-menu -->
         </section>
