@@ -2,6 +2,8 @@ package com.cts.jcart.wh.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +17,8 @@ import com.cts.jcart.wh.entities.WhInflow;
 @Transactional(rollbackFor=Exception.class)
 public class WhInflowsDataImpl implements WhInflowsData {
 
-//    @Autowired
-//    SessionFactory sessionFactory;
+    @Autowired
+    SessionFactory sessionFactory;
     
     /**
      * Gets inflows from the database
@@ -25,12 +27,11 @@ public class WhInflowsDataImpl implements WhInflowsData {
      */
     @SuppressWarnings("unchecked")
 	public List<WhInflow> get() {
-//        return sessionFactory.getCurrentSession()
-//                .createCriteria(WhInflow.class)
-//                .createAlias("product", "p")
-//                .addOrder(Order.asc("p.name"))
-//                .list();
-    	return null;
+        return sessionFactory.getCurrentSession()
+                .createCriteria(WhInflow.class)
+                .createAlias("product", "p")
+                .addOrder(Order.asc("p.name"))
+                .list();
     }
 
     /**
@@ -38,8 +39,8 @@ public class WhInflowsDataImpl implements WhInflowsData {
      * @param inflow object that needs to be saved
      */
     public void add(WhInflow inflow) {
-//        sessionFactory.getCurrentSession()
-//                .save(inflow);
+        sessionFactory.getCurrentSession()
+                .save(inflow);
     	}
 
     /**
@@ -48,9 +49,8 @@ public class WhInflowsDataImpl implements WhInflowsData {
      * @return inflow object
      */
     public WhInflow get(Long id) {
-//        return (WhInflow)sessionFactory.getCurrentSession()
-//                .get(WhInflow.class, id);
-    	return null;
+        return (WhInflow)sessionFactory.getCurrentSession()
+                .get(WhInflow.class, id);
     }
     
 }

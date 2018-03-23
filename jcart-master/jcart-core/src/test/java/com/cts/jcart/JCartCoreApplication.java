@@ -3,8 +3,11 @@
  */
 package com.cts.jcart;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.jpa.HibernateEntityManagerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @author ungtq
@@ -19,4 +22,8 @@ public class JCartCoreApplication
 		SpringApplication.run(JCartCoreApplication.class, args);
 	}
 
+	@Bean  
+	public SessionFactory sessionFactory(HibernateEntityManagerFactory hemf){  
+	    return hemf.getSessionFactory();  
+	}
 }
