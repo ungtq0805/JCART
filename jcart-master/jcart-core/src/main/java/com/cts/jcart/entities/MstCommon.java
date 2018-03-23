@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -20,7 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  *
  */
 @Entity
-@Table(name="mst_common")
+@Table(name="mst_common", uniqueConstraints=@UniqueConstraint(columnNames={"common_no", "class_no"}))
 public class MstCommon
 {
 	@Id 

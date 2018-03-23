@@ -2,6 +2,7 @@ package com.cts.jcart.wh.impl;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,7 +42,7 @@ public class WhInflowsDataImpl implements WhInflowsData {
     public void add(WhInflow inflow) {
         sessionFactory.getCurrentSession()
                 .save(inflow);
-    	}
+	}
 
     /**
      * Get an inflow by its identifier

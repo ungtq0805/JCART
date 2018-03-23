@@ -2,7 +2,6 @@ package com.cts.jcart.wh.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,14 +15,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.format.annotation.DateTimeFormat;
+
+import com.cts.jcart.entities.Product;
 
 /**
  * Represents the database inflows table
@@ -39,9 +38,9 @@ public class WhInflow implements Serializable {
     private Long id;
     
     @NotNull
-    @ManyToOne(targetEntity=WhProduct.class)
+    @ManyToOne(targetEntity=Product.class)
     @JoinColumn(name="product")
-    private WhProduct product;
+    private Product product;
     
     @NotNull
     @Column(name="amount")
@@ -52,21 +51,21 @@ public class WhInflow implements Serializable {
     @Column(name="price")
     private BigDecimal price;
     
-    @NotNull
-    @ManyToOne(targetEntity=WhShipper.class)
-    @JoinColumn(name="shipper")
-    private WhShipper shipper;
+//    @NotNull
+//    @ManyToOne(targetEntity=WhShipper.class)
+//    @JoinColumn(name="shipper")
+//    private WhShipper shipper;
     
     @NotNull
     @ManyToOne(targetEntity=WhWarehouse.class)
     @JoinColumn(name="warehouse")
     private WhWarehouse warehouse;
     
-    @NotNull
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    @Column(name="inflowdate")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date inflowdate;
+//    @NotNull
+//    @DateTimeFormat(pattern="yyyy-MM-dd")
+//    @Column(name="inflowdate")
+//    @Temporal(javax.persistence.TemporalType.DATE)
+//    private Date inflowdate;
     
     @OneToMany(fetch=FetchType.EAGER, mappedBy="inflow")
     @Fetch(FetchMode.SELECT)
@@ -81,11 +80,11 @@ public class WhInflow implements Serializable {
         this.id = id;
     }
 
-    public WhProduct getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(WhProduct product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
@@ -105,13 +104,13 @@ public class WhInflow implements Serializable {
         this.price = price;
     }
 
-    public WhShipper getShipper() {
-        return shipper;
-    }
-
-    public void setShipper(WhShipper shipper) {
-        this.shipper = shipper;
-    }
+//    public WhShipper getShipper() {
+//        return shipper;
+//    }
+//
+//    public void setShipper(WhShipper shipper) {
+//        this.shipper = shipper;
+//    }
 
     public WhWarehouse getWarehouse() {
         return warehouse;
@@ -121,13 +120,13 @@ public class WhInflow implements Serializable {
         this.warehouse = warehouse;
     }
 
-    public Date getInflowdate() {
-        return inflowdate;
-    }
-
-    public void setInflowdate(Date inflowdate) {
-        this.inflowdate = inflowdate;
-    }
+//    public Date getInflowdate() {
+//        return inflowdate;
+//    }
+//
+//    public void setInflowdate(Date inflowdate) {
+//        this.inflowdate = inflowdate;
+//    }
 
     public Set<WhOutflow> getOutflows() {
         return outflows;
