@@ -38,6 +38,12 @@
 						</div>
     				</div>
                     
+                    <div class="form-group" th:classappend="${#fields.hasErrors('amount')}? 'has-error'">
+                      <label>Amount</label>
+                      <input type="number" class="form-control" name="amount" th:field="*{amount}" placeholder="Enter Amount" onblur=""/>
+                      <p th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" th:class="text-red">Incorrect data</p>
+                    </div>
+                    
 					<div class="box-footer">
 	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>
 	                </div>
