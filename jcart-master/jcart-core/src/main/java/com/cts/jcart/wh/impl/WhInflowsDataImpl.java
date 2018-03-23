@@ -54,4 +54,23 @@ public class WhInflowsDataImpl implements WhInflowsData {
                 .get(WhInflow.class, id);
     }
     
+    /**
+     * Update a inflow into the database
+     * @param warehouse object that needs to be saved
+     */
+    public void update(WhInflow whInflow) {
+        sessionFactory.getCurrentSession()
+                .update(whInflow);
+    }
+    
+    /**
+     * remove inflow by id
+     * @author ungtq
+     * @param id
+     * @return WhWarehouse
+     */
+    public void removeById(Long id) {
+    	WhInflow wInflow = get(id);
+    	sessionFactory.getCurrentSession().delete(wInflow);
+    }
 }
