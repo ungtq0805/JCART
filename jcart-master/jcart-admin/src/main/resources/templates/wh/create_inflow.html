@@ -61,7 +61,17 @@
 						</div>
     				</div>
     				
-    				
+    				<div class="form-group" th:classappend="${#fields.hasErrors('shipper.id')}? 'has-error'">
+						<label>Shipper</label>
+						<div>
+							<select class="form-control" th:field="*{shipper.id}">
+							  <option th:each="shipper : ${shippers}" 
+							          th:value="${shipper.id}" 
+							          th:text="${shipper.fullName}"></option>
+							</select>
+					  	<p th:if="${#fields.hasErrors('shipper.id')}" th:errors="*{shipper.id}" th:class="text-red">Incorrect data</p>
+						</div>
+    				</div>
     				
 					<div class="box-footer">
 	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>

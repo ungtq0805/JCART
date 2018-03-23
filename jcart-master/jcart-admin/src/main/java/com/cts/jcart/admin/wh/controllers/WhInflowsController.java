@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.jcart.catalog.CatalogService;
+import com.cts.jcart.security.SecurityService;
 import com.cts.jcart.wh.entities.WhInflow;
 import com.cts.jcart.wh.entities.WhProduct;
 import com.cts.jcart.wh.entities.WhShipper;
@@ -37,6 +38,9 @@ public class WhInflowsController extends WhAbstractController {
     
 	private static final String viewPrefix = "wh/";
 	
+	@Autowired 
+	SecurityService securityService;
+	
     @Autowired
     WhInflowsData inflowsData;
     
@@ -50,7 +54,7 @@ public class WhInflowsController extends WhAbstractController {
     WhWarehousesData warehousesData;
     
     @Autowired
-	private CatalogService catalogService;
+	CatalogService catalogService;
     
     List<WhProduct> goods;
     List<WhShipper> shippers;
@@ -87,6 +91,7 @@ public class WhInflowsController extends WhAbstractController {
         /*model.addAttribute("goods", goods);
         model.addAttribute("shippers", shippers);
         model.addAttribute("warehouses", warehouses);*/
+        model.addAttribute("shippers", securityService.getAllUsers());
         model.addAttribute("warehousesList", warehousesData.get());
         model.addAttribute("productsList", catalogService.getAllProducts());
         return viewPrefix + "create_inflow";
@@ -128,6 +133,7 @@ public class WhInflowsController extends WhAbstractController {
 	public String editInflowForm(@PathVariable Integer id, Model model) {
     	WhInflow whInflow = inflowsData.get((long)id);
 		model.addAttribute("inflow", whInflow);
+		model.addAttribute("shippers", securityService.getAllUsers());
 		model.addAttribute("warehousesList", warehousesData.get());
         model.addAttribute("productsList", catalogService.getAllProducts());
 		return viewPrefix + "edit_inflow";
