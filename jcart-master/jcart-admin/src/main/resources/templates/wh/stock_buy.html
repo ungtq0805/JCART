@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout/mainLayout">
+      
+      <head>
+        <title>Stock Buy</title>
+    </head>
+    <body>
+    	<div layout:fragment="pageHeader">
+          	<section class="content-header">
+	        	<h1>
+	            	Stock Buy
+	          	</h1>
+	        </section>
+        </div>
+        
+    	<div layout:fragment="content">
+	        
+              <div class="box box-warning">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Stock Buy</h3>
+                </div><!-- /.box-header -->
+                
+                <div class="box-body">
+                  <form role="form" th:action="@{/wh/outflows/create}" th:object="${outflow}" method="post">
+                  	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
+                  	
+                    <div class="form-group" th:classappend="${#fields.hasErrors('customer.id')}? 'has-error'">
+						<label>Customers</label>
+						<div>
+							<select class="form-control" th:field="*{customer.id}">
+							  <option th:each="customer : ${customers}" 
+							          th:value="${customer.id}" 
+							          th:text="${customer.firstName}"></option>
+							</select>
+					  	<p th:if="${#fields.hasErrors('customer.id')}" th:errors="*{customert.id}" th:class="text-red">Incorrect data</p>
+						</div>
+    				</div>
+                    
+					<div class="box-footer">
+	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>
+	                </div>
+                  </form>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+    	</div>
+    	
+    </body>
+    
+</html>

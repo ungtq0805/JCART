@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.cts.jcart.wh.entities.WhCustomer;
+import com.cts.jcart.customers.CustomerService;
 import com.cts.jcart.wh.entities.WhInflow;
 import com.cts.jcart.wh.entities.WhOutflow;
 import com.cts.jcart.wh.impl.WhCustomersData;
@@ -28,10 +28,11 @@ import com.cts.jcart.wh.impl.WhOutflowsData;
  * in the warehouse
  */
 @Controller
-@RequestMapping(value = "/stock")
 public class WhStockController extends WhAbstractController {
     
     public static final String NOSUCHAMOUNT = "There is no such amount in the chosen warehouse";
+    
+    private static final String viewPrefix = "wh/";
     
     @Autowired
     WhInflowsData inflowsData;
@@ -42,8 +43,11 @@ public class WhStockController extends WhAbstractController {
     @Autowired
     WhCustomersData customersData;
     
+    @Autowired 
+	private CustomerService customerService;
+    
     WhInflow inflow;
-    List<WhCustomer> customers;
+//    List<WhCustomer> customers;
     
     /**
      * Gets inflows (with the amount left, i.e. without outflow data) and renders them
@@ -51,11 +55,11 @@ public class WhStockController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the stock.xml file
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/wh/stocks", method = RequestMethod.GET)
     public String showInflows(ModelMap model) {
         List<WhInflow> inflows = inflowsData.get();
         model.addAttribute("inflows", inflows);
-        return "stock";
+        return viewPrefix + "stock";
     }
     
     /**
@@ -65,16 +69,20 @@ public class WhStockController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the stock.xml file
      */
-    @RequestMapping(value = "/buy/{inflow_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/wh/buy/{inflow_id}", method = RequestMethod.GET)
     public String showBuyingForm(@PathVariable("inflow_id") Long inflow_id, ModelMap model) {
         inflow = inflowsData.get(inflow_id);
         WhOutflow outflow = new WhOutflow();
         outflow.setInflow(inflow);
-        customers = customersData.get();
-        model.addAttribute(outflow);
+        
+//        customers = customersData.get();
+        model.addAttribute("outflow", outflow);
         model.addAttribute("product_name", inflow.getProduct().getName());
-        model.addAttribute("customers", customers);
-        return "stockbuy";
+        
+        //model.addAttribute("customers", customers);
+        
+        model.addAttribute("customers", customerService.getAllCustomers());
+        return viewPrefix + "stock_buy";
     }
     
     /**
@@ -89,13 +97,13 @@ public class WhStockController extends WhAbstractController {
     public String buyingProduct(@Valid WhOutflow outflow, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             model.addAttribute("product_name", inflow.getProduct().getName());
-            model.addAttribute("customers", customers);
+//            model.addAttribute("customers", customers);
             return "stockbuy";
         } else {
             if (outflow.getAmount() > inflow.getAmount()) {
                 result.rejectValue("amount", "", NOSUCHAMOUNT);
                 model.addAttribute("product_name", inflow.getProduct().getName());
-                model.addAttribute("customers", customers);
+//                model.addAttribute("customers", customers);
                 return "stockbuy";
             } else {
                 outflowsData.add(outflow);
