@@ -23,6 +23,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.cts.jcart.entities.Product;
+import com.cts.jcart.entities.User;
 
 /**
  * Represents the database inflows table
@@ -51,10 +52,9 @@ public class WhInflow implements Serializable {
     @Column(name="price")
     private BigDecimal price;
     
-//    @NotNull
-//    @ManyToOne(targetEntity=WhShipper.class)
-//    @JoinColumn(name="shipper")
-//    private WhShipper shipper;
+    @ManyToOne(targetEntity=User.class)
+    @JoinColumn(name="shipper")
+    private User shipper;
     
     @NotNull
     @ManyToOne(targetEntity=WhWarehouse.class)
@@ -104,13 +104,13 @@ public class WhInflow implements Serializable {
         this.price = price;
     }
 
-//    public WhShipper getShipper() {
-//        return shipper;
-//    }
-//
-//    public void setShipper(WhShipper shipper) {
-//        this.shipper = shipper;
-//    }
+    public User getShipper() {
+        return shipper;
+    }
+
+    public void setShipper(User shipper) {
+        this.shipper = shipper;
+    }
 
     public WhWarehouse getWarehouse() {
         return warehouse;
