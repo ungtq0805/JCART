@@ -16,6 +16,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.cts.jcart.entities.Customer;
+
 /**
  * Represents the database outflows table
  */
@@ -35,9 +37,9 @@ public class WhOutflow implements Serializable {
     private WhInflow inflow;
     
     @NotNull
-    @ManyToOne(targetEntity=WhCustomer.class)
+    @ManyToOne(targetEntity=Customer.class)
     @JoinColumn(name="customer")
-    private WhCustomer customer;
+    private Customer customer;
     
     @NotNull
     @Column(name="amount")
@@ -65,11 +67,11 @@ public class WhOutflow implements Serializable {
         this.inflow = inflow;
     }
 
-    public WhCustomer getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(WhCustomer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
