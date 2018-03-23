@@ -6,9 +6,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -78,9 +80,9 @@ public class WhInflowsController extends WhAbstractController {
     @RequestMapping(value = "/wh/inflows/init/create", method = RequestMethod.GET)
     public String showInflowForm(ModelMap model) {
     	WhInflow inflow = new WhInflow();
-        goods = goodsData.get();
+        /*goods = goodsData.get();
         shippers = shippersData.get();
-        warehouses = warehousesData.get();
+        warehouses = warehousesData.get();*/
         model.addAttribute("inflow", inflow);
         /*model.addAttribute("goods", goods);
         model.addAttribute("shippers", shippers);
@@ -114,5 +116,54 @@ public class WhInflowsController extends WhAbstractController {
             inflowsData.add(inflow);
             return "redirect:/wh/inflows";
         }
+    }
+    
+    /**
+     * edit warehouse form with mode edit 
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping(value="/wh/edit/inflow/{id}", method=RequestMethod.GET)
+	public String editInflowForm(@PathVariable Integer id, Model model) {
+    	WhInflow whInflow = inflowsData.get((long)id);
+		model.addAttribute("inflow", whInflow);
+		model.addAttribute("warehousesList", warehousesData.get());
+        model.addAttribute("productsList", catalogService.getAllProducts());
+		return viewPrefix + "edit_inflow";
+	}
+    
+    /**
+     * Handles the submit action for a update warehouse
+     * @param warehouse object with all product input information
+     * @param result validation information about the current action
+     * @return name which will be resolved into the jsp page using
+     * apache tiles configuration in the warehouses.xml file
+     */
+    @RequestMapping(value = "/wh/inflow/update/{id}", method = RequestMethod.POST)
+    public String updateInflow(
+    		@Valid @ModelAttribute("inflow") WhInflow whInflow,
+    		BindingResult result) {
+        if (result.hasErrors()) {
+            return viewPrefix + "edit_inflow";
+        } else {
+        	inflowsData.update(whInflow);
+            return "redirect:/wh/inflows";
+        }
+    }
+    
+    /**
+     * Handles the submit action for a delete warehouse
+     * @param warehouse object with all product input information
+     * @param result validation information about the current action
+     * @return name which will be resolved into the jsp page using
+     * apache tiles configuration in the warehouses.xml file
+     */
+    @RequestMapping(value = "/wh/inflow/delete/{id}", method = RequestMethod.GET)
+    public String delInflowById(
+    		@PathVariable Integer id,
+    		Model model) {
+    	inflowsData.removeById((long)id);
+        return "redirect:/wh/inflows";
     }
 }

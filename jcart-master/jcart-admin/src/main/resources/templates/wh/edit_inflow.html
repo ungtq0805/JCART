@@ -4,13 +4,13 @@
       layout:decorator="layout/mainLayout">
       
       <head>
-        <title>Create New Inflow</title>
+        <title>Edit Inflow</title>
     </head>
     <body>
     	<div layout:fragment="pageHeader">
           	<section class="content-header">
 	        	<h1>
-	            	Create New Inflow
+	            	Edit Inflow
 	          	</h1>
 	        </section>
         </div>
@@ -19,10 +19,10 @@
 	        
               <div class="box box-warning">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Create New Inflow</h3>
+                  <h3 class="box-title">Edit Inflow</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" th:action="@{/wh/inflows/create}" th:object="${inflow}" method="post">
+                  <form role="form" th:action="@{/wh/inflow/update/{id}(id=${inflow.id})}" th:object="${inflow}" method="post">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                   	
                     <div class="form-group" th:classappend="${#fields.hasErrors('product.id')}? 'has-error'">
