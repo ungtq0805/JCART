@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cts.jcart.catalog.CatalogService;
 import com.cts.jcart.wh.entities.WhInflow;
 import com.cts.jcart.wh.entities.WhProduct;
 import com.cts.jcart.wh.entities.WhShipper;
@@ -29,9 +31,10 @@ import com.cts.jcart.wh.impl.WhWarehousesData;
  * into the warehouse by shipper
  */
 @Controller
-@RequestMapping(value = "/inflows")
 public class WhInflowsController extends WhAbstractController {
     
+	private static final String viewPrefix = "wh/";
+	
     @Autowired
     WhInflowsData inflowsData;
     
@@ -44,6 +47,9 @@ public class WhInflowsController extends WhAbstractController {
     @Autowired
     WhWarehousesData warehousesData;
     
+    @Autowired
+	private CatalogService catalogService;
+    
     List<WhProduct> goods;
     List<WhShipper> shippers;
     List<WhWarehouse> warehouses;
@@ -54,11 +60,11 @@ public class WhInflowsController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the inflows.xml file
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/wh/inflows", method = RequestMethod.GET)
     public String showInflows(ModelMap model) {
         List<WhInflow> inflows = inflowsData.get();
         model.addAttribute("inflows", inflows);
-        return "inflows";
+        return viewPrefix + "inflows";
     }
     
     /**
@@ -69,17 +75,19 @@ public class WhInflowsController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the inflows.xml file
      */
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/wh/inflows/init/create", method = RequestMethod.GET)
     public String showInflowForm(ModelMap model) {
     	WhInflow inflow = new WhInflow();
         goods = goodsData.get();
         shippers = shippersData.get();
         warehouses = warehousesData.get();
-        model.addAttribute(inflow);
-        model.addAttribute("goods", goods);
+        model.addAttribute("inflow", inflow);
+        /*model.addAttribute("goods", goods);
         model.addAttribute("shippers", shippers);
-        model.addAttribute("warehouses", warehouses);
-        return "inflow";
+        model.addAttribute("warehouses", warehouses);*/
+        model.addAttribute("warehousesList", warehousesData.get());
+        model.addAttribute("productsList", catalogService.getAllProducts());
+        return viewPrefix + "create_inflow";
     }
     
     /**
@@ -90,16 +98,21 @@ public class WhInflowsController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the inflows.xml file
      */
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createCustomer(@Valid WhInflow inflow, BindingResult result, ModelMap model) {
+    @RequestMapping(value = "/wh/inflows/create", method = RequestMethod.POST)
+    public String createInflow(
+    		@Valid @ModelAttribute("inflow") WhInflow inflow,
+    		BindingResult result, 
+    		ModelMap model) {
         if (result.hasErrors()) {
-            model.addAttribute("goods", goods);
+            /*model.addAttribute("goods", goods);
             model.addAttribute("shippers", shippers);
-            model.addAttribute("warehouses", warehouses);
-            return "inflow";
+            model.addAttribute("warehouses", warehouses);*/
+        	model.addAttribute("warehousesList", warehousesData.get());
+            model.addAttribute("productsList", catalogService.getAllProducts());
+            return viewPrefix + "create_inflow";
         } else {
             inflowsData.add(inflow);
-            return "redirect:/inflows";
+            return "redirect:/wh/inflows";
         }
     }
 }

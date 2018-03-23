@@ -165,6 +165,7 @@
             <li th:class="${CURRENT_MENU == 'Permissions'}? 'active' : ''"  sec:authorize="hasRole('ROLE_MANAGE_PERMISSIONS')"><a href="#" th:href="@{'/permissions'}"><i class="fa fa-shield"></i> Permissions</a></li>
             <li><a href="#" th:href="@{'/edit/companyInfo'}"><i class="fa fa-gear"></i> Settings</a></li>
             <li><a href="#" th:href="@{'/warehouses'}"><i class="fa fa-gear"></i> WareHouse</a></li>
+            <li><a href="#" th:href="@{'/wh/inflows'}"><i class="fa fa-gear"></i> InFlows</a></li>
             
           </ul><!-- /.sidebar-menu -->
         </section>
