@@ -22,6 +22,8 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
+                	<input type="datetime-local" value="10/14/2016" class="form-control" id="dateOfBirth"
+              					 th:name="dateOfBirth" />
                   <table class="table table-hover">
                     <tr>
                       <th style="width: 10px"></th>
@@ -30,7 +32,35 @@
                     
                     <tr th:each="remain,iterStat : ${remains}">
                       	<td th:text="${remain.productName}"></td>
-                      	<td th:each="whAmountOfWarehouse,iterStat : ${remain.lstAmountProduct}" th:text="${whAmountOfWarehouse.totalAmount}"></td>
+                      	
+                      	 
+                      	<td th:each="whAmountOfWarehouse,iterStat : ${remain.lstAmountProduct}">
+                      		<div style="width: 100%; background-color:olive; "
+                      			th:if="${whAmountOfWarehouse.totalAmount} > 0">
+                      			<span th:text="${whAmountOfWarehouse.totalAmount}" style="font-size: large;"></span>
+                      		</div>
+                      		
+                      		<div style="width: 100%; "
+                      			th:if="${whAmountOfWarehouse.totalAmount} == 0">
+                      			<span th:text="${whAmountOfWarehouse.totalAmount}" style="font-size: large;"></span>
+                      		</div>
+                      	</td>
+                      	
+                      	
+                      	 <!-- 
+                      	<td th:each="whAmountOfWarehouse,iterStat : ${remain.lstAmountProduct}" 
+                      		th:text="${whAmountOfWarehouse.totalAmount}" 
+                      		th:if="${whAmountOfWarehouse.totalAmount} > 0" 
+                      		style="background-color: green">
+                      	</td>
+                      	
+                      	<td th:each="whAmountOfWarehouse,iterStat : ${remain.lstAmountProduct}" 
+                      		th:text="${whAmountOfWarehouse.totalAmount}" 
+                      		th:if="${whAmountOfWarehouse.totalAmount} == 0" 
+                      		style="background-color: blue">
+                      	</td>
+                      	 -->
+                      	 
                     </tr>
                     
                   </table>
