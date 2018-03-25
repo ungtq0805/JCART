@@ -35,9 +35,9 @@
                       	
                       	 
                       	<td th:each="whAmountOfWarehouse,iterStat : ${remain.lstAmountProduct}">
-                      		<div style="width: 100%; background-color:olive; "
+                      		<div style="width: 100%; "
                       			th:if="${whAmountOfWarehouse.totalAmount} > 0">
-                      			<span th:text="${whAmountOfWarehouse.totalAmount}" style="font-size: large;"></span>
+                      			<span th:text="${whAmountOfWarehouse.totalAmount}" style="font-size: large; font-weight: bold;"></span>
                       		</div>
                       		
                       		<div style="width: 100%; "
