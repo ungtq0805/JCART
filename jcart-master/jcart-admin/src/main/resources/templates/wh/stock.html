@@ -38,7 +38,7 @@
                     <tr th:each="inflow,iterStat : ${inflows}">
                       <td><a><span th:text="${iterStat.count}">1</span></a></td>
                       <td th:text="${inflow.product.name}"></td>
-                      <td th:text="${#numbers.formatDecimal(inflow.amount, 0, 'COMMA', 0, 'POINT')}" align="right"></td> <!-- ${inflow.product.units} -->
+                      <td th:text="${#numbers.formatDecimal(inflow.left, 0, 'COMMA', 0, 'POINT')}" align="right"></td> <!-- ${inflow.product.units} -->
                       <td th:text="${#numbers.formatDecimal(inflow.price, 0, 'COMMA', 2, 'POINT')}" align="right"></td>
                       <td th:text="${#numbers.formatDecimal(inflow.price * inflow.amount, 0, 'COMMA', 2, 'POINT')}" align="right"></td>
                       

@@ -2,6 +2,9 @@ package com.cts.jcart.wh.impl;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +18,8 @@ import com.cts.jcart.wh.entities.WhOutflow;
 @Transactional(rollbackFor=Exception.class)
 public class WhOutflowsDataImpl implements WhOutflowsData {
 
-//    @Autowired
-//    SessionFactory sessionFactory;
+    @Autowired
+    SessionFactory sessionFactory;
     
     /**
      * Gets outflows data from the database
@@ -25,11 +28,10 @@ public class WhOutflowsDataImpl implements WhOutflowsData {
      */
     @SuppressWarnings("unchecked")
 	public List<WhOutflow> get() {
-//        return sessionFactory.getCurrentSession()
-//                .createCriteria(WhOutflow.class)
-//                .addOrder(Order.desc("outflowdate"))
-//                .list();
-    	return null;
+        return sessionFactory.getCurrentSession()
+                .createCriteria(WhOutflow.class)
+                .addOrder(Order.desc("outflowdate"))
+                .list();
     }
 
     /**
@@ -37,8 +39,8 @@ public class WhOutflowsDataImpl implements WhOutflowsData {
      * @param outflow object that needs to be saved
      */
     public void add(WhOutflow outflow) {
-//        sessionFactory.getCurrentSession()
-//                .save(outflow);
+        sessionFactory.getCurrentSession()
+                .save(outflow);
     }
     
 }

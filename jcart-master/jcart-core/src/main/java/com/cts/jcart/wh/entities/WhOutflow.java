@@ -1,6 +1,7 @@
 package com.cts.jcart.wh.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -44,8 +45,11 @@ public class WhOutflow implements Serializable {
     @NotNull
     @Column(name="amount")
     private Integer amount;
-    
+
     @NotNull
+    @Column(name="price")
+    private BigDecimal price;
+    
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name="outflowdate")
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -90,4 +94,12 @@ public class WhOutflow implements Serializable {
     public void setOutflowdate(Date outflowdate) {
         this.outflowdate = outflowdate;
     }
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 }

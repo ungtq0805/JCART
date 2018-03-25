@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.jcart.admin.wh.controllers.WhAbstractController;
-import com.cts.jcart.wh.entities.WhInflow;
+import com.cts.jcart.dto.WhRemainDto;
 import com.cts.jcart.wh.entities.WhWarehouse;
 import com.cts.jcart.wh.impl.WhWarehousesData;
 import com.cts.jcart.wh.report.WhRemainsData;
@@ -23,8 +23,9 @@ import com.cts.jcart.wh.report.WhRemainsData;
  * about currently available goods in all warehouses
  */
 @Controller
-@RequestMapping(value = "/report")
 public class RemainsController extends WhAbstractController {
+	
+	private static final String viewPrefix = "reports/";
     
     @Autowired
     WhRemainsData remainsData;
@@ -38,12 +39,16 @@ public class RemainsController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the remains.xml file
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/wh/reports/remain", method = RequestMethod.GET)
     public String showRemains(ModelMap model) {
-        List<WhInflow> inflows = remainsData.get();
+        //List<WhInflow> inflows = remainsData.get();
+    	List<WhRemainDto> remainList = remainsData.getRemainList();
+    	
         List<WhWarehouse> warehouses = warehousesData.get();
-        model.addAttribute("inflows", inflows);
+        //model.addAttribute("inflows", inflows);
+        model.addAttribute("remains", remainList);
+        
         model.addAttribute("warehouses", warehouses);
-        return "remains";
+        return viewPrefix + "remains";
     }
 }

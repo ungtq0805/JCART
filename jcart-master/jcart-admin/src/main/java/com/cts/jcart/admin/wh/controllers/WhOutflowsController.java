@@ -19,9 +19,10 @@ import com.cts.jcart.wh.impl.WhOutflowsData;
  * from the warehouse to some customer
  */
 @Controller
-@RequestMapping(value = "/outflows")
 public class WhOutflowsController extends WhAbstractController {
     
+	private static final String viewPrefix = "wh/";
+	
     @Autowired
     WhOutflowsData outflowsData;
     
@@ -31,11 +32,10 @@ public class WhOutflowsController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the outflows.xml file
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/wh/outflows", method = RequestMethod.GET)
     public String showOutflows(ModelMap model) {
         List<WhOutflow> outflows = outflowsData.get();
         model.addAttribute("outflows", outflows);
-        return "outflows";
+        return viewPrefix + "outflows";
     }
-    
 }
