@@ -14,8 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JCartSiteApplication
 {
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args){
 		SpringApplication.run(JCartSiteApplication.class, args);
 	}
 
