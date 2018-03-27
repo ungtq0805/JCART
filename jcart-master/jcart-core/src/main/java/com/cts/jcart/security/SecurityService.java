@@ -182,6 +182,7 @@ public class SecurityService
 		if (!StringUtils.isEmpty(user.getPassword())) {
 			persistedUser.setPassword(user.getPassword());
 		}
+		persistedUser.setShipper(user.isShipper());
 		
 		List<Role> updatedRoles = new ArrayList<>();
 		List<Role> roles = user.getRoles();
@@ -194,5 +195,9 @@ public class SecurityService
 		}
 		persistedUser.setRoles(updatedRoles);
 		return userRepository.save(persistedUser);
+	}
+	
+	public List<User> getShippers() {
+		return userRepository.getShippers();
 	}
 }

@@ -3,7 +3,10 @@
  */
 package com.cts.jcart.security;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.cts.jcart.entities.User;
 
@@ -30,4 +33,12 @@ public interface UserRepository extends JpaRepository<User, Integer>
 	 * @return User
 	 */
 	User findByUserName(String userName);
+	
+	/**
+	 * @author ungtq
+	 * @param query
+	 * @return 
+	 */
+	@Query("select p from User p where p.shipper=true")
+	List<User> getShippers();
 }

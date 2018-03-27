@@ -56,6 +56,9 @@ public class User
 	private String password;
 	private String passwordResetToken;
 	
+	@Column(nullable=true)
+	private Boolean shipper;
+	
 	@ManyToMany(cascade=CascadeType.MERGE)
 	@JoinTable(
 	      name="user_role",
@@ -126,5 +129,11 @@ public class User
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public Boolean isShipper() {
+		return shipper;
+	}
+	public void setShipper(Boolean shipper) {
+		this.shipper = shipper;
 	}
 }
