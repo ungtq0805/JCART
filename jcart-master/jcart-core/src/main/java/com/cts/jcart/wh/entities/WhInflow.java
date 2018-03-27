@@ -2,6 +2,7 @@ package com.cts.jcart.wh.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,12 +16,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cts.jcart.entities.Product;
 import com.cts.jcart.entities.User;
@@ -61,16 +64,19 @@ public class WhInflow implements Serializable {
     @JoinColumn(name="warehouse")
     private WhWarehouse warehouse;
     
-//    @NotNull
-//    @DateTimeFormat(pattern="yyyy-MM-dd")
-//    @Column(name="inflowdate")
-//    @Temporal(javax.persistence.TemporalType.DATE)
-//    private Date inflowdate;
+    @NotNull
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Column(name="inflowdate")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date inflowdate;
     
     @OneToMany(fetch=FetchType.EAGER, mappedBy="inflow")
     @Fetch(FetchMode.SELECT)
     private Set<WhOutflow> outflows =
             new HashSet<WhOutflow>(0);
+    
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date lastUpdDate; 
 
     public Long getId() {
         return id;
@@ -120,13 +126,13 @@ public class WhInflow implements Serializable {
         this.warehouse = warehouse;
     }
 
-//    public Date getInflowdate() {
-//        return inflowdate;
-//    }
-//
-//    public void setInflowdate(Date inflowdate) {
-//        this.inflowdate = inflowdate;
-//    }
+    public Date getInflowdate() {
+        return inflowdate;
+    }
+
+    public void setInflowdate(Date inflowdate) {
+        this.inflowdate = inflowdate;
+    }
 
     public Set<WhOutflow> getOutflows() {
         return outflows;
@@ -136,7 +142,15 @@ public class WhInflow implements Serializable {
         this.outflows = outflows;
     }
     
-    /**
+    public Date getLastUpdDate() {
+		return lastUpdDate;
+	}
+
+	public void setLastUpdDate(Date lastUpdDate) {
+		this.lastUpdDate = lastUpdDate;
+	}
+
+	/**
      * Gets the amount of goods which are left
      * in the currently available stock for the current inflow
      * @return amount of goods

@@ -50,10 +50,14 @@ public class WhOutflow implements Serializable {
     @Column(name="price")
     private BigDecimal price;
     
+    @NotNull
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name="outflowdate")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date outflowdate;
+    
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date lastUpdDate;
 
     public Long getId() {
         return id;
@@ -101,5 +105,13 @@ public class WhOutflow implements Serializable {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public Date getLastUpdDate() {
+		return lastUpdDate;
+	}
+
+	public void setLastUpdDate(Date lastUpdDate) {
+		this.lastUpdDate = lastUpdDate;
 	}
 }
