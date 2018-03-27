@@ -53,6 +53,8 @@ public class UserForm
 	      inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
 	private List<Role> roles;
 	
+	private boolean shipper;
+	
 	public Integer getId()
 	{
 		return id;
@@ -138,6 +140,13 @@ public class UserForm
 		this.userName = userName;
 	}
 	
+	public boolean isShipper() {
+		return shipper;
+	}
+	public void setShipper(boolean shipper) {
+		this.shipper = shipper;
+	}
+	
 	public User toUser() {
 		User p = new User();
 		p.setId(id);
@@ -148,6 +157,7 @@ public class UserForm
 		p.setPasswordResetToken(passwordResetToken);
 		p.setRoles(roles);
 		p.setPhoneNo(phoneNo);
+		p.setShipper(shipper);
 		return p;
 	}
 	
@@ -167,6 +177,10 @@ public class UserForm
 		p.setRoles(user.getRoles());
 		
 		p.setPhoneNo(user.getPhoneNo());
+		
+		if (user.isShipper()!=null) {
+			p.setShipper(user.isShipper());
+		}
 		
 		return p;
 	}

@@ -57,6 +57,12 @@
                       <p th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}" th:class="text-red">Incorrect data</p>
                     </div>
                     
+                    <div class="form-group" th:classappend="${#fields.hasErrors('shipper')}? 'has-error'">
+                      <label for="idxShipper">Is Shipper</label>
+                      <input type="checkbox" name="shipper" id="idxShipper" th:field="*{shipper}"/>
+                      <p th:if="${#fields.hasErrors('shipper')}" th:errors="*{shipper}" th:class="text-red">Incorrect data</p>
+                    </div>
+                    
                     <!-- Image URL -->
                     <div class="form-group" th:classappend="${#fields.hasErrors('image')}? 'has-error'">
                       <label for="image">Image</label>

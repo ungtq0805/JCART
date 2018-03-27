@@ -92,7 +92,7 @@ public class WhInflowsController extends WhAbstractController {
         /*model.addAttribute("goods", goods);
         model.addAttribute("shippers", shippers);
         model.addAttribute("warehouses", warehouses);*/
-        model.addAttribute("shippers", securityService.getAllUsers());
+        model.addAttribute("shippers", securityService.getShippers());
         model.addAttribute("warehousesList", warehousesData.get());
         model.addAttribute("productsList", catalogService.getAllProducts());
         return viewPrefix + "create_inflow";
@@ -112,7 +112,7 @@ public class WhInflowsController extends WhAbstractController {
     		BindingResult result, 
     		ModelMap model) {
         if (result.hasErrors()) {
-        	model.addAttribute("shippers", securityService.getAllUsers());
+        	model.addAttribute("shippers", securityService.getShippers());
         	model.addAttribute("warehousesList", warehousesData.get());
             model.addAttribute("productsList", catalogService.getAllProducts());
             return viewPrefix + "create_inflow";
@@ -133,7 +133,7 @@ public class WhInflowsController extends WhAbstractController {
 	public String editInflowForm(@PathVariable Integer id, Model model) {
     	WhInflow whInflow = inflowsData.get((long)id);
 		model.addAttribute("inflow", whInflow);
-		model.addAttribute("shippers", securityService.getAllUsers());
+		model.addAttribute("shippers", securityService.getShippers());
 		model.addAttribute("warehousesList", warehousesData.get());
         model.addAttribute("productsList", catalogService.getAllProducts());
 		return viewPrefix + "edit_inflow";
@@ -149,7 +149,13 @@ public class WhInflowsController extends WhAbstractController {
     @RequestMapping(value = "/wh/inflow/update/{id}", method = RequestMethod.POST)
     public String updateInflow(
     		@Valid @ModelAttribute("inflow") WhInflow whInflow,
-    		BindingResult result) {
+    		BindingResult result,
+    		ModelMap model) {
+    	
+    	model.addAttribute("shippers", securityService.getShippers());
+		model.addAttribute("warehousesList", warehousesData.get());
+        model.addAttribute("productsList", catalogService.getAllProducts());
+        
         if (result.hasErrors()) {
             return viewPrefix + "edit_inflow";
         } else {
