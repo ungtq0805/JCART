@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cts.jcart.JCartException;
+import com.cts.jcart.constant.MstCmnConst;
 import com.cts.jcart.entities.Category;
+import com.cts.jcart.entities.MstCommon;
 import com.cts.jcart.entities.Product;
 
 /**
@@ -23,14 +25,13 @@ import com.cts.jcart.entities.Product;
 public class CatalogService {
 	@Autowired CategoryRepository categoryRepository;
 	@Autowired ProductRepository productRepository;
+	@Autowired MasterCommonRepository masterRepository;
 	
 	public List<Category> getAllCategories() {
-		
 		return categoryRepository.findAll();
 	}
 	
 	public List<Product> getAllProducts() {
-		
 		return productRepository.findAll();
 	}
 
@@ -85,7 +86,15 @@ public class CatalogService {
 		persistedProduct.setDescription(product.getDescription());
 		persistedProduct.setDisabled(product.isDisabled());
 		persistedProduct.setPrice(product.getPrice());
-		persistedProduct.setCategory(getCategoryById(product.getCategory().getId()));
+		
+		if (product.getCategory() != null) {
+			persistedProduct.setCategory(getCategoryById(product.getCategory().getId()));
+		}
+		
+		if (product.getUnit() != null) {
+			persistedProduct.setUnit(product.getUnit());
+		}
+		
 		return productRepository.save(persistedProduct);
 	}
 
@@ -125,5 +134,15 @@ public class CatalogService {
 		productTarget.setId(null);
 		
 		return productTarget;
+	}
+	
+	
+	/**
+	 * @author ungtq
+	 * get Unit List
+	 * @return List Of Commons
+	 */
+	public List<MstCommon> getUnitsList() {
+		return masterRepository.getMstCommonByCommonNo(MstCmnConst.MST_UNIT);
 	}
 }

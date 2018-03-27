@@ -27,18 +27,24 @@ import javax.persistence.TemporalType;
 public class Product implements Serializable
 {
 	private static final long serialVersionUID = 1L;
+	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private Integer id;
+	
 	@Column(nullable=false, unique=true)
 	private String sku;
+	
 	@Column(nullable=false)
 	private String name;
+	
 	private String description;
+	
 	@Column(nullable=false)
 	private BigDecimal price = new BigDecimal("0.0");
 	private String imageUrl;
 	private boolean disabled;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="created_on")
 	private Date createdOn = new Date();
@@ -46,6 +52,10 @@ public class Product implements Serializable
 	@ManyToOne
 	@JoinColumn(name="cat_id")
 	private Category category;
+	
+	@ManyToOne
+	@JoinColumn(name="unit_id")
+	private MstCommon unit;
 	
 	public Integer getId()
 	{
@@ -122,5 +132,10 @@ public class Product implements Serializable
 	{
 		this.category = category;
 	}
-	
+	public MstCommon getUnit() {
+		return unit;
+	}
+	public void setUnit(MstCommon unit) {
+		this.unit = unit;
+	}
 }
