@@ -1,5 +1,6 @@
 package com.cts.jcart.admin.wh.controllers;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -111,13 +112,12 @@ public class WhInflowsController extends WhAbstractController {
     		BindingResult result, 
     		ModelMap model) {
         if (result.hasErrors()) {
-            /*model.addAttribute("goods", goods);
-            model.addAttribute("shippers", shippers);
-            model.addAttribute("warehouses", warehouses);*/
+        	model.addAttribute("shippers", securityService.getAllUsers());
         	model.addAttribute("warehousesList", warehousesData.get());
             model.addAttribute("productsList", catalogService.getAllProducts());
             return viewPrefix + "create_inflow";
         } else {
+        	inflow.setLastUpdDate(Calendar.getInstance().getTime());
             inflowsData.add(inflow);
             return "redirect:/wh/inflows";
         }
@@ -153,6 +153,7 @@ public class WhInflowsController extends WhAbstractController {
         if (result.hasErrors()) {
             return viewPrefix + "edit_inflow";
         } else {
+        	whInflow.setLastUpdDate(Calendar.getInstance().getTime());
         	inflowsData.update(whInflow);
             return "redirect:/wh/inflows";
         }

@@ -1,10 +1,7 @@
 package com.cts.jcart.admin.wh.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -12,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.jcart.wh.entities.WhProduct;
-import com.cts.jcart.wh.impl.WhGoodsData;
+
+//import com.cts.jcart.wh.entities.WhProduct;
+//import com.cts.jcart.wh.impl.WhGoodsData;
 
 /**
  * Provides methods which transfer goods data
@@ -23,8 +22,8 @@ import com.cts.jcart.wh.impl.WhGoodsData;
 @RequestMapping(value = "/goods")
 public class WhGoodsController extends WhAbstractController {
     
-    @Autowired
-    WhGoodsData goodsData;
+//    @Autowired
+//    WhGoodsData goodsData;
     
     /**
      * Gets goods and renders them
@@ -34,8 +33,8 @@ public class WhGoodsController extends WhAbstractController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String showGoods(ModelMap model) {
-        List<WhProduct> goods = goodsData.get();
-        model.addAttribute("goods", goods);
+//        List<WhProduct> goods = goodsData.get();
+//        model.addAttribute("goods", goods);
         return "goods";
     }
     
@@ -47,8 +46,8 @@ public class WhGoodsController extends WhAbstractController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showProductForm(ModelMap model) {
-    	WhProduct product = new WhProduct();
-        model.addAttribute(product);
+//    	WhProduct product = new WhProduct();
+//        model.addAttribute(product);
         return "product";
     }
     
@@ -61,11 +60,12 @@ public class WhGoodsController extends WhAbstractController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createProduct(@Valid WhProduct product, BindingResult result) {
-        if (result.hasErrors()) {
-            return "product";
-        } else {
-            goodsData.add(product);
-            return "redirect:/goods";
-        }
+//        if (result.hasErrors()) {
+//            return "product";
+//        } else {
+//            goodsData.add(product);
+//            return "redirect:/goods";
+//        }
+    	return null;
     }
 }

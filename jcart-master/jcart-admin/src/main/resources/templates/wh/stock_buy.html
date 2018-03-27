@@ -50,6 +50,14 @@
                       <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:class="text-red">Incorrect data</p>
                     </div>
                     
+                    <div class="form-group" th:classappend="${#fields.hasErrors('outflowdate')}? 'has-error'">
+						<label>OutFlow Date</label>
+						<div>
+							<input type="date" class="form-control" name="outflowdate" th:field="*{outflowdate}" placeholder="Enter OutFlow Date" />
+					  	<p th:if="${#fields.hasErrors('outflowdate')}" th:errors="*{outflowdate}" th:class="text-red">Incorrect data</p>
+						</div>
+    				</div>
+    				
                     <input type="hidden" th:field="*{inflow.id}"/>
                     
 					<div class="box-footer">

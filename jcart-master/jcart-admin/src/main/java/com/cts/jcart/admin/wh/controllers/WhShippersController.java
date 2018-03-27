@@ -1,10 +1,7 @@
 package com.cts.jcart.admin.wh.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -12,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.jcart.wh.entities.WhShipper;
-import com.cts.jcart.wh.impl.WhShippersData;
 
 /**
  * Provides methods which transfer shippers data
@@ -23,8 +19,8 @@ import com.cts.jcart.wh.impl.WhShippersData;
 @RequestMapping(value = "/shippers")
 public class WhShippersController extends WhAbstractController {
     
-    @Autowired
-    WhShippersData shippersData;
+//    @Autowired
+//    WhShippersData shippersData;
     
     /**
      * Gets shippers and renders them
@@ -34,8 +30,8 @@ public class WhShippersController extends WhAbstractController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String showShippers(ModelMap model) {
-        List<WhShipper> shippers = shippersData.get();
-        model.addAttribute("shippers", shippers);
+//        List<WhShipper> shippers = shippersData.get();
+//        model.addAttribute("shippers", shippers);
         return "shippers";
     }
     
@@ -47,8 +43,8 @@ public class WhShippersController extends WhAbstractController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showShipperForm(ModelMap model) {
-    	WhShipper shipper = new WhShipper();
-        model.addAttribute(shipper);
+//    	WhShipper shipper = new WhShipper();
+//        model.addAttribute(shipper);
         return "shipper";
     }
     
@@ -61,12 +57,13 @@ public class WhShippersController extends WhAbstractController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createShipper(@Valid WhShipper shipper, BindingResult result) {
-        if (result.hasErrors()) {
-            return "shipper";
-        } else {
-            shippersData.add(shipper);
-            return "redirect:/shippers";
-        }
+//        if (result.hasErrors()) {
+//            return "shipper";
+//        } else {
+//            shippersData.add(shipper);
+//            return "redirect:/shippers";
+//        }
+    	return null;
     }
     
 }

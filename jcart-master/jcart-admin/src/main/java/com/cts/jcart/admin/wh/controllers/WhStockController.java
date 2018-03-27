@@ -1,5 +1,6 @@
 package com.cts.jcart.admin.wh.controllers;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -144,6 +145,8 @@ public class WhStockController extends WhAbstractController {
     		result.rejectValue("amount", "", NOSUCHAMOUNT);
     		return viewPrefix + "stock_buy";
     	}
+    	
+    	outflow.setLastUpdDate(Calendar.getInstance().getTime());
     	
     	//error invalid
     	outflowsData.add(outflow);
