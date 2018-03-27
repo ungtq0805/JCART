@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.jcart.entities.Category;
+import com.cts.jcart.entities.MstCommon;
 import com.cts.jcart.entities.Product;
 
 /**
@@ -39,6 +40,9 @@ public class ProductForm
 	
 	@NotNull
 	private Integer categoryId;
+	
+	@NotNull
+	private Integer unitId;
 	
 	public Integer getId() {
 		return id;
@@ -95,6 +99,14 @@ public class ProductForm
 	public void setCategoryId(Integer categoryId) {
 		this.categoryId = categoryId;
 	}
+	
+	public Integer getUnitId() {
+		return unitId;
+	}
+	public void setUnitId(Integer unitId) {
+		this.unitId = unitId;
+	}
+	
 	public Product toProduct() {
 		Product p = new Product();
 		p.setId(id);
@@ -103,10 +115,16 @@ public class ProductForm
 		p.setDisabled(disabled);
 		p.setPrice(price);
 		p.setSku(sku);
+		
 		Category category = new Category();
 		category.setId(categoryId);
 		p.setCategory(category );
 		//p.setImageUrl(WebUtils.IMAGES_PREFIX+id+".jpg");
+		
+		MstCommon unit = new MstCommon();
+		unit.setId(unitId);
+		p.setUnit(unit);
+		
 		return p;
 	}
 	
@@ -120,7 +138,12 @@ public class ProductForm
 		p.setPrice(product.getPrice());
 		p.setSku(product.getSku());
 		p.setCategoryId(product.getCategory().getId());
+		
+		if (product.getUnit() != null) {
+			p.setUnitId(product.getUnit().getId());
+		}
 		//p.setImageUrl(WebUtils.IMAGES_PREFIX+product.getId()+".jpg");
+		
 		return p;
 	}
 }

@@ -34,6 +34,7 @@ import com.cts.jcart.admin.web.utils.WebUtils;
 import com.cts.jcart.admin.web.validators.ProductFormValidator;
 import com.cts.jcart.catalog.CatalogService;
 import com.cts.jcart.entities.Category;
+import com.cts.jcart.entities.MstCommon;
 import com.cts.jcart.entities.Product;
 
 /**
@@ -57,9 +58,13 @@ public class ProductController extends JCartAdminBaseController
 	}
 	
 	@ModelAttribute("categoriesList")
-	public List<Category> categoriesList()
-	{
+	public List<Category> categoriesList(){
 		return catalogService.getAllCategories();
+	}
+	
+	@ModelAttribute("unitsList")
+	public List<MstCommon> unitsList(){
+		return catalogService.getUnitsList();
 	}
 	
 	@RequestMapping(value="/products", method=RequestMethod.GET)
