@@ -90,7 +90,7 @@ public class ProductController extends JCartAdminBaseController
         // param. decreased by 1.
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         
-        Page<Product> products = catalogService.getAllProducts(new PageRequest(evalPage, evalPageSize));
+        Page<Product> products = catalogService.findActiveProducts(new PageRequest(evalPage, evalPageSize));
         
 		model.addAttribute("products", products);
 		
