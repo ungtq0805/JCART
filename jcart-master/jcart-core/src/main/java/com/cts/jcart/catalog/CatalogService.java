@@ -104,6 +104,7 @@ public class CatalogService {
 		if(persistedProduct == null){
 			throw new JCartException("Product "+product.getId()+" doesn't exist");
 		}
+		persistedProduct.setName(product.getName());
 		persistedProduct.setDescription(product.getDescription());
 		persistedProduct.setDisabled(product.isDisabled());
 		persistedProduct.setPrice(product.getPrice());
