@@ -26,8 +26,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 @Entity
 @Table(name="users")
-public class User
-{
+public class User{
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
@@ -58,6 +57,9 @@ public class User
 	
 	@Column(nullable=true)
 	private Boolean shipper;
+	
+	@Column(nullable=true)
+	private Boolean disabled = false;
 	
 	@ManyToMany(cascade=CascadeType.MERGE)
 	@JoinTable(
@@ -135,5 +137,11 @@ public class User
 	}
 	public void setShipper(Boolean shipper) {
 		this.shipper = shipper;
+	}
+	public Boolean getDisabled() {
+		return disabled;
+	}
+	public void setDisabled(Boolean disabled) {
+		this.disabled = disabled;
 	}
 }

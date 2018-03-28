@@ -138,7 +138,12 @@ public class CatalogService {
 	 * @param id
 	 */
 	public void deleteProductById(Integer id) {
-		productRepository.deleteById(id);
+		Product persistedProduct = getProductById(id);
+		
+		//set disable is true for delete product
+		persistedProduct.setDisabled(true);
+		
+		productRepository.save(persistedProduct);
 	}
 	
 	/**

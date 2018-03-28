@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -148,6 +150,16 @@ public class SecurityService
 	
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
+	}
+	
+	/**
+	 * @author ungtq
+	 * Find active users
+	 * @param pageable
+	 * @return Page<User>
+	 */
+	public Page<User> findActiveUsers(Pageable pageable) {
+		return userRepository.findActiveUsers(pageable);
 	}
 	
 	public User createUser(User user)
