@@ -45,6 +45,16 @@ public class CatalogService {
 	public Page<Product> getAllProducts(Pageable pageable) {
 		return productRepository.findAll(pageable);
 	}
+	
+	/**
+	 * Find active product
+	 * @author ungtq
+	 * @param pageable
+	 * @return Page<Product>
+	 */
+	public Page<Product> findActiveProducts(Pageable pageable) {
+		return productRepository.findActiveProducts(pageable);
+	}
 
 	public Category getCategoryByName(String name) {
 		return categoryRepository.getByName(name);
