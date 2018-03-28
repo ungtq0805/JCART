@@ -55,11 +55,6 @@ public class ProductController extends JCartAdminBaseController
 	
 	@Autowired private ProductFormValidator productFormValidator;
 	
-	private static final int BUTTONS_TO_SHOW = 5;
-    private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 5;
-    private static final int[] PAGE_SIZES = {5, 10, 20};
-	
 	@Override
 	protected String getHeaderTitle()
 	{
@@ -92,8 +87,6 @@ public class ProductController extends JCartAdminBaseController
         
         Page<Product> products = catalogService.findActiveProducts(new PageRequest(evalPage, evalPageSize));
         
-		model.addAttribute("products", products);
-		
 		Pager pager = new Pager(products.getTotalPages(), products.getNumber(), BUTTONS_TO_SHOW);
 		
 		model.addAttribute("products", products);

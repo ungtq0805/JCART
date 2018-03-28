@@ -16,8 +16,16 @@ import com.cts.jcart.common.services.JCLogger;
  * @author ungtq
  *
  */
-public abstract class JCartAdminBaseController
-{
+public abstract class JCartAdminBaseController{
+	
+	/**
+	 * PAGINATION
+	 */
+	public static final int BUTTONS_TO_SHOW = 5;
+	public static final int INITIAL_PAGE = 0;
+	public static final int INITIAL_PAGE_SIZE = 5;
+	public static final int[] PAGE_SIZES = {5, 10, 20};
+    
 	protected final JCLogger logger = JCLogger.getLogger(getClass());
 	
 	@Autowired protected MessageSource messageSource;

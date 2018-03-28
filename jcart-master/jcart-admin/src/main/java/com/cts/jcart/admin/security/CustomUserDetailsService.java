@@ -47,7 +47,9 @@ public class CustomUserDetailsService implements UserDetailsService
 	 * @param id
 	 */
 	public void removeUserById(Integer id) {
-		userRepository.deleteById(id);
+		//userRepository.deleteById(id);
+		User user = userRepository.findById(id);
+		user.setDisabled(true);
+		userRepository.save(user);
 	}
-
 }

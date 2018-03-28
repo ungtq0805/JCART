@@ -7,19 +7,7 @@
       <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <title>Users</title>
-        <script type="text/javascript">
-	        
-	        function showDeleteModal(userId) {
-	        	$('#userId').val(userId);
-	        }
-	        
-	        function deleteUser() {
-	        	 var userId = $('#userId').val();
-	        	 var url = '/users/remove/' + userId;
-				 window.location = url;
-	        }
-	        
-	  	</script>
+        <script th:src="@{'/assets/dist/js/users.js'}"></script>
     </head>
     <body>
         
@@ -57,9 +45,40 @@
                       	  </a>
                       </td>
                     </tr>
-                    
                   </table>
                 </div><!-- /.box-body -->
+                
+                <div class="row">
+			        <div class="form-group col-md-1">
+			            <select class="form-control pagination" id="pageSizeSelect">
+			                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+			                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+			            </select>
+			        </div>
+			        <div th:if="${users.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+			            <ul class="pagination">
+			                <li th:class="${users.number == 0} ? disabled">
+			                    <a class="pageLink" th:href="@{/users(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+			                </li>
+			                <li th:class="${users.number == 0} ? disabled">
+			                    <a class="pageLink" th:href="@{/users(pageSize=${selectedPageSize}, page=${users.number})}">&larr;</a>
+			                </li>
+			                <li th:class="${users.number == (page - 1)} ? 'active pointer-disabled'"
+			                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+			                    <a class="pageLink" th:href="@{/users(pageSize=${selectedPageSize}, page=${page})}"
+			                       th:text="${page}"></a>
+			                </li>
+			                <li th:class="${users.number + 1 == users.totalPages} ? disabled">
+			                    <a class="pageLink"
+			                       th:href="@{/users(pageSize=${selectedPageSize}, page=${users.number + 2})}">&rarr;</a>
+			                </li>
+			                <li th:class="${users.number + 1 == users.totalPages} ? disabled">
+			                    <a class="pageLink"
+			                       th:href="@{/users(pageSize=${selectedPageSize}, page=${users.totalPages})}">&raquo;</a>
+			                </li>
+			            </ul>
+			        </div>
+			    </div>
                 
               </div><!-- /.box -->
               </div>
