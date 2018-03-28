@@ -6,20 +6,7 @@
 
 <head>
 <title>Products</title>
- 	<script type="text/javascript">
-	        
-       function showDeleteModal(catId) {
-       	$('#productId').val(catId);
-       }
-       
-       function deleteProduct() {
-       	 var productId = $('#productId').val();
-       	 var url = '/products/remove/' + productId;
-		 window.location = url;
-       }
-       
- 	</script>
- 	
+	<script th:src="@{'/assets/dist/js/products.js'}"></script>
 </head>
 <body>
 
@@ -36,6 +23,7 @@
 							</div>
 						</div>
 					</div>
+					
 					<!-- /.box-header -->
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
@@ -72,7 +60,38 @@
 
 						</table>
 					</div>
-
+					
+					<div class="row">
+				        <div class="form-group col-md-1">
+				            <select class="form-control pagination" id="pageSizeSelect">
+				                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+				                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+				            </select>
+				        </div>
+				        <div th:if="${products.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+				            <ul class="pagination">
+				                <li th:class="${products.number == 0} ? disabled">
+				                    <a class="pageLink" th:href="@{/products(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+				                </li>
+				                <li th:class="${products.number == 0} ? disabled">
+				                    <a class="pageLink" th:href="@{/products(pageSize=${selectedPageSize}, page=${products.number})}">&larr;</a>
+				                </li>
+				                <li th:class="${products.number == (page - 1)} ? 'active pointer-disabled'"
+				                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+				                    <a class="pageLink" th:href="@{/products(pageSize=${selectedPageSize}, page=${page})}"
+				                       th:text="${page}"></a>
+				                </li>
+				                <li th:class="${products.number + 1 == products.totalPages} ? disabled">
+				                    <a class="pageLink"
+				                       th:href="@{/products(pageSize=${selectedPageSize}, page=${products.number + 2})}">&rarr;</a>
+				                </li>
+				                <li th:class="${products.number + 1 == products.totalPages} ? disabled">
+				                    <a class="pageLink"
+				                       th:href="@{/products(pageSize=${selectedPageSize}, page=${products.totalPages})}">&raquo;</a>
+				                </li>
+				            </ul>
+				        </div>
+				    </div>
 				</div>
 				
 				<div id="deleteModal" class="modal fade" role="dialog">
