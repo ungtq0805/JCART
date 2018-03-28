@@ -19,9 +19,10 @@
                   	method="post"  enctype="multipart/form-data">
                     <p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                     <!-- text input -->
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
                       <label>Name</label>
-                      <input type="text" class="form-control" name="name" th:field="*{name}" readonly="readonly"/>
+                      <input type="text" class="form-control" name="name" th:field="*{name}" placeholder="Enter Product Name"/>
+                      <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:class="text-red">Incorrect data</p>
                     </div>
                     
                     <div class="form-group">
