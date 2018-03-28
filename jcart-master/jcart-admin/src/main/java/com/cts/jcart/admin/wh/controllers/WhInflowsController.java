@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.jcart.catalog.CatalogService;
+import com.cts.jcart.entities.Product;
+import com.cts.jcart.entities.User;
 import com.cts.jcart.security.SecurityService;
 import com.cts.jcart.wh.entities.WhInflow;
 import com.cts.jcart.wh.entities.WhProduct;
@@ -74,6 +76,21 @@ public class WhInflowsController extends WhAbstractController {
         return viewPrefix + "inflows";
     }
     
+    @ModelAttribute("shippers")
+	public List<User> shippersList(){
+		return securityService.getShippers();
+	}
+    
+    @ModelAttribute("warehousesList")
+	public List<WhWarehouse> warehousesList(){
+		return warehousesData.get();
+	}
+    
+    @ModelAttribute("productsList")
+	public List<Product> productsList(){
+		return catalogService.getAllProducts();
+	}
+    
     /**
      * Shows the form for the new product creation routine;
      * data about currently available goods, shippers and warehouses
@@ -89,12 +106,6 @@ public class WhInflowsController extends WhAbstractController {
         shippers = shippersData.get();
         warehouses = warehousesData.get();*/
         model.addAttribute("inflow", inflow);
-        /*model.addAttribute("goods", goods);
-        model.addAttribute("shippers", shippers);
-        model.addAttribute("warehouses", warehouses);*/
-        model.addAttribute("shippers", securityService.getShippers());
-        model.addAttribute("warehousesList", warehousesData.get());
-        model.addAttribute("productsList", catalogService.getAllProducts());
         return viewPrefix + "create_inflow";
     }
     
@@ -112,9 +123,6 @@ public class WhInflowsController extends WhAbstractController {
     		BindingResult result, 
     		ModelMap model) {
         if (result.hasErrors()) {
-        	model.addAttribute("shippers", securityService.getShippers());
-        	model.addAttribute("warehousesList", warehousesData.get());
-            model.addAttribute("productsList", catalogService.getAllProducts());
             return viewPrefix + "create_inflow";
         } else {
         	inflow.setLastUpdDate(Calendar.getInstance().getTime());
@@ -133,9 +141,6 @@ public class WhInflowsController extends WhAbstractController {
 	public String editInflowForm(@PathVariable Integer id, Model model) {
     	WhInflow whInflow = inflowsData.get((long)id);
 		model.addAttribute("inflow", whInflow);
-		model.addAttribute("shippers", securityService.getShippers());
-		model.addAttribute("warehousesList", warehousesData.get());
-        model.addAttribute("productsList", catalogService.getAllProducts());
 		return viewPrefix + "edit_inflow";
 	}
     
@@ -151,11 +156,6 @@ public class WhInflowsController extends WhAbstractController {
     		@Valid @ModelAttribute("inflow") WhInflow whInflow,
     		BindingResult result,
     		ModelMap model) {
-    	
-    	model.addAttribute("shippers", securityService.getShippers());
-		model.addAttribute("warehousesList", warehousesData.get());
-        model.addAttribute("productsList", catalogService.getAllProducts());
-        
         if (result.hasErrors()) {
             return viewPrefix + "edit_inflow";
         } else {
