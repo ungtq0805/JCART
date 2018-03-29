@@ -57,6 +57,15 @@ public class Product implements Serializable
 	@JoinColumn(name="unit_id")
 	private MstCommon unit;
 	
+	public Product() {
+		super();
+	}
+	
+	public Product(Integer idVal) {
+		super();
+		id = idVal;
+	}
+	
 	public Integer getId()
 	{
 		return id;

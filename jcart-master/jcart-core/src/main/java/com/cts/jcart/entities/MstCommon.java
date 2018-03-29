@@ -99,6 +99,15 @@ public class MstCommon
 	
 	@Column(name="last_update_time",nullable=true)
 	private Timestamp lastUpdateTime;
+	
+	public MstCommon(){
+		super();
+	}
+	
+	public MstCommon(Integer idVal){
+		super();
+		id = idVal;
+	}
 
 	public Integer getId() {
 		return id;

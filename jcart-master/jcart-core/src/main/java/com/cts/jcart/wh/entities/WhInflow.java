@@ -65,7 +65,7 @@ public class WhInflow implements Serializable {
     private WhWarehouse warehouse;
     
     @NotNull
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern="dd/MM/yyyy")
     @Column(name="inflowdate")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date inflowdate;
@@ -77,6 +77,15 @@ public class WhInflow implements Serializable {
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date lastUpdDate; 
+    
+    public WhInflow(){ 
+    	super();
+    }
+    
+    public WhInflow(Long idval){ 
+    	super();
+    	id = idval;
+    }
 
     public Long getId() {
         return id;

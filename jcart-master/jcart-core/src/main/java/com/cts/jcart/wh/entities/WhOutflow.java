@@ -15,8 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.cts.jcart.entities.Customer;
 
 /**
@@ -51,7 +49,6 @@ public class WhOutflow implements Serializable {
     private BigDecimal price;
     
     @NotNull
-    @DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name="outflowdate")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date outflowdate;

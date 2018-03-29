@@ -42,6 +42,15 @@ public class Category
 	@OneToMany(mappedBy="category")
 	private Set<Product> products;
 	
+	public Category(){
+		super();
+	}
+	
+	public Category(Integer idVal){
+		super();
+		id = idVal;
+	}
+	
 	public Integer getId()
 	{
 		return id;

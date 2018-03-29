@@ -39,6 +39,15 @@ public class WhWarehouse implements Serializable {
     @NotNull
     @Column(name="employees")
     private Integer employees;
+    
+    public WhWarehouse() {
+    	super();
+    }
+    
+    public WhWarehouse(Long idVal) {
+    	super();
+    	id = idVal;
+    }
 
     public Long getId() {
         return id;

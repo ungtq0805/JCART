@@ -68,6 +68,15 @@ public class User{
 	      inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
 	private List<Role> roles;
 	
+	public User() {
+		super();
+	}
+	
+	public User(Integer idVal) {
+		super();
+		id = idVal;
+	}
+	
 	public Integer getId()
 	{
 		return id;

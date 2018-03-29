@@ -40,6 +40,15 @@ public class Customer implements Serializable
 	private String password;
 	private String phone;
 	
+	public Customer() {
+		super();
+	}
+	
+	public Customer(Integer idVal) {
+		super();
+		id = idVal;
+	}
+	
 	public Integer getId()
 	{
 		return id;
