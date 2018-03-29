@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cts.jcart.JCartException;
-import com.cts.jcart.constant.MstCmnConst;
 import com.cts.jcart.entities.Category;
-import com.cts.jcart.entities.MstCommon;
 import com.cts.jcart.entities.Product;
 
 /**
@@ -161,15 +159,5 @@ public class CatalogService {
 		productTarget.setId(null);
 		
 		return productTarget;
-	}
-	
-	
-	/**
-	 * @author ungtq
-	 * get Unit List
-	 * @return List Of Commons
-	 */
-	public List<MstCommon> getUnitsList() {
-		return masterRepository.getMstCommonByCommonNo(MstCmnConst.MST_UNIT);
 	}
 }

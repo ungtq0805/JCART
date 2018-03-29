@@ -29,4 +29,7 @@ public class MstCmnConst {
 	 * STATUS APPLY - APPROVE
 	 */
 	public static final String MST_STATUS = "00000003";
+	public static final String MST_STATUS_SAVETEMP = "0000";
+	public static final String MST_STATUS_APPLY = "0001";
+	public static final String MST_STATUS_APPROVE = "2007";
 }

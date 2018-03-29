@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cts.jcart.catalog.MasterCommonRepository;
 import com.cts.jcart.wh.entities.WhInflow;
 
 /**
@@ -20,6 +21,9 @@ public class WhInflowsDataImpl implements WhInflowsData {
 
     @Autowired
     SessionFactory sessionFactory;
+    
+    @Autowired 
+    MasterCommonRepository masterRepository;
     
     /**
      * Gets inflows from the database

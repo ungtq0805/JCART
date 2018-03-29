@@ -3,6 +3,8 @@
  */
 package com.cts.jcart.catalog;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,4 +55,40 @@ public class MasterCommonService {
 		
 		return masterCommonRepository.save(mstLatestCompanyInfo);
 	}
+	
+	/**
+	 * @author ungtq
+	 * get Unit List
+	 * @return List Of Commons
+	 */
+	public List<MstCommon> getUnitsList() {
+		return masterCommonRepository.getMstCommonByCommonNo(MstCmnConst.MST_UNIT);
+	}
+	
+	/**
+	 * get STATUS save temp
+	 * @return
+	 */
+	public MstCommon getStatusSaveTemp() {
+    	return masterCommonRepository.getMstCommonByCommonNoAndClassNo(
+			MstCmnConst.MST_STATUS, MstCmnConst.MST_STATUS_SAVETEMP);
+    }
+    
+	/**
+	 * get STATUS apply
+	 * @return
+	 */
+    public MstCommon getStatusApply() {
+    	return masterCommonRepository.getMstCommonByCommonNoAndClassNo(
+			MstCmnConst.MST_STATUS, MstCmnConst.MST_STATUS_APPLY);
+    }
+    
+    /**
+     * get STATUS approve
+     * @return
+     */
+    public MstCommon getStatusApprove() {
+    	return masterCommonRepository.getMstCommonByCommonNoAndClassNo(
+			MstCmnConst.MST_STATUS, MstCmnConst.MST_STATUS_APPROVE);
+    }
 }
