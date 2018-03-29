@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.cts.jcart.customers.CustomerService;
+import com.cts.jcart.entities.Customer;
 import com.cts.jcart.wh.entities.WhInflow;
 import com.cts.jcart.wh.entities.WhOutflow;
 import com.cts.jcart.wh.impl.WhCustomersData;
@@ -49,7 +50,11 @@ public class WhStockController extends WhAbstractController {
 	private CustomerService customerService;
     
     WhInflow inflow;
-//    List<WhCustomer> customers;
+    
+    @ModelAttribute("customers")
+	public List<Customer> categoriesList(){
+		return customerService.getAllCustomers();
+	}
     
     /**
      * Gets inflows (with the amount left, i.e. without outflow data) and renders them
@@ -77,42 +82,11 @@ public class WhStockController extends WhAbstractController {
         WhOutflow outflow = new WhOutflow();
         outflow.setInflow(inflow);
         
-//        customers = customersData.get();
         model.addAttribute("outflow", outflow);
         model.addAttribute("product_name", inflow.getProduct().getName());
         
-        //model.addAttribute("customers", customers);
-        
-        model.addAttribute("customers", customerService.getAllCustomers());
         return viewPrefix + "stock_buy";
     }
-    
-//    /**
-//     * Handles the submit action for a new outflow
-//     * @param outflow object with all product input information
-//     * @param result validation information about the current action
-//     * @param model model map collection of parameters which can be used in the jsp file
-//     * @return name which will be resolved into the jsp page using
-//     * apache tiles configuration in the stock.xml file
-//     */
-//    @RequestMapping(value = "/buy/{inflow_id}", method = RequestMethod.POST)
-//    public String buyingProduct(@Valid WhOutflow outflow, BindingResult result, ModelMap model) {
-//        if (result.hasErrors()) {
-//            model.addAttribute("product_name", inflow.getProduct().getName());
-////            model.addAttribute("customers", customers);
-//            return viewPrefix + "stockbuy";
-//        } else {
-//            if (outflow.getAmount() > inflow.getAmount()) {
-//                result.rejectValue("amount", "", NOSUCHAMOUNT);
-//                model.addAttribute("product_name", inflow.getProduct().getName());
-////                model.addAttribute("customers", customers);
-//                return viewPrefix + "stockbuy";
-//            } else {
-//                outflowsData.add(outflow);
-//                return "redirect:/wh/stocks";
-//            }
-//        }
-//    }
     
     /**
      * Handles the submit action for a new inflow
@@ -127,8 +101,6 @@ public class WhStockController extends WhAbstractController {
     		@Valid @ModelAttribute("outflow") WhOutflow outflow,
     		BindingResult result, 
     		ModelMap model) {
-    	//get customer default
-    	model.addAttribute("customers", customerService.getAllCustomers());
     	
     	//set product name
     	model.addAttribute("product_name", inflow.getProduct().getName());

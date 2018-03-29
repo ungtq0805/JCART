@@ -101,7 +101,6 @@ public class ProductController extends JCartAdminBaseController
 	public String createProductForm(Model model) {
 		ProductForm product = new ProductForm();
 		model.addAttribute("product",product);
-		//model.addAttribute("categoriesList",catalogService.getAllCategories());
 		return viewPrefix+"create_product";
 	}
 
@@ -125,29 +124,12 @@ public class ProductController extends JCartAdminBaseController
 	public String editProductForm(@PathVariable Integer id, Model model) {
 		Product product = catalogService.getProductById(id);
 		model.addAttribute("product",ProductForm.fromProduct(product));
-		//model.addAttribute("categoriesList",catalogService.getAllCategories());
 		return viewPrefix+"edit_product";
 	}
-	
-	/*@RequestMapping(value="/products/images/{productId}", method=RequestMethod.GET)
-	public void showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
-		try {
-			FileSystemResource file = new FileSystemResource(WebUtils.IMAGES_DIR +productId+".jpg");     
-			response.setContentType("image/jpg");
-			org.apache.commons.io.IOUtils.copy(file.getInputStream(), response.getOutputStream());
-			response.flushBuffer();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}	      
-	}*/
 	
 	@RequestMapping(value="/products/{id}", method=RequestMethod.POST)
 	public String updateProduct(@Valid @ModelAttribute("product") ProductForm productForm, BindingResult result, 
 			Model model, RedirectAttributes redirectAttributes) {
-		//productFormValidator.validate(productForm, result);
-		//if(result.hasErrors()){
-		//	return viewPrefix+"edit_product";
-		//}
 		
 		Product product = productForm.toProduct();
 		Product persistedProduct = catalogService.updateProduct(product);

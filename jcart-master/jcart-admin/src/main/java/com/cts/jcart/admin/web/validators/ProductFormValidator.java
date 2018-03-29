@@ -24,8 +24,7 @@ public class ProductFormValidator implements Validator
 	@Autowired protected CatalogService catalogService;
 	
 	@Override
-	public boolean supports(Class<?> clazz)
-	{
+	public boolean supports(Class<?> clazz){
 		return Product.class.isAssignableFrom(clazz);
 	}
 	

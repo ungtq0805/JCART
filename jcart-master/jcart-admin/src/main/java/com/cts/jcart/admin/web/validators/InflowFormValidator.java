@@ -17,7 +17,7 @@ import com.cts.jcart.entities.Category;
  *
  */
 @Component
-public class InflowValidator implements Validator
+public class InflowFormValidator implements Validator
 {
 	@Autowired protected MessageSource messageSource;
 	@Autowired protected CatalogService catalogService;
@@ -29,30 +29,6 @@ public class InflowValidator implements Validator
 	
 	@Override
 	public void validate(Object target, Errors errors){
-//		WhInflow whInflow = (WhInflow) target;
-//		
-//		if (!isValidInflowDate(whInflow)) {
-//			errors.rejectValue("inflowdate", "error.date.input.invalid", 
-//					new Object[]{"Inflow Date"}, "Date input Invalid");
-//		}
+		
 	}
-	
-//	/**
-//	 * @author ungtq
-//	 * @param whInflow
-//	 * @return boolean
-//	 */
-//	private boolean isValidInflowDate(WhInflow whInflow) {
-//		SimpleDateFormat sdf = new SimpleDateFormat(ValidationConst.DATE_INPUT_PATTERN);
-//		
-//		try {
-//			sdf.parse(whInflow.getInflowdate().toString());
-//		} catch(ParseException e) {
-//			e.printStackTrace();
-//			return false;
-//		}
-//		
-//		return true;
-//	}
-	
 }

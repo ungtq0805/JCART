@@ -116,14 +116,10 @@ public class ProductForm
 		p.setPrice(price);
 		p.setSku(sku);
 		
-		Category category = new Category();
-		category.setId(categoryId);
-		p.setCategory(category );
+		p.setCategory(new Category(categoryId));
 		//p.setImageUrl(WebUtils.IMAGES_PREFIX+id+".jpg");
 		
-		MstCommon unit = new MstCommon();
-		unit.setId(unitId);
-		p.setUnit(unit);
+		p.setUnit(new MstCommon(unitId));
 		
 		return p;
 	}

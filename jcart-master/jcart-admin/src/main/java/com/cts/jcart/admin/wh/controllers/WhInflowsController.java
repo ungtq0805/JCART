@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cts.jcart.admin.web.models.WhInflowForm;
+import com.cts.jcart.admin.web.validators.InflowFormValidator;
 import com.cts.jcart.catalog.CatalogService;
 import com.cts.jcart.entities.Product;
 import com.cts.jcart.entities.User;
@@ -63,6 +65,8 @@ public class WhInflowsController extends WhAbstractController {
     List<WhShipper> shippers;
     List<WhWarehouse> warehouses;
     
+    @Autowired private InflowFormValidator inflowFormValidator;
+    
     /**
      * Gets inflows and renders them
      * @param model map collection of parameters which can be used in the jsp file
@@ -101,17 +105,14 @@ public class WhInflowsController extends WhAbstractController {
      */
     @RequestMapping(value = "/wh/inflows/init/create", method = RequestMethod.GET)
     public String showInflowForm(ModelMap model) {
-    	WhInflow inflow = new WhInflow();
-        /*goods = goodsData.get();
-        shippers = shippersData.get();
-        warehouses = warehousesData.get();*/
+    	WhInflowForm inflow = new WhInflowForm();
         model.addAttribute("inflow", inflow);
         return viewPrefix + "create_inflow";
     }
     
     /**
      * Handles the submit action for a new inflow
-     * @param inflow object with all product input information
+     * @param inflowForm object with all product input information
      * @param result validation information about the current action
      * @param model model map collection of parameters which can be used in the jsp file
      * @return name which will be resolved into the jsp page using
@@ -119,14 +120,16 @@ public class WhInflowsController extends WhAbstractController {
      */
     @RequestMapping(value = "/wh/inflows/create", method = RequestMethod.POST)
     public String createInflow(
-    		@Valid @ModelAttribute("inflow") WhInflow inflow,
+    		@Valid @ModelAttribute("inflow") WhInflowForm inflowForm,
     		BindingResult result, 
     		ModelMap model) {
+    	inflowFormValidator.validate(inflowForm, result);
         if (result.hasErrors()) {
             return viewPrefix + "create_inflow";
         } else {
-        	inflow.setLastUpdDate(Calendar.getInstance().getTime());
-            inflowsData.add(inflow);
+        	WhInflow persistedInflow = inflowForm.toWhInflow();
+        	persistedInflow.setLastUpdDate(Calendar.getInstance().getTime());
+            inflowsData.add(persistedInflow);
             return "redirect:/wh/inflows";
         }
     }
@@ -140,7 +143,8 @@ public class WhInflowsController extends WhAbstractController {
     @RequestMapping(value="/wh/edit/inflow/{id}", method=RequestMethod.GET)
 	public String editInflowForm(@PathVariable Integer id, Model model) {
     	WhInflow whInflow = inflowsData.get((long)id);
-		model.addAttribute("inflow", whInflow);
+    	WhInflowForm whInflowForm = WhInflowForm.fromWhInflow(whInflow);
+		model.addAttribute("inflow", whInflowForm);
 		return viewPrefix + "edit_inflow";
 	}
     
@@ -153,14 +157,16 @@ public class WhInflowsController extends WhAbstractController {
      */
     @RequestMapping(value = "/wh/inflow/update/{id}", method = RequestMethod.POST)
     public String updateInflow(
-    		@Valid @ModelAttribute("inflow") WhInflow whInflow,
+    		@Valid @ModelAttribute("inflow") WhInflowForm inflowForm,
     		BindingResult result,
     		ModelMap model) {
+    	inflowFormValidator.validate(inflowForm, result);
         if (result.hasErrors()) {
             return viewPrefix + "edit_inflow";
         } else {
-        	whInflow.setLastUpdDate(Calendar.getInstance().getTime());
-        	inflowsData.update(whInflow);
+        	WhInflow persistedInflow = inflowForm.toWhInflow();
+        	persistedInflow.setLastUpdDate(Calendar.getInstance().getTime());
+        	inflowsData.update(persistedInflow);
             return "redirect:/wh/inflows";
         }
     }
