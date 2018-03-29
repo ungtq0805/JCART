@@ -23,18 +23,18 @@
                 </div><!-- /.box-header -->
                 
                 <div class="box-body">
-                  <form role="form" th:action="@{/wh/outflows/create}" th:object="${outflow}" method="post">
+                  <form role="form" th:action="@{/wh/outflow/update/{id}(id=${outflow.id})}" th:object="${outflow}" method="post">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                   	
-                    <div class="form-group" th:classappend="${#fields.hasErrors('customer.id')}? 'has-error'">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('customerId')}? 'has-error'">
 						<label>Customers</label>
 						<div>
-							<select class="form-control" th:field="*{customer.id}">
+							<select class="form-control" th:field="*{customerId}">
 							  <option th:each="customer : ${customers}" 
 							          th:value="${customer.id}" 
 							          th:text="${customer.firstName}"></option>
 							</select>
-					  	<p th:if="${#fields.hasErrors('customer.id')}" th:errors="*{customert.id}" th:class="text-red">Incorrect data</p>
+					  	<p th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}" th:class="text-red">Incorrect data</p>
 						</div>
     				</div>
                     
@@ -58,7 +58,7 @@
 						</div>
     				</div>
     				
-                    <input type="hidden" th:field="*{inflow.id}"/>
+                    <input type="hidden" th:field="*{inflowId}"/>
                     
 					<div class="box-footer">
 	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>
