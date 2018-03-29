@@ -37,6 +37,7 @@ import com.cts.jcart.admin.web.models.ProductForm;
 import com.cts.jcart.admin.web.utils.WebUtils;
 import com.cts.jcart.admin.web.validators.ProductFormValidator;
 import com.cts.jcart.catalog.CatalogService;
+import com.cts.jcart.catalog.MasterCommonService;
 import com.cts.jcart.entities.Category;
 import com.cts.jcart.entities.MstCommon;
 import com.cts.jcart.entities.Product;
@@ -53,7 +54,11 @@ public class ProductController extends JCartAdminBaseController
 	@Autowired
 	private CatalogService catalogService;
 	
-	@Autowired private ProductFormValidator productFormValidator;
+	@Autowired 
+	private ProductFormValidator productFormValidator;
+	
+	@Autowired 
+	private MasterCommonService masterCommonService;
 	
 	@Override
 	protected String getHeaderTitle()
@@ -68,7 +73,7 @@ public class ProductController extends JCartAdminBaseController
 	
 	@ModelAttribute("unitsList")
 	public List<MstCommon> unitsList(){
-		return catalogService.getUnitsList();
+		return masterCommonService.getUnitsList();
 	}
 	
 	@RequestMapping(value="/products", method=RequestMethod.GET)

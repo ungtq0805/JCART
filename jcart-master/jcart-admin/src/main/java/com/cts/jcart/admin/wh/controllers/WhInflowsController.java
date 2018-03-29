@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.cts.jcart.admin.web.models.WhInflowForm;
 import com.cts.jcart.admin.web.validators.InflowFormValidator;
 import com.cts.jcart.catalog.CatalogService;
+import com.cts.jcart.catalog.MasterCommonService;
+import com.cts.jcart.entities.MstCommon;
 import com.cts.jcart.entities.Product;
 import com.cts.jcart.entities.User;
 import com.cts.jcart.security.SecurityService;
@@ -60,6 +62,10 @@ public class WhInflowsController extends WhAbstractController {
     
     @Autowired
 	CatalogService catalogService;
+    
+    @Autowired
+	MasterCommonService masterCommonService;
+    
     
     List<WhProduct> goods;
     List<WhShipper> shippers;
@@ -118,18 +124,62 @@ public class WhInflowsController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the inflows.xml file
      */
-    @RequestMapping(value = "/wh/inflows/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/wh/inflows/create", params="saveTemp", method = RequestMethod.POST)
     public String createInflow(
     		@Valid @ModelAttribute("inflow") WhInflowForm inflowForm,
+    		BindingResult result, 
+    		ModelMap model) {
+    	return createInflow(SAVETEMP, inflowForm, result, model);
+    }
+    
+    @RequestMapping(value = "/wh/inflows/create", params="apply", method = RequestMethod.POST)
+    public String applyInflow(
+    		@Valid @ModelAttribute("inflow") WhInflowForm inflowForm,
+    		BindingResult result, 
+    		ModelMap model) {
+    	return createInflow(APPLY, inflowForm, result, model);
+    }
+    
+    /**
+     * create inflow with apply or approve
+     * @param dispatch
+     * @param inflowForm
+     * @param result
+     * @param model
+     * @return String
+     */
+    private String createInflow(String dispatch,
+    		WhInflowForm inflowForm,
     		BindingResult result, 
     		ModelMap model) {
     	inflowFormValidator.validate(inflowForm, result);
         if (result.hasErrors()) {
             return viewPrefix + "create_inflow";
         } else {
+        	
+        	MstCommon status = null;
+        	
+        	if (SAVETEMP.equals(dispatch)) {
+        		status = masterCommonService.getStatusSaveTemp();
+        	} 
+        	
+        	if (APPLY.equals(dispatch)) {
+        		status = masterCommonService.getStatusApply();
+        	}
+        	
         	WhInflow persistedInflow = inflowForm.toWhInflow();
+        	
+        	//set status
+        	persistedInflow.setStatus(status);
+        	
+        	//set apply person
+        	persistedInflow.setApplyPerson(getCurrentUser().getUser());
+        	
+        	//set apply date
+        	persistedInflow.setApplyDate(Calendar.getInstance().getTime());
+        	
         	persistedInflow.setLastUpdDate(Calendar.getInstance().getTime());
-            inflowsData.add(persistedInflow);
+        	inflowsData.add(persistedInflow);
             return "redirect:/wh/inflows";
         }
     }

@@ -25,6 +25,9 @@ public abstract class JCartAdminBaseController{
 	public static final int INITIAL_PAGE = 0;
 	public static final int INITIAL_PAGE_SIZE = 5;
 	public static final int[] PAGE_SIZES = {5, 10, 20};
+	
+	public static final String SAVETEMP = "SAVETEMP";
+	public static final String APPLY = "APPLY";
     
 	protected final JCLogger logger = JCLogger.getLogger(getClass());
 	
