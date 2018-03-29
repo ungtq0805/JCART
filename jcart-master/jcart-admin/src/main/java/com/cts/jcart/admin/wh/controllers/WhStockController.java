@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cts.jcart.admin.web.models.WhOutflowForm;
 import com.cts.jcart.customers.CustomerService;
 import com.cts.jcart.entities.Customer;
 import com.cts.jcart.wh.entities.WhInflow;
@@ -79,10 +80,14 @@ public class WhStockController extends WhAbstractController {
     @RequestMapping(value = "/wh/buy/{inflow_id}", method = RequestMethod.GET)
     public String showBuyingForm(@PathVariable("inflow_id") Long inflow_id, ModelMap model) {
         inflow = inflowsData.get(inflow_id);
-        WhOutflow outflow = new WhOutflow();
-        outflow.setInflow(inflow);
         
-        model.addAttribute("outflow", outflow);
+        WhOutflowForm outflowForm = new WhOutflowForm();
+        outflowForm.setInflow(inflow);
+        if (inflow != null) {
+        	outflowForm.setInflowId(inflow.getId());
+        }
+        
+        model.addAttribute("outflow", outflowForm);
         model.addAttribute("product_name", inflow.getProduct().getName());
         
         return viewPrefix + "stock_buy";
@@ -98,7 +103,7 @@ public class WhStockController extends WhAbstractController {
      */
     @RequestMapping(value = "/wh/outflows/create", method = RequestMethod.POST)
     public String createOutflow(
-    		@Valid @ModelAttribute("outflow") WhOutflow outflow,
+    		@Valid @ModelAttribute("outflow") WhOutflowForm outflowForm,
     		BindingResult result, 
     		ModelMap model) {
     	
@@ -106,22 +111,27 @@ public class WhStockController extends WhAbstractController {
     	model.addAttribute("product_name", inflow.getProduct().getName());
     	
     	//set inflow
-    	outflow.setInflow(inflow);
+    	outflowForm.setInflow(inflow);
+    	if (inflow != null) {
+    		outflowForm.setInflowId(inflow.getId());
+    	}
     	
     	if (result.hasErrors()) {
             return viewPrefix + "stock_buy";
     	}
     	
     	//check quantities
-    	if (outflow.getAmount() > inflow.getAmount()) {
+    	if (outflowForm.getAmount() > inflow.getLeft()) {
     		result.rejectValue("amount", "", NOSUCHAMOUNT);
     		return viewPrefix + "stock_buy";
     	}
     	
-    	outflow.setLastUpdDate(Calendar.getInstance().getTime());
+    	outflowForm.setLastUpdDate(Calendar.getInstance().getTime());
+    	
+    	WhOutflow outFlow = outflowForm.toWhOutflow();
     	
     	//error invalid
-    	outflowsData.add(outflow);
+    	outflowsData.add(outFlow);
         return "redirect:/wh/stocks";
     }
 }

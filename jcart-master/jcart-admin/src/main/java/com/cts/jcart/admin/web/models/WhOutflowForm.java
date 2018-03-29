@@ -3,6 +3,10 @@ package com.cts.jcart.admin.web.models;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.cts.jcart.entities.Customer;
 import com.cts.jcart.wh.entities.WhInflow;
 import com.cts.jcart.wh.entities.WhOutflow;
@@ -17,13 +21,20 @@ public class WhOutflowForm {
     private WhInflow inflow;
     private long inflowId;
     
+    
     private Customer customer;
+    
+    @NotNull
     private int customerId;
     
+    @NotNull
     private Integer amount;
 
+    @NotNull
     private BigDecimal price;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private Date outflowdate;
     
     private Date lastUpdDate;
