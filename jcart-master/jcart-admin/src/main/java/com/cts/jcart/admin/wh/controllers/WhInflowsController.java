@@ -173,7 +173,7 @@ public class WhInflowsController extends WhAbstractController {
         	persistedInflow.setStatus(status);
         	
         	//set apply person
-        	persistedInflow.setApplyPerson(getCurrentUser().getUser());
+        	persistedInflow.setApplyPerson(new User(getCurrentUser().getUser().getId()));
         	
         	//set apply date
         	persistedInflow.setApplyDate(Calendar.getInstance().getTime());
