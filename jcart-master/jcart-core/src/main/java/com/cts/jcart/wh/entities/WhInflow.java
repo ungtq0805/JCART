@@ -25,6 +25,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.cts.jcart.entities.MstCommon;
 import com.cts.jcart.entities.Product;
 import com.cts.jcart.entities.User;
 
@@ -77,6 +78,28 @@ public class WhInflow implements Serializable {
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date lastUpdDate; 
+    
+    @ManyToOne(targetEntity=User.class)
+    @JoinColumn(name="status")
+    private MstCommon status;
+    
+    @ManyToOne(targetEntity=User.class)
+    @JoinColumn(name="applyPerson")
+    private User applyPerson;
+    
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @Column(name="applyDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date applyDate;
+    
+    @ManyToOne(targetEntity=User.class)
+    @JoinColumn(name="approvePerson")
+    private User approvePerson;
+    
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @Column(name="approveDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date approveDate;
     
     public WhInflow(){ 
     	super();
@@ -157,6 +180,46 @@ public class WhInflow implements Serializable {
 
 	public void setLastUpdDate(Date lastUpdDate) {
 		this.lastUpdDate = lastUpdDate;
+	}
+
+	public MstCommon getStatus() {
+		return status;
+	}
+
+	public void setStatus(MstCommon status) {
+		this.status = status;
+	}
+
+	public User getApplyPerson() {
+		return applyPerson;
+	}
+
+	public void setApplyPerson(User applyPerson) {
+		this.applyPerson = applyPerson;
+	}
+
+	public Date getApplyDate() {
+		return applyDate;
+	}
+
+	public void setApplyDate(Date applyDate) {
+		this.applyDate = applyDate;
+	}
+
+	public User getApprovePerson() {
+		return approvePerson;
+	}
+
+	public void setApprovePerson(User approvePerson) {
+		this.approvePerson = approvePerson;
+	}
+
+	public Date getApproveDate() {
+		return approveDate;
+	}
+
+	public void setApproveDate(Date approveDate) {
+		this.approveDate = approveDate;
 	}
 
 	/**

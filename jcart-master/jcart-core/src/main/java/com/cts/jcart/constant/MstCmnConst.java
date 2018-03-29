@@ -24,4 +24,9 @@ public class MstCmnConst {
 	 * Master Company information
 	 */
 	public static final String MST_UNIT = "00000002";
+	
+	/**
+	 * STATUS APPLY - APPROVE
+	 */
+	public static final String MST_STATUS = "00000003";
 }
