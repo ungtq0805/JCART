@@ -43,4 +43,33 @@ public class WhOutflowsDataImpl implements WhOutflowsData {
                 .save(outflow);
     }
     
+    /**
+     * Get an inflow by its identifier
+     * @param id identifier of the inflow
+     * @return inflow object
+     */
+    public WhOutflow get(Long id) {
+        return (WhOutflow)sessionFactory.getCurrentSession()
+                .get(WhOutflow.class, id);
+    }
+    
+    /**
+     * Update a inflow into the database
+     * @param warehouse object that needs to be saved
+     */
+    public void update(WhOutflow whOutflow) {
+        sessionFactory.getCurrentSession()
+                .update(whOutflow);
+    }
+    
+    /**
+     * remove inflow by id
+     * @author ungtq
+     * @param id
+     * @return WhWarehouse
+     */
+    public void removeById(Long id) {
+    	WhOutflow outflow = get(id);
+    	sessionFactory.getCurrentSession().delete(outflow);
+    }
 }
