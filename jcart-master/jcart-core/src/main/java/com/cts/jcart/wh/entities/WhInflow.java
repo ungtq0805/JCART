@@ -79,11 +79,11 @@ public class WhInflow implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date lastUpdDate; 
     
-    @ManyToOne(targetEntity=User.class)
+    @ManyToOne(targetEntity=MstCommon.class)
     @JoinColumn(name="status")
     private MstCommon status;
     
-    @ManyToOne(targetEntity=User.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity=User.class)
     @JoinColumn(name="applyPerson")
     private User applyPerson;
     
@@ -92,7 +92,7 @@ public class WhInflow implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date applyDate;
     
-    @ManyToOne(targetEntity=User.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity=User.class)
     @JoinColumn(name="approvePerson")
     private User approvePerson;
     

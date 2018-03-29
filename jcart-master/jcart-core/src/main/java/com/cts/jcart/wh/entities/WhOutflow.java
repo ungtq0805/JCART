@@ -60,7 +60,7 @@ public class WhOutflow implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date lastUpdDate;
     
-    @ManyToOne(targetEntity=User.class)
+    @ManyToOne(targetEntity=MstCommon.class)
     @JoinColumn(name="status")
     private MstCommon status;
     
