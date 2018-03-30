@@ -170,7 +170,7 @@ public class WhInflowsController extends WhAbstractController {
         	WhInflow persistedInflow = inflowForm.toWhInflow();
         	
         	//set status
-        	persistedInflow.setStatus(status);
+        	persistedInflow.setStatusKbn(status.getClassNo());
         	
         	//set apply person
         	persistedInflow.setApplyPerson(new User(getCurrentUser().getUser().getId()));
