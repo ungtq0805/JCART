@@ -81,8 +81,16 @@ public class WhInflowsController extends WhAbstractController {
      */
     @RequestMapping(value="/wh/inflows", method = RequestMethod.GET)
     public String showInflows(ModelMap model) {
+    	//get all entities
         List<WhInflow> inflows = inflowsData.get();
-        List<WhInflowForm> inflowForms = WhInflowForm.fromWhInflows(inflows, getCurrentUser().getUser().getId());
+        
+        //set to DTO
+        List<WhInflowForm> inflowForms = WhInflowForm.fromWhInflows(
+        		inflows, 
+        		getCurrentUser().getUser().getId(),
+        		masterCommonService);
+        
+        //set to screen
         model.addAttribute("inflows", inflowForms);
         return viewPrefix + "inflows";
     }
@@ -194,7 +202,8 @@ public class WhInflowsController extends WhAbstractController {
     @RequestMapping(value="/wh/edit/inflow/{id}", method=RequestMethod.GET)
 	public String editInflowForm(@PathVariable Integer id, Model model) {
     	WhInflow whInflow = inflowsData.get((long)id);
-    	WhInflowForm whInflowForm = WhInflowForm.fromWhInflow(whInflow);
+    	WhInflowForm whInflowForm = WhInflowForm.fromWhInflow(whInflow, 
+    			masterCommonService);
 		model.addAttribute("inflow", whInflowForm);
 		return viewPrefix + "edit_inflow";
 	}

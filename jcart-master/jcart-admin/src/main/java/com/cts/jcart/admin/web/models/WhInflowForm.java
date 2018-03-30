@@ -11,8 +11,12 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.cts.jcart.catalog.MasterCommonService;
+import com.cts.jcart.constant.MstCmnConst;
+import com.cts.jcart.entities.MstCommon;
 import com.cts.jcart.entities.Product;
 import com.cts.jcart.entities.User;
+import com.cts.jcart.utils.StringUtils;
 import com.cts.jcart.wh.entities.WhInflow;
 import com.cts.jcart.wh.entities.WhOutflow;
 import com.cts.jcart.wh.entities.WhWarehouse;
@@ -116,7 +120,8 @@ public class WhInflowForm  {
      * @param whInflow
      * @return WhInflowForm
      */
-	public static WhInflowForm fromWhInflow(WhInflow whInflow){
+	public static WhInflowForm fromWhInflow(WhInflow whInflow,
+			MasterCommonService masterCommonService){
 		WhInflowForm p = new WhInflowForm();
 		p.setId(whInflow.getId());
 		
@@ -154,6 +159,13 @@ public class WhInflowForm  {
 		
 		p.setStatusKbn(whInflow.getStatusKbn());
 		
+		if (!StringUtils.isEmpty(whInflow.getStatusKbn())) {
+			//set status name
+			MstCommon statusKbn = masterCommonService.getMstCommonByCommonNoAndClassNo(
+					MstCmnConst.MST_STATUS, whInflow.getStatusKbn()) ;
+			p.setStatusName(statusKbn.getCharData1()); 
+		}
+		
 		//apply person
 		if (whInflow.getApplyPerson() != null) {
 			p.setApplyPerson(whInflow.getApplyPerson());
@@ -179,11 +191,13 @@ public class WhInflowForm  {
      * @param whInflow
      * @return WhInflowForm
      */
-	public static List<WhInflowForm> fromWhInflows(List<WhInflow> whInflows){
+	public static List<WhInflowForm> fromWhInflows(
+			List<WhInflow> whInflows,
+			MasterCommonService masterCommonService){
 		List<WhInflowForm> lstWhInflowForm = new ArrayList<WhInflowForm>();
 		
 		for (WhInflow whInflow : whInflows) {
-			lstWhInflowForm.add(fromWhInflow(whInflow));
+			lstWhInflowForm.add(fromWhInflow(whInflow, masterCommonService));
 		}
 		
 		return lstWhInflowForm;
@@ -195,8 +209,12 @@ public class WhInflowForm  {
      * @param whInflow
      * @return WhInflowForm
      */
-	public static List<WhInflowForm> fromWhInflows(List<WhInflow> whInflows, int userId){
-		List<WhInflowForm> lstWhInflowForm = fromWhInflows(whInflows);
+	public static List<WhInflowForm> fromWhInflows(
+			List<WhInflow> whInflows, 
+			int userId,
+			MasterCommonService masterCommonService){
+		List<WhInflowForm> lstWhInflowForm = fromWhInflows(
+				whInflows, masterCommonService);
 		
 		for (WhInflowForm inflowForm : lstWhInflowForm) {
 			if (inflowForm.getApplyPersonId() == userId) {
