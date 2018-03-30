@@ -25,15 +25,15 @@
                   <form role="form" th:action="@{/wh/inflow/update/{id}(id=${inflow.id})}" th:object="${inflow}" method="post">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                   	
-                    <div class="form-group" th:classappend="${#fields.hasErrors('product.id')}? 'has-error'">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('productId')}? 'has-error'">
 						<label>Product</label>
 						<div>
-							<select class="form-control" th:field="*{product.id}">
+							<select class="form-control" th:field="*{productId}">
 							  <option th:each="product : ${productsList}" 
 							          th:value="${product.id}" 
 							          th:text="${product.name}"></option>
 							</select>
-					  	<p th:if="${#fields.hasErrors('product.id')}" th:errors="*{product.id}" th:class="text-red">Incorrect data</p>
+					  	<p th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}" th:class="text-red">Incorrect data</p>
 						</div>
     				</div>
                     
@@ -49,27 +49,27 @@
                       <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:class="text-red">Incorrect data</p>
                     </div>
                     
-                    <div class="form-group" th:classappend="${#fields.hasErrors('warehouse.id')}? 'has-error'">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('warehouseId')}? 'has-error'">
 						<label>Warehouse</label>
 						<div>
-							<select class="form-control" th:field="*{warehouse.id}">
+							<select class="form-control" th:field="*{warehouseId}">
 							  <option th:each="warehouse : ${warehousesList}" 
 							          th:value="${warehouse.id}" 
 							          th:text="${warehouse.name}"></option>
 							</select>
-					  	<p th:if="${#fields.hasErrors('warehouse.id')}" th:errors="*{warehouse.id}" th:class="text-red">Incorrect data</p>
+					  	<p th:if="${#fields.hasErrors('warehouseId')}" th:errors="*{warehouseId}" th:class="text-red">Incorrect data</p>
 						</div>
     				</div>
     				
-    				<div class="form-group" th:classappend="${#fields.hasErrors('shipper.id')}? 'has-error'">
+    				<div class="form-group" th:classappend="${#fields.hasErrors('shipperId')}? 'has-error'">
 						<label>Shipper</label>
 						<div>
-							<select class="form-control" th:field="*{shipper.id}">
+							<select class="form-control" th:field="*{shipperId}">
 							  <option th:each="shipper : ${shippers}" 
 							          th:value="${shipper.id}" 
 							          th:text="${shipper.fullName}"></option>
 							</select>
-					  	<p th:if="${#fields.hasErrors('shipper.id')}" th:errors="*{shipper.id}" th:class="text-red">Incorrect data</p>
+					  	<p th:if="${#fields.hasErrors('shipperId')}" th:errors="*{shipperId}" th:class="text-red">Incorrect data</p>
 						</div>
     				</div>
     				

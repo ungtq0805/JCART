@@ -5,6 +5,7 @@
       
       <head>
         <title>Home</title>
+        <script th:src="@{'/assets/dist/js/home.js'}"></script>
     </head>
     <body>
     	<div layout:fragment="pageHeader">
@@ -17,6 +18,18 @@
         </div>
     	<div layout:fragment="content">
 	        <p>Welcome <span th:text="${authenticatedUser.user.userName}">User</span>!</p>
+	        
+	        <input type="radio" id="rdCurrentDay" th:name="rdYmd" value="Current Day" checked="checked"
+	        	th:if="${dispatch == 'by_day'}"/> 
+	        <input type="radio" id="rdCurrentDay" th:name="rdYmd" value="Current Day"
+	        	th:if="${dispatch == 'by_month'}"/>
+	        <label for="rdCurrentDay">Current Day</label>
+	        	 
+	        <input type="radio" id="rdCurrentMonth" th:name="rdYmd" value="Current Month" 
+	        	th:if="${dispatch == 'by_day'}"/> 
+	        	<input type="radio" id="rdCurrentMonth" th:name="rdYmd" value="Current Month" checked="checked" 
+	        	th:if="${dispatch == 'by_month'}"/>
+	        <label for="rdCurrentMonth">Current Month</label>
 	        
 	        <h2>REVENUE : <span th:text="${#numbers.formatDecimal(revenue, 0, 'COMMA', 0, 'POINT')}"/></h2>
 	        
