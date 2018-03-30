@@ -2,6 +2,7 @@ package com.cts.jcart.wh.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cts.jcart.catalog.MasterCommonRepository;
+import com.cts.jcart.constant.MstCmnConst;
 import com.cts.jcart.wh.entities.WhInflow;
 
 /**
@@ -37,6 +39,42 @@ public class WhInflowsDataImpl implements WhInflowsData {
                 .createAlias("product", "p")
                 .addOrder(Order.asc("p.name"))
                 .list();
+    }
+    
+    /**
+     * Gets inflows from the database by user id
+     * ordered by the product name
+     * @return list of inflows
+     */
+    @SuppressWarnings("unchecked")
+	public List<WhInflow> getInFlowsByApplyPerson(int applyPersonId) {
+    	
+    	StringBuilder strSql = new StringBuilder();
+    	strSql.append("from WhInflow where applyPerson = :applyPersonId");
+    	
+    	Query query = sessionFactory.getCurrentSession()
+    			.createQuery(strSql.toString())
+    			.setParameter("applyPersonId", applyPersonId);
+    	
+    	return query.list();
+    }
+    
+    /**
+     * Gets inflows from the database
+     * ordered by the product name
+     * @return list of inflows
+     */
+    @SuppressWarnings("unchecked")
+	public List<WhInflow> getInFlowsActive() {
+    	
+    	StringBuilder strSql = new StringBuilder();
+    	strSql.append("from WhInflow where statusKbn = :state");
+    	
+    	Query query = sessionFactory.getCurrentSession()
+    			.createQuery(strSql.toString())
+    			.setParameter("state", MstCmnConst.MST_STATUS_APPROVE);
+    	
+    	return query.list();
     }
 
     /**

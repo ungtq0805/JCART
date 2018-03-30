@@ -33,7 +33,7 @@ public class WhOutflowsDataImpl implements WhOutflowsData {
                 .addOrder(Order.desc("outflowdate"))
                 .list();
     }
-
+    
     /**
      * Stores an outflow into the database
      * @param outflow object that needs to be saved
