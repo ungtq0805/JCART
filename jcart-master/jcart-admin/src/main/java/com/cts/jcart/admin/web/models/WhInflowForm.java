@@ -1,8 +1,10 @@
 package com.cts.jcart.admin.web.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
@@ -45,6 +47,27 @@ public class WhInflowForm  {
             new HashSet<WhOutflow>(0);
     
     /**
+     * status
+     */
+    private String statusKbn;
+    private String statusName;
+    
+    /**
+     * apply Person
+     */
+    private User applyPerson;
+    private int applyPersonId;
+    
+    private Date applyDate;
+    
+    private User approvePerson;
+    private int approvePersonId;
+    
+    private Date approveDate;
+    
+    private boolean isEdit = false;
+    
+    /**
      * From FORM to entity
      * @return
      */
@@ -69,6 +92,20 @@ public class WhInflowForm  {
 		
 		//inflow date
 		p.setInflowdate(inflowdate);
+		
+		p.setStatusKbn(statusKbn);
+		
+		if (applyPersonId != 0) {
+			p.setApplyPerson(new User(applyPersonId));
+		}
+		
+		p.setApplyDate(applyDate);
+		
+		if (approvePersonId != 0) {
+			p.setApprovePerson(new User(approvePersonId));
+		}
+		
+		p.setApproveDate(approveDate);
 		
 		return p;
 	}
@@ -115,7 +152,59 @@ public class WhInflowForm  {
 			p.setOutflows(whInflow.getOutflows());
 		}
 		
+		p.setStatusKbn(whInflow.getStatusKbn());
+		
+		//apply person
+		if (whInflow.getApplyPerson() != null) {
+			p.setApplyPerson(whInflow.getApplyPerson());
+			p.setApplyPersonId(whInflow.getApplyPerson().getId());
+		}
+		
+		//apply date
+		p.setApplyDate(whInflow.getApplyDate());
+		
+		if (whInflow.getApprovePerson() != null) {
+			p.setApprovePerson(whInflow.getApprovePerson());
+			p.setApplyPersonId(whInflow.getApprovePerson().getId());
+		}
+		
+	    p.setApproveDate(whInflow.getApproveDate());
+		
 		return p;
+	}
+	
+	/**
+     * convert list entities to list form
+     * @author ungtq
+     * @param whInflow
+     * @return WhInflowForm
+     */
+	public static List<WhInflowForm> fromWhInflows(List<WhInflow> whInflows){
+		List<WhInflowForm> lstWhInflowForm = new ArrayList<WhInflowForm>();
+		
+		for (WhInflow whInflow : whInflows) {
+			lstWhInflowForm.add(fromWhInflow(whInflow));
+		}
+		
+		return lstWhInflowForm;
+	}
+	
+	/**
+     * convert list entities to list form and user id 
+     * @author ungtq
+     * @param whInflow
+     * @return WhInflowForm
+     */
+	public static List<WhInflowForm> fromWhInflows(List<WhInflow> whInflows, int userId){
+		List<WhInflowForm> lstWhInflowForm = fromWhInflows(whInflows);
+		
+		for (WhInflowForm inflowForm : lstWhInflowForm) {
+			if (inflowForm.getApplyPersonId() == userId) {
+				inflowForm.setEdit(true);
+			}
+		}
+		
+		return lstWhInflowForm;
 	}
     
 	public Long getId() {
@@ -204,6 +293,78 @@ public class WhInflowForm  {
 
 	public void setOutflows(Set<WhOutflow> outflows) {
 		this.outflows = outflows;
+	}
+
+	public boolean isEdit() {
+		return isEdit;
+	}
+
+	public void setEdit(boolean isEdit) {
+		this.isEdit = isEdit;
+	}
+
+	public String getStatusKbn() {
+		return statusKbn;
+	}
+
+	public void setStatusKbn(String statusKbn) {
+		this.statusKbn = statusKbn;
+	}
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
+
+	public User getApplyPerson() {
+		return applyPerson;
+	}
+
+	public void setApplyPerson(User applyPerson) {
+		this.applyPerson = applyPerson;
+	}
+
+	public int getApplyPersonId() {
+		return applyPersonId;
+	}
+
+	public void setApplyPersonId(int applyPersonId) {
+		this.applyPersonId = applyPersonId;
+	}
+
+	public Date getApplyDate() {
+		return applyDate;
+	}
+
+	public void setApplyDate(Date applyDate) {
+		this.applyDate = applyDate;
+	}
+
+	public User getApprovePerson() {
+		return approvePerson;
+	}
+
+	public void setApprovePerson(User approvePerson) {
+		this.approvePerson = approvePerson;
+	}
+
+	public int getApprovePersonId() {
+		return approvePersonId;
+	}
+
+	public void setApprovePersonId(int approvePersonId) {
+		this.approvePersonId = approvePersonId;
+	}
+
+	public Date getApproveDate() {
+		return approveDate;
+	}
+
+	public void setApproveDate(Date approveDate) {
+		this.approveDate = approveDate;
 	}
 
 	/**

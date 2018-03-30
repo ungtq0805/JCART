@@ -65,7 +65,7 @@ public class WhStockController extends WhAbstractController {
      */
     @RequestMapping(value = "/wh/stocks", method = RequestMethod.GET)
     public String showInflows(ModelMap model) {
-        List<WhInflow> inflows = inflowsData.get();
+        List<WhInflow> inflows = inflowsData.getInFlowsActive();
         model.addAttribute("inflows", inflows);
         return viewPrefix + "stock";
     }

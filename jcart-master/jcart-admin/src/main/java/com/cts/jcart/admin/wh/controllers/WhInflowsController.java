@@ -82,7 +82,8 @@ public class WhInflowsController extends WhAbstractController {
     @RequestMapping(value="/wh/inflows", method = RequestMethod.GET)
     public String showInflows(ModelMap model) {
         List<WhInflow> inflows = inflowsData.get();
-        model.addAttribute("inflows", inflows);
+        List<WhInflowForm> inflowForms = WhInflowForm.fromWhInflows(inflows, getCurrentUser().getUser().getId());
+        model.addAttribute("inflows", inflowForms);
         return viewPrefix + "inflows";
     }
     
@@ -214,8 +215,12 @@ public class WhInflowsController extends WhAbstractController {
         if (result.hasErrors()) {
             return viewPrefix + "edit_inflow";
         } else {
+        	inflowForm.setApplyPersonId(getCurrentUser().getUser().getId());
+        	inflowForm.setApprovePersonId(0);
+        	
         	WhInflow persistedInflow = inflowForm.toWhInflow();
         	persistedInflow.setLastUpdDate(Calendar.getInstance().getTime());
+        	
         	inflowsData.update(persistedInflow);
             return "redirect:/wh/inflows";
         }

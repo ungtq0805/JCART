@@ -40,35 +40,40 @@
                     <tr>
                       <th style="width: 10px">No</th>
                       <th>Product</th>
-                      <th>Amount</th>
-                      <th>Price</th>
-                      <th>Cost</th>
-                      <th>Shipper</th>
+                      <th>Amount x Price = Cost</th>
                       <th>Warehouse</th>
                       <th>Date</th>
+                      <th>Status</th>
                       <th></th>
                     </tr>
                     <tr th:each="inflow,iterStat : ${inflows}">
                       <td><a><span th:text="${iterStat.count}">1</span></a></td>
                       <td th:text="${inflow.product.name}"></td>
-                      <td th:text="${#numbers.formatDecimal(inflow.amount, 0, 'COMMA', 0, 'POINT')}" align="right"></td> <!-- ${inflow.product.units} -->
-                      <td th:text="${#numbers.formatDecimal(inflow.price, 0, 'COMMA', 2, 'POINT')}" align="right"></td>
-                      <td th:text="${#numbers.formatDecimal(inflow.price * inflow.amount, 0, 'COMMA', 2, 'POINT')}" align="right"></td>
-                      
-                      <td th:text="${inflow.shipper.fullName}"></td>
+                      <td th:text="
+                      ${#numbers.formatDecimal(inflow.amount, 0, 'COMMA', 0, 'POINT')} + '  x  ' + 
+                      ${#numbers.formatDecimal(inflow.price, 0, 'COMMA', 2, 'POINT')} + '  =  ' +
+                      ${#numbers.formatDecimal(inflow.price * inflow.amount, 0, 'COMMA', 2, 'POINT')}" align="right"></td>
                       
                       <td th:text="${inflow.warehouse.name}"></td>
                       
                       <td th:text="${inflow.inflowdate}"></td>
+                      <td></td>
                        
-                      <td>
-                      	  <a id="editLink" th:href="@{/wh/edit/inflow/{id}(id=${inflow.id})}" class="btn btn-sm btn-default"><i class="fa fa-edit"></i> Edit</a>
+                      <td th:if="${inflow.edit == true}">
+                      	  	
+                      	  <a id="editLink" 
+                      	  	th:href="@{/wh/edit/inflow/{id}(id=${inflow.id})}" class="btn btn-sm btn-default">
+                      	  <i class="fa fa-edit"></i> Edit</a>
                       	  <a class="btn btn-sm btn-default open-AddBookDialog" 
                       	  	data-toggle="modal" 
                       	  	data-target="#deleteModal"
                       	  	th:onclick="'showDeleteModal(' + ${inflow.id} + ')'">
                       	  	<i class="fa fa-trash"></i> Del
                       	  </a>
+                      </td>
+                      
+                      <td th:if="${inflow.edit == false}">
+                       
                       </td>
                     </tr>
                     
