@@ -73,4 +73,10 @@ public class HomeController extends JCartAdminBaseController{
 		return whRemainsData.getPaymentByDateOrYm(JCartConsts.BY_DAY, 
 				StringUtils.formatDate(Calendar.getInstance().getTime()).replaceAll("/", ""));
 	}
+	
+	@ModelAttribute("revenue")
+	public BigDecimal getRevenue(){
+		return whRemainsData.getRevenueByDateOrYm(JCartConsts.BY_DAY, 
+				StringUtils.formatDate(Calendar.getInstance().getTime()).replaceAll("/", ""));
+	}
 }

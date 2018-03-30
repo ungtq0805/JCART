@@ -18,7 +18,10 @@
     	<div layout:fragment="content">
 	        <p>Welcome <span th:text="${authenticatedUser.user.userName}">User</span>!</p>
 	        
+	        <h2>REVENUE : <span th:text="${#numbers.formatDecimal(revenue, 0, 'COMMA', 0, 'POINT')}"/></h2>
+	        
 	        <h2>PAYMENT : <span th:text="${#numbers.formatDecimal(payment, 0, 'COMMA', 0, 'POINT')}"/></h2>
+	        
     	</div>
     	
     </body>
