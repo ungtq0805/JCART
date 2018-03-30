@@ -225,7 +225,6 @@ public class WhRemainsDataImpl implements WhRemainsData {
     	}
     	
     	return payment;
-    	
     }
     
     /**
@@ -237,15 +236,59 @@ public class WhRemainsDataImpl implements WhRemainsData {
     	StringBuilder builder = new StringBuilder();
     	
     	if (byType.equals(JCartConsts.BY_DAY)) {
-    		builder.append("SELECT SUM(I.amount * I.price) from WH_INFLOWS I  ")
+    		builder.append("SELECT COALESCE(SUM(I.amount * I.price), 0) from WH_INFLOWS I  ")
     		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMMDD') = :dateYmd ")
     		.append(" AND I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
-    		return builder.toString();
     	} else {
-    		builder.append("SELECT SUM(I.amount * I.price) from WH_INFLOWS I  ")
+    		builder.append("SELECT COALESCE(SUM(I.amount * I.price), 0) from WH_INFLOWS I  ")
     		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMM') = :dateYmd ")
     		.append(" AND I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
-    		return builder.toString();
     	}
+    	
+    	return builder.toString();
+    }
+    
+    /**
+     * get Payment
+     * @author ungtq
+     * @param dateYmd
+     * @return
+     */
+    public BigDecimal getRevenueByDateOrYm(String byType, String dateYmd) {
+    	EntityManager em = emf.createEntityManager();
+    	
+    	BigDecimal payment = null;
+    	
+    	if (byType.equals(JCartConsts.BY_DAY)) {
+    		payment = (BigDecimal)em.createNativeQuery(getSqlRevenue(JCartConsts.BY_DAY))
+    				.setParameter("dateYmd", dateYmd).getSingleResult();
+    	} else {
+    		payment = (BigDecimal)em.createNativeQuery(getSqlRevenue(JCartConsts.BY_MONTH))
+    				.setParameter("dateYmd", dateYmd).getSingleResult();
+    	}
+    	
+    	return payment;
+    	
+    }
+    
+    /**
+     * get SQL INFLOWS - Payment
+     * @param byType
+     * @return String
+     */
+    private String getSqlRevenue(String byType) {
+    	StringBuilder builder = new StringBuilder();
+    	
+    	if (byType.equals(JCartConsts.BY_DAY)) {
+    		builder.append("SELECT COALESCE(SUM(I.amount * I.price), 0) from WH_OUTFLOWS I  ")
+    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMMDD') = :dateYmd ")
+    		.append(" AND I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
+    	} else {
+    		builder.append("SELECT COALESCE(SUM(I.amount * I.price), 0) from WH_OUTFLOWS I  ")
+    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMM') = :dateYmd ")
+    		.append(" AND I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
+    	}
+    	
+    	return builder.toString();
     }
 }

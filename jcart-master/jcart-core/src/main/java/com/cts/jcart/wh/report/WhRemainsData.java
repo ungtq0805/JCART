@@ -13,4 +13,6 @@ public interface WhRemainsData {
     public List<WhRemainDto> getRemainList();
     
     public BigDecimal getPaymentByDateOrYm(String byType, String dateYmd);
+    
+    public BigDecimal getRevenueByDateOrYm(String byType, String dateYmd);
 }
