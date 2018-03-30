@@ -25,7 +25,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.cts.jcart.entities.MstCommon;
 import com.cts.jcart.entities.Product;
 import com.cts.jcart.entities.User;
 
@@ -79,9 +78,8 @@ public class WhInflow implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date lastUpdDate; 
     
-    @ManyToOne(targetEntity=MstCommon.class)
-    @JoinColumn(name="status")
-    private MstCommon status;
+    @Column(name="statuskbn")
+    private String statusKbn;
     
     @ManyToOne(fetch = FetchType.EAGER, targetEntity=User.class)
     @JoinColumn(name="applyPerson")
@@ -182,14 +180,6 @@ public class WhInflow implements Serializable {
 		this.lastUpdDate = lastUpdDate;
 	}
 
-	public MstCommon getStatus() {
-		return status;
-	}
-
-	public void setStatus(MstCommon status) {
-		this.status = status;
-	}
-
 	public User getApplyPerson() {
 		return applyPerson;
 	}
@@ -220,6 +210,14 @@ public class WhInflow implements Serializable {
 
 	public void setApproveDate(Date approveDate) {
 		this.approveDate = approveDate;
+	}
+
+	public String getStatusKbn() {
+		return statusKbn;
+	}
+
+	public void setStatusKbn(String statusKbn) {
+		this.statusKbn = statusKbn;
 	}
 
 	/**

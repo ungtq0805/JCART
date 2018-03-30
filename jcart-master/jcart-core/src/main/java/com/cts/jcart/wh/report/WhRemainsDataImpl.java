@@ -1,5 +1,6 @@
 package com.cts.jcart.wh.report;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cts.jcart.constant.JCartConsts;
+import com.cts.jcart.constant.MstCmnConst;
 import com.cts.jcart.dto.WhInflowDto;
 import com.cts.jcart.dto.WhOutFlowDto;
 import com.cts.jcart.dto.WhRemainDto;
@@ -200,5 +203,49 @@ public class WhRemainsDataImpl implements WhRemainsData {
     	.append("ORDER BY B.WAREHOUSE ");
     	
     	return builder.toString();
+    }
+    
+    /**
+     * get Payment
+     * @author ungtq
+     * @param dateYmd
+     * @return
+     */
+    public BigDecimal getPaymentByDateOrYm(String byType, String dateYmd) {
+    	EntityManager em = emf.createEntityManager();
+    	
+    	BigDecimal payment = null;
+    	
+    	if (byType.equals(JCartConsts.BY_DAY)) {
+    		payment = (BigDecimal)em.createNativeQuery(getSqlPayment(JCartConsts.BY_DAY))
+    				.setParameter("dateYmd", dateYmd).getSingleResult();
+    	} else {
+    		payment = (BigDecimal)em.createNativeQuery(getSqlPayment(JCartConsts.BY_MONTH))
+    				.setParameter("dateYmd", dateYmd).getSingleResult();
+    	}
+    	
+    	return payment;
+    	
+    }
+    
+    /**
+     * get SQL INFLOWS - Payment
+     * @param byType
+     * @return String
+     */
+    private String getSqlPayment(String byType) {
+    	StringBuilder builder = new StringBuilder();
+    	
+    	if (byType.equals(JCartConsts.BY_DAY)) {
+    		builder.append("SELECT SUM(I.amount * I.price) from WH_INFLOWS I  ")
+    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMMDD') = :dateYmd ")
+    		.append(" AND I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
+    		return builder.toString();
+    	} else {
+    		builder.append("SELECT SUM(I.amount * I.price) from WH_INFLOWS I  ")
+    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMM') = :dateYmd ")
+    		.append(" AND I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
+    		return builder.toString();
+    	}
     }
 }
