@@ -31,13 +31,11 @@ public class AuthenticatedUser extends org.springframework.security.core.userdet
 		this.user = user;
 	}
 	
-	public User getUser()
-	{
+	public User getUser(){
 		return user;
 	}
 	
-	private static Collection<? extends GrantedAuthority> getAuthorities(User user)
-	{
+	private static Collection<? extends GrantedAuthority> getAuthorities(User user){
 		Set<String> roleAndPermissions = new HashSet<>();
 		List<Role> roles = user.getRoles();
 		

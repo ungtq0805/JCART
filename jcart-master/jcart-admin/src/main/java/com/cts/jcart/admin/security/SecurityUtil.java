@@ -17,4 +17,6 @@ public class SecurityUtil{
 	public static final String MANAGE_ROLES = "ROLE_MANAGE_ROLES";
 	public static final String MANAGE_PERMISSIONS = "ROLE_MANAGE_PERMISSIONS";
 	public static final String MANAGE_SETTINGS = "ROLE_MANAGE_SETTINGS";
+	public static final String MANAGE_ROLE_INOUTFLOW_INPUT = "ROLE_INOUTFLOW_INPUT";
+	public static final String MANAGE_ROLE_INOUTFLOW_APPROVE = "ROLE_INOUTFLOW_APPROVE";
 }
