@@ -224,6 +224,10 @@ public class WhInflowForm  {
 			if (inflowForm.getApplyPersonId() == userId) {
 				inflowForm.setEdit(true);
 			}
+			
+			if (MstCmnConst.MST_STATUS_APPLY.equals(inflowForm.getStatusKbn())) {
+				inflowForm.setEdit(false);
+			}
 		}
 		
 		return lstWhInflowForm;

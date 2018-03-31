@@ -43,7 +43,7 @@
                     </div>
                     
                      <!-- phone No -->
-                    <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('phoneNo')}? 'has-error'">
                       <label>Phone Number</label>
                       <input type="text" class="form-control" name="phoneNo" th:field="*{phoneNo}"  placeholder="Enter Phone Number"/>
                       <p th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}" th:class="text-red">Incorrect data</p>

@@ -182,9 +182,11 @@ public class UserController extends JCartAdminBaseController
 		User user = userForm.toUser();
 		
 		//encode password
-		String password = userForm.getPassword();
-		String encodedPwd = passwordEncoder.encode(password);
-		user.setPassword(encodedPwd);
+		if (!StringUtils.isEmpty(userForm.getPassword())) {
+			String password = userForm.getPassword();
+			String encodedPwd = passwordEncoder.encode(password);
+			user.setPassword(encodedPwd);
+		}
 		
 		//update DB
 		User persistedUser = securityService.updateUser(user);

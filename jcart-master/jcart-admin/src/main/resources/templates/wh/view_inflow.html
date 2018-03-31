@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout/mainLayout">
+      
+      <head>
+        <title>View Inflow</title>
+         <script type="text/javascript">
+         	function setInflowId(whId) {
+	        	$('#whInflowId').val(whId);
+	        }
+	        
+	        function gotoApply() {
+	        	var whInflowId = $('#whInflowId').val();
+	        	$('#frmUpdateInflow').attr('action', "/wh/inflow/update/" + whInflowId + "?apply=apply").submit();
+	        }
+	  	</script>
+    </head>
+    <body>
+    	<div layout:fragment="pageHeader">
+          	<section class="content-header">
+	        	<h1>
+	            	Edit Inflow
+	          	</h1>
+	        </section>
+        </div>
+        
+    	<div layout:fragment="content">
+	        
+              <div class="box box-warning">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Edit Inflow</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <form role="form" id="frmUpdateInflow" 
+                  	th:action="@{/wh/inflow/update/{id}(id=${inflow.id})}" th:object="${inflow}" method="post">
+                  	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
+                  	
+                    <div class="form-group" th:classappend="${#fields.hasErrors('productId')}? 'has-error'">
+						<label>Product</label>
+						<span th:field="*{product.name}"/>
+    				</div>
+                    
+                  	<div class="form-group" th:classappend="${#fields.hasErrors('amount')}? 'has-error'">
+                      <label>Amount</label>
+                      <span th:text="${#numbers.formatDecimal(amount, 0, 'COMMA', 0, 'POINT')}"/>
+                    </div>
+                    
+                    <div class="form-group" th:classappend="${#fields.hasErrors('price')}? 'has-error'">
+                      <label>Price</label>
+                      <span th:text="${#numbers.formatDecimal(price, 0, 'COMMA', 0, 'POINT')}"/>
+                    </div>
+                    
+                    <div class="form-group" th:classappend="${#fields.hasErrors('warehouseId')}? 'has-error'">
+						<label>Warehouse</label>
+						<span th:field="*{warehouse.name}"/>
+    				</div>
+    				
+    				<div class="form-group" th:classappend="${#fields.hasErrors('shipperId')}? 'has-error'">
+						<label>Shipper</label>
+						<span th:field="*{shipper.fullName}"/>
+    				</div>
+    				
+    				<div class="form-group" th:classappend="${#fields.hasErrors('inflowdate')}? 'has-error'">
+						<label>Inflow Date</label>
+						<span th:field="*{inflowdate}"/>
+    				</div>
+    				
+    				<input type="hidden" th:field="*{statusKbn}"/>
+    				<input type="hidden" th:field="*{statusName}"/>
+    				
+					<div class="box-footer">
+	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" 
+	                    	class="btn btn-primary" name="saveTemp">Save Temp</button>
+	                    
+	                    <a class="btn btn-primary"
+                      	  	data-toggle="modal"
+                      	  	data-target="#confirmModal"
+                      	  	th:onclick="'setInflowId(' + ${inflow.id} + ')'">Apply</a>
+	                </div>
+                  </form>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+              
+              <div id="confirmModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+					
+					    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title" th:text="#{label.confirm.title}"></h4>
+				      </div>
+				      <div class="modal-body">
+				        <p th:text="#{label.inflow.confirm.apply}"></p>
+				      </div>
+			    	  <input type="hidden" id="whInflowId"/>
+				      <div class="modal-footer">
+				     	<a type="button" class="btn btn-danger" 
+				     		style="text-decoration: none;  color: #ffffff;" th:text="#{label.confirm.ok}"
+		                   	onclick="gotoApply()">
+		                </a>
+				        <a type="button" class="btn btn-danger" data-dismiss="modal"
+	                		style="color: #ffffff;" th:text="#{label.confirm.cancel}">
+		                </a>
+				      </div>
+				    </div>
+				
+				  </div>
+			 </div>
+    	</div>
+    	
+    </body>
+    
+</html>
