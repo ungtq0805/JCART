@@ -147,7 +147,9 @@ public class ProductController extends JCartAdminBaseController
 	private void saveProductImageToDisk(ProductForm productForm) {
 		MultipartFile file = productForm.getImage();
 		if (file!= null && !file.isEmpty()) {
-			String name = WebUtils.IMAGES_DIR + productForm.getId() + ".jpg";
+			String name = messageSource.getMessage("spring.jcart.dir.path.products", null, null) + 
+					productForm.getId() + 
+					".jpg";
 			try {
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(name)));
