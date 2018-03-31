@@ -45,6 +45,7 @@
                       <th>Date</th>
                       <th>Status</th>
                       <th>Apply Person</th>
+                      <th>Approve Person</th>
                       <th></th>
                     </tr>
                     <tr th:each="inflow,iterStat : ${inflows}">
@@ -60,6 +61,7 @@
                       <td th:text="${inflow.inflowdate}"></td>
                       <td th:text="${inflow.statusName}"></td>
                       <td th:text="${inflow.applyPerson.fullName}"></td>
+                      <td th:text="${inflow.approvePerson.fullName}"></td>
                        
                       <td th:if="${inflow.edit == true}">
                       	  	
@@ -77,7 +79,7 @@
                       
                       <td th:if="${inflow.edit == false}">
                        		 <a id="editLink" 
-	                      	  	th:href="@{/wh/edit/inflow/{id}(id=${inflow.id})}" class="btn btn-sm btn-default">
+	                      	  	th:href="@{/wh/view/inflow/{id}(id=${inflow.id})}" class="btn btn-sm btn-default">
 	                      	  <i class="fa fa-search"></i> View </a>
                       </td>
                     </tr>
