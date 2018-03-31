@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cts.jcart.admin.security.SecurityUtil;
 import com.cts.jcart.admin.web.models.WhInflowForm;
 import com.cts.jcart.admin.web.validators.InflowFormValidator;
 import com.cts.jcart.catalog.CatalogService;
 import com.cts.jcart.catalog.MasterCommonService;
+import com.cts.jcart.constant.MstCmnConst;
 import com.cts.jcart.entities.MstCommon;
+import com.cts.jcart.entities.Permission;
 import com.cts.jcart.entities.Product;
+import com.cts.jcart.entities.Role;
 import com.cts.jcart.entities.User;
 import com.cts.jcart.security.SecurityService;
 import com.cts.jcart.wh.entities.WhInflow;
@@ -253,5 +257,85 @@ public class WhInflowsController extends WhAbstractController {
     		Model model) {
     	inflowsData.removeById((long)id);
         return "redirect:/wh/inflows";
+    }
+    
+    /**
+     * Handles the submit action for a update warehouse
+     * @param warehouse object with all product input information
+     * @param result validation information about the current action
+     * @return name which will be resolved into the jsp page using
+     * apache tiles configuration in the warehouses.xml file
+     */
+    @RequestMapping(value = "/wh/view/inflow/{id}", method = RequestMethod.GET)
+    public String viewInflowWithModeUpd(@PathVariable Integer id, Model model) {
+    	
+    	WhInflow whInflow = inflowsData.get((long)id);
+    	WhInflowForm whInflowForm = WhInflowForm.fromWhInflow(whInflow, 
+    			masterCommonService);
+		model.addAttribute("inflow", whInflowForm);
+		
+		model.addAttribute("isApprove", "false");
+		
+		//if inflows has status kbn approve, not show the button approve
+		if (!MstCmnConst.MST_STATUS_APPROVE.equals(whInflowForm.getStatusKbn())
+			&& !MstCmnConst.MST_STATUS_SAVETEMP.equals(whInflowForm.getStatusKbn())) {
+			User authUser = getCurrentUser().getUser();
+			for (Role role : authUser.getRoles()){
+				List<Permission> permissions = role.getPermissions();
+				for (Permission permission : permissions){
+					if (SecurityUtil.MANAGE_ROLE_INOUTFLOW_APPROVE.equals(
+							permission.getName())) {
+						model.addAttribute("isApprove", "true");
+						break;
+					}
+				}
+			}
+		}
+		
+		return viewPrefix + "view_inflow";
+    }
+    
+    /**
+     * Handles the submit action for a update warehouse
+     * @param warehouse object with all product input information
+     * @param result validation information about the current action
+     * @return name which will be resolved into the jsp page using
+     * apache tiles configuration in the warehouses.xml file
+     */
+    @RequestMapping(value = "/wh/inflow/approve", method = RequestMethod.POST)
+    public String approveInflow(
+    		@Valid @ModelAttribute("inflow") WhInflowForm inflowForm,
+    		BindingResult result,
+    		ModelMap model) {
+    	WhInflow whInflow = inflowsData.get(inflowForm.getId());
+    	whInflow.setStatusKbn(MstCmnConst.MST_STATUS_APPROVE);
+    	whInflow.setLastUpdDate(Calendar.getInstance().getTime());
+    	
+    	whInflow.setApproveDate(Calendar.getInstance().getTime());
+    	whInflow.setApprovePerson(new User(getCurrentUser().getUser().getId()));
+    	inflowsData.update(whInflow);
+    	
+    	return "redirect:/wh/inflows";
+    }
+    
+    /**
+     * Handles the submit action for a update warehouse
+     * @param warehouse object with all product input information
+     * @param result validation information about the current action
+     * @return name which will be resolved into the jsp page using
+     * apache tiles configuration in the warehouses.xml file
+     */
+    @RequestMapping(value = "/wh/inflow/sendBack", method = RequestMethod.POST)
+    public String sendBackInflow(
+    		@Valid @ModelAttribute("inflow") WhInflowForm inflowForm,
+    		BindingResult result,
+    		ModelMap model) {
+    	WhInflow whInflow = inflowsData.get(inflowForm.getId());
+    	whInflow.setStatusKbn(MstCmnConst.MST_STATUS_SAVETEMP);
+    	whInflow.setLastUpdDate(Calendar.getInstance().getTime());
+    	
+    	inflowsData.update(whInflow);
+    	
+    	return "redirect:/wh/inflows";
     }
 }
