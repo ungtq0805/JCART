@@ -36,8 +36,7 @@ public class WhInflowsDataImpl implements WhInflowsData {
 	public List<WhInflow> get() {
         return sessionFactory.getCurrentSession()
                 .createCriteria(WhInflow.class)
-                .createAlias("product", "p")
-                .addOrder(Order.asc("p.name"))
+                .addOrder(Order.desc("lastUpdDate"))
                 .list();
     }
     
