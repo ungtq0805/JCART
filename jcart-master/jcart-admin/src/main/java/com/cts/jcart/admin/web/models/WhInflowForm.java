@@ -228,6 +228,14 @@ public class WhInflowForm  {
 			if (MstCmnConst.MST_STATUS_APPLY.equals(inflowForm.getStatusKbn())) {
 				inflowForm.setEdit(false);
 			}
+			
+			if (MstCmnConst.MST_STATUS_APPROVE.equals(inflowForm.getStatusKbn())) {
+				inflowForm.setEdit(false);
+			}
+			
+			if (inflowForm.getApprovePerson() == null) {
+				inflowForm.setApprovePerson(new User());
+			}
 		}
 		
 		return lstWhInflowForm;
