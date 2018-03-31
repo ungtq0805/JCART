@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,13 +33,16 @@ public class WhInflowForm  {
     private int productId;
     
     @NotNull
+    @Min(0)
     private Integer amount;
     
     @NotNull
+    @Min(0)
     private BigDecimal price;
     
-    private User shipper;
+    @NotNull
     private int shipperId;
+    private User shipper;
     
     private WhWarehouse warehouse;
     private long warehouseId;
@@ -60,12 +64,12 @@ public class WhInflowForm  {
      * apply Person
      */
     private User applyPerson;
-    private int applyPersonId;
+    private Integer applyPersonId;
     
     private Date applyDate;
     
     private User approvePerson;
-    private int approvePersonId;
+    private Integer approvePersonId;
     
     private Date approveDate;
     
@@ -99,13 +103,13 @@ public class WhInflowForm  {
 		
 		p.setStatusKbn(statusKbn);
 		
-		if (applyPersonId != 0) {
+		if (applyPersonId != null) {
 			p.setApplyPerson(new User(applyPersonId));
 		}
 		
 		p.setApplyDate(applyDate);
 		
-		if (approvePersonId != 0) {
+		if (approvePersonId != null) {
 			p.setApprovePerson(new User(approvePersonId));
 		}
 		
@@ -345,14 +349,6 @@ public class WhInflowForm  {
 		this.applyPerson = applyPerson;
 	}
 
-	public int getApplyPersonId() {
-		return applyPersonId;
-	}
-
-	public void setApplyPersonId(int applyPersonId) {
-		this.applyPersonId = applyPersonId;
-	}
-
 	public Date getApplyDate() {
 		return applyDate;
 	}
@@ -369,20 +365,28 @@ public class WhInflowForm  {
 		this.approvePerson = approvePerson;
 	}
 
-	public int getApprovePersonId() {
-		return approvePersonId;
-	}
-
-	public void setApprovePersonId(int approvePersonId) {
-		this.approvePersonId = approvePersonId;
-	}
-
 	public Date getApproveDate() {
 		return approveDate;
 	}
 
 	public void setApproveDate(Date approveDate) {
 		this.approveDate = approveDate;
+	}
+
+	public Integer getApplyPersonId() {
+		return applyPersonId;
+	}
+
+	public void setApplyPersonId(Integer applyPersonId) {
+		this.applyPersonId = applyPersonId;
+	}
+
+	public Integer getApprovePersonId() {
+		return approvePersonId;
+	}
+
+	public void setApprovePersonId(Integer approvePersonId) {
+		this.approvePersonId = approvePersonId;
 	}
 
 	/**

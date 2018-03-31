@@ -134,19 +134,19 @@ public class WhInflowsController extends WhAbstractController {
      * apache tiles configuration in the inflows.xml file
      */
     @RequestMapping(value = "/wh/inflows/create", params="saveTemp", method = RequestMethod.POST)
-    public String createInflow(
+    public String saveInflowInModeNew(
     		@Valid @ModelAttribute("inflow") WhInflowForm inflowForm,
     		BindingResult result, 
     		ModelMap model) {
-    	return createInflow(SAVETEMP, inflowForm, result, model);
+    	return saveOrUpdate(SAVETEMP, inflowForm, result, model, MODE_NEW);
     }
     
     @RequestMapping(value = "/wh/inflows/create", params="apply", method = RequestMethod.POST)
-    public String applyInflow(
+    public String applyInflowInModeNew(
     		@Valid @ModelAttribute("inflow") WhInflowForm inflowForm,
     		BindingResult result, 
     		ModelMap model) {
-    	return createInflow(APPLY, inflowForm, result, model);
+    	return saveOrUpdate(APPLY, inflowForm, result, model, MODE_NEW);
     }
     
     /**
@@ -157,10 +157,11 @@ public class WhInflowsController extends WhAbstractController {
      * @param model
      * @return String
      */
-    private String createInflow(String dispatch,
+    private String saveOrUpdate(String dispatch,
     		WhInflowForm inflowForm,
     		BindingResult result, 
-    		ModelMap model) {
+    		ModelMap model,
+    		String mode) {
     	inflowFormValidator.validate(inflowForm, result);
         if (result.hasErrors()) {
             return viewPrefix + "create_inflow";
@@ -188,7 +189,15 @@ public class WhInflowsController extends WhAbstractController {
         	persistedInflow.setApplyDate(Calendar.getInstance().getTime());
         	
         	persistedInflow.setLastUpdDate(Calendar.getInstance().getTime());
-        	inflowsData.add(persistedInflow);
+        	
+        	if (MODE_NEW.equals(mode)) {
+        		inflowsData.add(persistedInflow);
+        	} 
+        	
+        	if (MODE_UPD.equals(mode)) {
+        		inflowsData.update(persistedInflow);
+        	}
+        	
             return "redirect:/wh/inflows";
         }
     }
@@ -215,24 +224,20 @@ public class WhInflowsController extends WhAbstractController {
      * @return name which will be resolved into the jsp page using
      * apache tiles configuration in the warehouses.xml file
      */
-    @RequestMapping(value = "/wh/inflow/update/{id}", method = RequestMethod.POST)
-    public String updateInflow(
+    @RequestMapping(value = "/wh/inflow/update/{id}", params="saveTemp", method = RequestMethod.POST)
+    public String saveInflowWithModeUpd(
     		@Valid @ModelAttribute("inflow") WhInflowForm inflowForm,
     		BindingResult result,
     		ModelMap model) {
-    	inflowFormValidator.validate(inflowForm, result);
-        if (result.hasErrors()) {
-            return viewPrefix + "edit_inflow";
-        } else {
-        	inflowForm.setApplyPersonId(getCurrentUser().getUser().getId());
-        	inflowForm.setApprovePersonId(0);
-        	
-        	WhInflow persistedInflow = inflowForm.toWhInflow();
-        	persistedInflow.setLastUpdDate(Calendar.getInstance().getTime());
-        	
-        	inflowsData.update(persistedInflow);
-            return "redirect:/wh/inflows";
-        }
+    	return saveOrUpdate(SAVETEMP, inflowForm, result, model, MODE_UPD);
+    }
+    
+    @RequestMapping(value = "/wh/inflow/update/{id}", params="apply", method = RequestMethod.POST)
+    public String applyInflowInModeUpd(
+    		@Valid @ModelAttribute("inflow") WhInflowForm inflowForm,
+    		BindingResult result, 
+    		ModelMap model) {
+    	return saveOrUpdate(APPLY, inflowForm, result, model, MODE_UPD);
     }
     
     /**

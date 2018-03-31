@@ -44,6 +44,7 @@
                       <th>Warehouse</th>
                       <th>Date</th>
                       <th>Status</th>
+                      <th>Apply Person</th>
                       <th></th>
                     </tr>
                     <tr th:each="inflow,iterStat : ${inflows}">
@@ -58,6 +59,7 @@
                       
                       <td th:text="${inflow.inflowdate}"></td>
                       <td th:text="${inflow.statusName}"></td>
+                      <td th:text="${inflow.applyPerson.fullName}"></td>
                        
                       <td th:if="${inflow.edit == true}">
                       	  	
@@ -109,7 +111,7 @@
 				    </div>
 				
 				  </div>
-				</div>
+			</div>
     	</div>
     </body>
     

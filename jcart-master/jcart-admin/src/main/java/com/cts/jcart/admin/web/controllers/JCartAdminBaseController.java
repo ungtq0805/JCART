@@ -28,6 +28,8 @@ public abstract class JCartAdminBaseController{
 	
 	public static final String SAVETEMP = "SAVETEMP";
 	public static final String APPLY = "APPLY";
+	public static final String MODE_NEW = "MODE_NEW";
+	public static final String MODE_UPD = "MODE_UPD";
     
 	protected final JCLogger logger = JCLogger.getLogger(getClass());
 	
