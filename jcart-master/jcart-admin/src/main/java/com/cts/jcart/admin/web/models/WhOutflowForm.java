@@ -1,13 +1,21 @@
 package com.cts.jcart.admin.web.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.cts.jcart.catalog.MasterCommonService;
+import com.cts.jcart.constant.MstCmnConst;
 import com.cts.jcart.entities.Customer;
+import com.cts.jcart.entities.MstCommon;
+import com.cts.jcart.entities.User;
+import com.cts.jcart.utils.StringUtils;
 import com.cts.jcart.wh.entities.WhInflow;
 import com.cts.jcart.wh.entities.WhOutflow;
 
@@ -21,16 +29,16 @@ public class WhOutflowForm {
     private WhInflow inflow;
     private long inflowId;
     
-    
+    @NotNull
+    private int customerId;
     private Customer customer;
     
     @NotNull
-    private int customerId;
-    
-    @NotNull
+    @Min(0)
     private Integer amount;
 
     @NotNull
+    @Min(0)
     private BigDecimal price;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -38,6 +46,27 @@ public class WhOutflowForm {
     private Date outflowdate;
     
     private Date lastUpdDate;
+    
+    /**
+     * status
+     */
+    private String statusKbn;
+    private String statusName;
+    
+    /**
+     * apply Person
+     */
+    private User applyPerson;
+    private Integer applyPersonId;
+    
+    private Date applyDate;
+    
+    private User approvePerson;
+    private Integer approvePersonId;
+    
+    private Date approveDate;
+    
+    private boolean isEdit = false;
     
     /**
      * From FORM to entity
@@ -65,6 +94,24 @@ public class WhOutflowForm {
 		//last update date
 		p.setLastUpdDate(lastUpdDate);
 		
+		//set status kbn
+		p.setStatusKbn(statusKbn);
+		
+		//apply person
+		if (applyPersonId != null) {
+			p.setApplyPerson(new User(applyPersonId));
+		}
+		
+		//apply date
+		p.setApplyDate(applyDate);
+		
+		//approve person
+		if (approvePersonId != null) {
+			p.setApprovePerson(new User(approvePersonId));
+		}
+		
+		p.setApproveDate(approveDate);
+		
 		return p;
     }
     
@@ -74,7 +121,8 @@ public class WhOutflowForm {
      * @param whInflow
      * @return WhInflowForm
      */
-	public static WhOutflowForm fromWhOutflow(WhOutflow whOutflow){
+	public static WhOutflowForm fromWhOutflow(WhOutflow whOutflow,
+			MasterCommonService masterCommonService){
 		WhOutflowForm p = new WhOutflowForm();
 		p.setId(whOutflow.getId());
 		
@@ -96,13 +144,97 @@ public class WhOutflowForm {
 		//set price
 		p.setPrice(whOutflow.getPrice());
 		
+		//set status kbn
+		p.setStatusKbn(whOutflow.getStatusKbn());
+		
+		if (!StringUtils.isEmpty(whOutflow.getStatusKbn())) {
+			//set status name
+			MstCommon statusKbn = masterCommonService.getMstCommonByCommonNoAndClassNo(
+					MstCmnConst.MST_STATUS, whOutflow.getStatusKbn()) ;
+			p.setStatusName(statusKbn.getCharData1()); 
+		}
+		
+		//apply person
+		if (whOutflow.getApplyPerson() != null) {
+			p.setApplyPerson(whOutflow.getApplyPerson());
+			p.setApplyPersonId(whOutflow.getApplyPerson().getId());
+		}
+		
+		//apply date
+		p.setApplyDate(whOutflow.getApplyDate());
+		
+		if (whOutflow.getApprovePerson() != null) {
+			p.setApprovePerson(whOutflow.getApprovePerson());
+			p.setApplyPersonId(whOutflow.getApprovePerson().getId());
+		}
+		
+	    p.setApproveDate(whOutflow.getApproveDate());
+		
 		//set outflow date
 		p.setOutflowdate(whOutflow.getOutflowdate());
 		
 		//last update
 		p.setLastUpdDate(whOutflow.getLastUpdDate());
 		
+		//set customer
+		if (whOutflow.getCustomer() != null) {
+			p.setCustomerId(whOutflow.getCustomer().getId());
+			p.setCustomer(whOutflow.getCustomer());
+		}
+		
 		return p;
+	}
+	
+	/**
+     * convert list entities to list form
+     * @author ungtq
+     * @param whInflow
+     * @return WhInflowForm
+     */
+	public static List<WhOutflowForm> fromWhOutflows(
+			List<WhOutflow> whOutflows,
+			MasterCommonService masterCommonService){
+		List<WhOutflowForm> lstWhInflowForm = new ArrayList<WhOutflowForm>();
+		
+		for (WhOutflow whOutflow : whOutflows) {
+			lstWhInflowForm.add(fromWhOutflow(whOutflow, masterCommonService));
+		}
+		
+		return lstWhInflowForm;
+	}
+	
+	/**
+     * convert list entities to list form and user id 
+     * @author ungtq
+     * @param whInflow
+     * @return WhInflowForm
+     */
+	public static List<WhOutflowForm> fromWhOutflows(
+			List<WhOutflow> whOutflows, 
+			int userId,
+			MasterCommonService masterCommonService){
+		List<WhOutflowForm> lstWhOutflowForm = fromWhOutflows(
+				whOutflows, masterCommonService);
+		
+		for (WhOutflowForm inflowForm : lstWhOutflowForm) {
+			if (inflowForm.getApplyPersonId() == userId) {
+				inflowForm.setEdit(true);
+			}
+			
+			if (MstCmnConst.MST_STATUS_APPLY.equals(inflowForm.getStatusKbn())) {
+				inflowForm.setEdit(false);
+			}
+			
+			if (MstCmnConst.MST_STATUS_APPROVE.equals(inflowForm.getStatusKbn())) {
+				inflowForm.setEdit(false);
+			}
+			
+			if (inflowForm.getApprovePerson() == null) {
+				inflowForm.setApprovePerson(new User());
+			}
+		}
+		
+		return lstWhOutflowForm;
 	}
 
 	public Long getId() {
@@ -175,5 +307,77 @@ public class WhOutflowForm {
 
 	public void setLastUpdDate(Date lastUpdDate) {
 		this.lastUpdDate = lastUpdDate;
+	}
+
+	public String getStatusKbn() {
+		return statusKbn;
+	}
+
+	public void setStatusKbn(String statusKbn) {
+		this.statusKbn = statusKbn;
+	}
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
+
+	public User getApplyPerson() {
+		return applyPerson;
+	}
+
+	public void setApplyPerson(User applyPerson) {
+		this.applyPerson = applyPerson;
+	}
+
+	public Integer getApplyPersonId() {
+		return applyPersonId;
+	}
+
+	public void setApplyPersonId(Integer applyPersonId) {
+		this.applyPersonId = applyPersonId;
+	}
+
+	public Date getApplyDate() {
+		return applyDate;
+	}
+
+	public void setApplyDate(Date applyDate) {
+		this.applyDate = applyDate;
+	}
+
+	public User getApprovePerson() {
+		return approvePerson;
+	}
+
+	public void setApprovePerson(User approvePerson) {
+		this.approvePerson = approvePerson;
+	}
+
+	public Integer getApprovePersonId() {
+		return approvePersonId;
+	}
+
+	public void setApprovePersonId(Integer approvePersonId) {
+		this.approvePersonId = approvePersonId;
+	}
+
+	public Date getApproveDate() {
+		return approveDate;
+	}
+
+	public void setApproveDate(Date approveDate) {
+		this.approveDate = approveDate;
+	}
+
+	public boolean isEdit() {
+		return isEdit;
+	}
+
+	public void setEdit(boolean isEdit) {
+		this.isEdit = isEdit;
 	}
 }

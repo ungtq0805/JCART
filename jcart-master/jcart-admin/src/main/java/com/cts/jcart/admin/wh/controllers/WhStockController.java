@@ -1,24 +1,14 @@
 package com.cts.jcart.admin.wh.controllers;
 
-import java.util.Calendar;
 import java.util.List;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.cts.jcart.admin.web.models.WhOutflowForm;
-import com.cts.jcart.customers.CustomerService;
-import com.cts.jcart.entities.Customer;
 import com.cts.jcart.wh.entities.WhInflow;
-import com.cts.jcart.wh.entities.WhOutflow;
 import com.cts.jcart.wh.impl.WhCustomersData;
 import com.cts.jcart.wh.impl.WhInflowsData;
 import com.cts.jcart.wh.impl.WhOutflowsData;
@@ -47,16 +37,6 @@ public class WhStockController extends WhAbstractController {
     @Autowired
     WhCustomersData customersData;
     
-    @Autowired 
-	private CustomerService customerService;
-    
-    WhInflow inflow;
-    
-    @ModelAttribute("customers")
-	public List<Customer> categoriesList(){
-		return customerService.getAllCustomers();
-	}
-    
     /**
      * Gets inflows (with the amount left, i.e. without outflow data) and renders them
      * @param model map collection of parameters which can be used in the jsp file
@@ -68,70 +48,5 @@ public class WhStockController extends WhAbstractController {
         List<WhInflow> inflows = inflowsData.getInFlowsActive();
         model.addAttribute("inflows", inflows);
         return viewPrefix + "stock";
-    }
-    
-    /**
-     * Shows the form for buying currently selected inflow (outflow form)
-     * @param inflow_id identifier for the selected inflow
-     * @param model model map collection of parameters which can be used in the jsp file
-     * @return name which will be resolved into the jsp page using
-     * apache tiles configuration in the stock.xml file
-     */
-    @RequestMapping(value = "/wh/buy/{inflow_id}", method = RequestMethod.GET)
-    public String showBuyingForm(@PathVariable("inflow_id") Long inflow_id, ModelMap model) {
-        inflow = inflowsData.get(inflow_id);
-        
-        WhOutflowForm outflowForm = new WhOutflowForm();
-        outflowForm.setInflow(inflow);
-        if (inflow != null) {
-        	outflowForm.setInflowId(inflow.getId());
-        }
-        
-        model.addAttribute("outflow", outflowForm);
-        model.addAttribute("product_name", inflow.getProduct().getName());
-        
-        return viewPrefix + "stock_buy";
-    }
-    
-    /**
-     * Handles the submit action for a new inflow
-     * @param inflow object with all product input information
-     * @param result validation information about the current action
-     * @param model model map collection of parameters which can be used in the jsp file
-     * @return name which will be resolved into the jsp page using
-     * apache tiles configuration in the inflows.xml file
-     */
-    @RequestMapping(value = "/wh/outflows/create", method = RequestMethod.POST)
-    public String createOutflow(
-    		@Valid @ModelAttribute("outflow") WhOutflowForm outflowForm,
-    		BindingResult result, 
-    		ModelMap model) {
-    	
-    	//set product name
-    	model.addAttribute("product_name", inflow.getProduct().getName());
-    	
-    	//set inflow
-    	outflowForm.setInflow(inflow);
-    	if (inflow != null) {
-    		outflowForm.setInflowId(inflow.getId());
-    	}
-    	
-    	if (result.hasErrors()) {
-            return viewPrefix + "stock_buy";
-    	}
-    	
-    	//check quantities
-    	if (outflowForm.getAmount() > inflow.getLeft()) {
-    		result.rejectValue("amount", "", NOSUCHAMOUNT);
-    		return viewPrefix + "stock_buy";
-    	}
-    	
-    	outflowForm.setLastUpdDate(Calendar.getInstance().getTime());
-    	
-    	WhOutflow outFlow = outflowForm.toWhOutflow();
-    	
-    	//error invalid
-    	outflowsData.add(outFlow);
-        return "redirect:/wh/stocks";
     }
 }

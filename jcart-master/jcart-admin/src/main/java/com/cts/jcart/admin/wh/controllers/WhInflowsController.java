@@ -168,7 +168,11 @@ public class WhInflowsController extends WhAbstractController {
     		String mode) {
     	inflowFormValidator.validate(inflowForm, result);
         if (result.hasErrors()) {
-            return viewPrefix + "create_inflow";
+        	if (MODE_NEW.equals(mode)) {
+        		return viewPrefix + "create_inflow";
+        	}
+        	
+        	return viewPrefix + "edit_inflow";
         } else {
         	
         	MstCommon status = null;
