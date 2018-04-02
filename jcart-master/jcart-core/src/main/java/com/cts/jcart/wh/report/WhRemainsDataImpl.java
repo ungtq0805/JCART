@@ -153,6 +153,7 @@ public class WhRemainsDataImpl implements WhRemainsData {
     	.append("FROM WH_INFLOWS A ")
     	.append("INNER JOIN PRODUCTS B ON A.PRODUCT = B.ID ")
     	.append("INNER JOIN WH_WAREHOUSES D ON A.WAREHOUSE = D.ID ")
+    	.append("WHERE A.STATUSKBN = '").append(MstCmnConst.MST_STATUS_APPROVE).append("'")
     	.append("GROUP BY A.WAREHOUSE, D.NAME, B.ID, B.NAME ")
     	.append("ORDER BY A.WAREHOUSE ");
     	
@@ -199,6 +200,7 @@ public class WhRemainsDataImpl implements WhRemainsData {
     	.append("INNER JOIN WH_INFLOWS B ON A.INFLOW = B.ID ")
     	.append("INNER JOIN WH_WAREHOUSES C ON B.WAREHOUSE = C.ID ")
     	.append("INNER JOIN PRODUCTS D ON B.PRODUCT = D.ID ")
+    	.append("WHERE A.STATUSKBN = '").append(MstCmnConst.MST_STATUS_APPROVE).append("'")
     	.append("GROUP BY B.WAREHOUSE, C.NAME, D.ID, D.NAME ")
     	.append("ORDER BY B.WAREHOUSE ");
     	
