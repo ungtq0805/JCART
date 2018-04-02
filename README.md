@@ -16,4 +16,6 @@ Implementing contents:
 - Multilanguages with Vietnamese - Japanese (Demo - 10%)
 - Warehouse management
 - Permission with INFLOW (with apply person and approve person), the idea base on WORKFLOW systems.
+- Pagination
+
 
