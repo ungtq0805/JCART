@@ -5,6 +5,12 @@
       
       <head>
         <title>Stock Buy</title>
+        <script type="text/javascript">
+	        function gotoApply() {
+	        	$('#frmCreateOutflow').attr('action', "/wh/outflows/create?apply=apply").submit();
+	        }
+	        
+	  	</script>
     </head>
     <body>
     	<div layout:fragment="pageHeader">
@@ -23,7 +29,7 @@
                 </div><!-- /.box-header -->
                 
                 <div class="box-body">
-                  <form role="form" th:action="@{/wh/outflows/create}" th:object="${outflow}" method="post">
+                  <form id="frmCreateOutflow" role="form" th:action="@{/wh/outflows/create}" th:object="${outflow}" method="post">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                   	
                     <div class="form-group" th:classappend="${#fields.hasErrors('customerId')}? 'has-error'">
@@ -61,11 +67,49 @@
                     <input type="hidden" th:field="*{inflowId}"/>
                     
 					<div class="box-footer">
-	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>
+	                    <button type="submit" 
+	                    	data-toggle="modal" 
+	                    	data-target="#waitingModal" 
+	                    	class="btn btn-primary" 
+	                    	name="saveTemp">Save Temp</button>
+	                    
+	                    <a class="btn btn-primary"
+                      	  	data-toggle="modal"
+                      	  	data-target="#confirmModal">Apply</a>
 	                </div>
                   </form>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+              
+              <div id="confirmModal" class="modal fade" role="dialog">
+				  <div class="modal-dialog">
+					
+					    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title" th:text="#{label.confirm.title}"></h4>
+				      </div>
+				      <div class="modal-body">
+				        <p th:text="#{label.inflow.confirm.apply}"></p>
+				      </div>
+			    	  <input type="hidden" id="whOutflowId"/>
+				      <div class="modal-footer">
+				     	<a type="button" class="btn btn-danger" 
+				     		style="text-decoration: none;  color: #ffffff;" 
+				     		th:text="#{label.confirm.ok}"
+				     		data-toggle="modal" 
+			     			data-target="#waitingModal"
+		                   	onclick="gotoApply()">
+		                </a>
+				        <a type="button" class="btn btn-danger" data-dismiss="modal"
+	                		style="color: #ffffff;" th:text="#{label.confirm.cancel}">
+		                </a>
+				      </div>
+				    </div>
+				
+				  </div>
+			</div>
     	</div>
     	
     </body>

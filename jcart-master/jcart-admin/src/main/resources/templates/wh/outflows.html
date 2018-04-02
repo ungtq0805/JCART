@@ -40,20 +40,29 @@
 	                    <tr>
 	                      <th style="width: 10px">No</th>
 	                      <th>Product</th>
-	                      <th>Amount</th>
-	                      <th>Price</th>
-	                      <th>Cost</th>
+	                      <th>Amount x Price = Cost</th>
+	                      <th>Date</th>
+	                      <th>Status</th>
 	                      <th>Customer</th>
+	                      <th>Apply Person</th>
+	                      <th>Approve Person</th>
 	                      <th></th>
 	                    </tr>
 	                    <tr th:each="outflow,iterStat : ${outflows}">
 	                      <td><a><span th:text="${iterStat.count}">1</span></a></td>
 	                      <td th:text="${outflow.inflow.product.name}"></td>
-	                      <td th:text="${#numbers.formatDecimal(outflow.amount, 0, 'COMMA', 0, 'POINT')}" align="right"></td> <!-- ${inflow.product.units} -->
-	                      <td th:text="${#numbers.formatDecimal(outflow.price, 0, 'COMMA', 2, 'POINT')}" align="right"></td>
-	                      <td th:text="${#numbers.formatDecimal(outflow.price * outflow.amount, 0, 'COMMA', 2, 'POINT')}" align="right"></td>
+	                      <td th:text="
+	                      ${#numbers.formatDecimal(outflow.amount, 0, 'COMMA', 0, 'POINT')} + '  x  ' + 
+	                      ${#numbers.formatDecimal(outflow.price, 0, 'COMMA', 2, 'POINT')} + '  =  ' +
+	                      ${#numbers.formatDecimal(outflow.price * outflow.amount, 0, 'COMMA', 2, 'POINT')}" align="right"></td>
+	                      
+	                      <td th:text="${outflow.outflowdate}" align="center"></td>
+	                      <td th:text="${outflow.statusName}" align="center"></td>
 	                      <td th:text="${outflow.customer.firstName + ' ' + outflow.customer.lastName}"></td>
-	                      <td>
+	                      <td th:text="${outflow.applyPerson.fullName}"></td>
+	                      <td th:text="${outflow.approvePerson.fullName}"></td>
+	                      
+	                      <td th:if="${outflow.edit == true}">
 	                      	  <a id="editLink" th:href="@{/wh/edit/outflow/{id}(id=${outflow.id})}" class="btn btn-sm btn-default"><i class="fa fa-edit"></i> Edit</a>
 	                      	  <a class="btn btn-sm btn-default open-AddBookDialog" 
 	                      	  	data-toggle="modal" 
@@ -61,6 +70,12 @@
 	                      	  	th:onclick="'showDeleteModal(' + ${outflow.id} + ')'">
 	                      	  	<i class="fa fa-trash"></i> Del
 	                      	  </a>
+	                      </td>
+	                      
+	                      <td th:if="${outflow.edit == false}">
+	                      	<a id="editLink" 
+	                      	  	th:href="@{/wh/view/outflow/{id}(id=${outflow.id})}" class="btn btn-sm btn-default">
+	                      	  <i class="fa fa-search"></i> View </a>
 	                      </td>
 	                    </tr>
 	                    

@@ -4,19 +4,18 @@
       layout:decorator="layout/mainLayout">
       
       <head>
-        <title>View Inflow</title>
+        <title>Stock Buy</title>
          <script type="text/javascript">
-         	function setInflowId(whId) {
-	        	$('#whInflowId').val(whId);
+         	function setOutflowId(whId) {
+         		$('#whOutflowId').val(whId);
 	        }
 	        
 	        function gotoApprove() {
-	        	var whInflowId = $('#whInflowId').val();
-	        	$('#frmUpdateInflow').attr('action', "/wh/inflow/approve").submit();
+	        	$('#frmUpdateOutflow').attr('action', "/wh/outflow/approve").submit();
 	        }
 	        
 	        function sendBack(whId) {
-	        	$('#frmUpdateInflow').attr('action', "/wh/inflow/sendBack").submit();
+	        	$('#frmUpdateOutflow').attr('action', "/wh/outflow/sendBack").submit();
 	        }
 	  	</script>
     </head>
@@ -24,7 +23,7 @@
     	<div layout:fragment="pageHeader">
           	<section class="content-header">
 	        	<h1>
-	            	View Inflow
+	            	Stock Buy
 	          	</h1>
 	        </section>
         </div>
@@ -33,25 +32,26 @@
 	        
               <div class="box box-warning">
                 <div class="box-header with-border">
-                  <h3 class="box-title">View Inflow</h3>
+                  <h3 class="box-title">Stock Buy The Product <span th:text="${product_name}"></span> </h3>
                 </div><!-- /.box-header -->
+                
                 <div class="box-body">
-                  <form role="form" id="frmUpdateInflow" 
-                  	th:action="@{/wh/inflow/update/{id}(id=${inflow.id})}" th:object="${inflow}" method="post">
+                  <form role="form" id="frmUpdateOutflow" 
+                  	th:action="@{/wh/outflow/update/{id}(id=${outflow.id})}" th:object="${outflow}" method="post">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                   	
-                    <div class="form-group" th:classappend="${#fields.hasErrors('productId')}? 'has-error'">
-						<label>Product</label>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('customerId')}? 'has-error'">
+						<label>Customers</label>
 						<input type="text" class="form-control" 
-						name="amount" 
-						th:field="*{product.name}" readonly="readonly"/>
+						name="customerName" 
+						th:value="${outflow.customer.lastName}" readonly="readonly"/>
     				</div>
                     
-                  	<div class="form-group" th:classappend="${#fields.hasErrors('amount')}? 'has-error'">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('amount')}? 'has-error'">
                       <label>Amount</label>
                       <input type="text" class="form-control" 
 						name="amount" 
-						th:value="${#numbers.formatDecimal(inflow.amount, 0, 'COMMA', 0, 'POINT')}" 
+						th:value="${#numbers.formatDecimal(outflow.amount, 0, 'COMMA', 0, 'POINT')}" 
 						readonly="readonly"/>
                     </div>
                     
@@ -59,55 +59,41 @@
                       <label>Price</label>
                       <input type="text" class="form-control" 
 						name="price" 
-						th:value="${#numbers.formatDecimal(inflow.price, 0, 'COMMA', 0, 'POINT')}" 
+						th:value="${#numbers.formatDecimal(outflow.price, 0, 'COMMA', 0, 'POINT')}" 
 						readonly="readonly"/>
                     </div>
                     
-                    <div class="form-group" th:classappend="${#fields.hasErrors('warehouseId')}? 'has-error'">
-						<label>Warehouse</label>
-						 <input type="text" class="form-control" 
-						name="price" 
-						th:field="*{warehouse.name}"
-						readonly="readonly"/>
-    				</div>
-    				
-    				<div class="form-group" th:classappend="${#fields.hasErrors('shipperId')}? 'has-error'">
-						<label>Shipper</label>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('outflowdate')}? 'has-error'">
+						<label>OutFlow Date</label>
 						<input type="text" class="form-control" 
-						name="price" 
-						th:field="*{shipper.fullName}"
+						name="outflowdate" 
+						th:value="${outflow.outflowdate}" 
 						readonly="readonly"/>
     				</div>
     				
-    				<div class="form-group" th:classappend="${#fields.hasErrors('inflowdate')}? 'has-error'">
-						<label>Inflow Date</label>
-						<input type="text" class="form-control" 
-						name="price" 
-						th:value="${inflow.inflowdate}" 
-						readonly="readonly"/>
-    				</div>
-    				
-    				<input type="hidden" th:field="${inflow.statusKbn}"/>
-    				<input type="hidden" th:field="${inflow.statusName}"/>
-    				<input type="hidden" th:field="${inflow.id}"/>
-    				
-    				<div class="box-footer" th:if="${isApprove == 'true'}">
+    				<input type="hidden" th:field="${outflow.statusKbn}"/>
+    				<input type="hidden" th:field="${outflow.statusName}"/>
+                    <input type="hidden" th:field="*{inflowId}"/>
+                    <input type="hidden" th:field="*{customerId}"/>
+                    <input type="hidden" th:field="*{id}"/>
+                    
+					<div class="box-footer" th:if="${isApprove == 'true'}">
 	                    <a class="btn btn-primary"
                       	  	data-toggle="modal"
                       	  	data-target="#confirmModalApprove"
-                      	  	th:onclick="'setInflowId(' + ${inflow.id} + ')'">Approve</a>
+                      	  	th:onclick="'setOutflowId(' + ${outflow.id} + ')'">Approve</a>
                       	  	
                       	 <a class="btn btn-primary"
                       	  	data-toggle="modal"
                       	  	data-target="#waitingModal"
-                      	  	th:onclick="'sendBack(' + ${inflow.id} + ')'">Send Back</a>
+                      	  	th:onclick="'sendBack(' + ${outflow.id} + ')'">Send Back</a>
 	                </div>
                   </form>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
               
               <div id="confirmModalApprove" class="modal fade" role="dialog">
-					<div class="modal-dialog">
+				  <div class="modal-dialog">
 					
 					    <!-- Modal content-->
 				    <div class="modal-content">
@@ -116,16 +102,15 @@
 				        <h4 class="modal-title" th:text="#{label.confirm.title}"></h4>
 				      </div>
 				      <div class="modal-body">
-				        <p th:text="#{label.inflow.confirm.approve}"></p>
+				        <p th:text="#{label.inflow.confirm.apply}"></p>
 				      </div>
-			    	  <input type="hidden" id="whInflowId"/>
+			    	  <input type="hidden" id="whOutflowId"/>
 				      <div class="modal-footer">
-				     	<a type="button" 
-				     		class="btn btn-danger" 
-				     		data-toggle="modal" 
-	                    	data-target="#waitingModal"
+				     	<a type="button" class="btn btn-danger" 
 				     		style="text-decoration: none;  color: #ffffff;" 
 				     		th:text="#{label.confirm.ok}"
+				     		data-toggle="modal" 
+			     			data-target="#waitingModal"
 		                   	onclick="gotoApprove()">
 		                </a>
 				        <a type="button" class="btn btn-danger" data-dismiss="modal"
@@ -135,7 +120,7 @@
 				    </div>
 				
 				  </div>
-			 </div>
+			</div>
     	</div>
     	
     </body>
