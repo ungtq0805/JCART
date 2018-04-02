@@ -6,6 +6,8 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +29,9 @@ public class WhInflowsDataImpl implements WhInflowsData {
     @Autowired 
     MasterCommonRepository masterRepository;
     
+    @Autowired 
+    WhInflowsRepository whInflowsRepository;
+    
     /**
      * Gets inflows from the database
      * ordered by the product name
@@ -38,6 +43,10 @@ public class WhInflowsDataImpl implements WhInflowsData {
                 .createCriteria(WhInflow.class)
                 .addOrder(Order.desc("lastUpdDate"))
                 .list();
+    }
+    
+	public Page<WhInflow> get(Pageable pageable) {
+        return whInflowsRepository.findAllDesc(pageable);
     }
     
     /**
