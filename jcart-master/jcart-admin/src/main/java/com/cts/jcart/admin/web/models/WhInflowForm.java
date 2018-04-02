@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cts.jcart.catalog.MasterCommonService;
@@ -215,6 +216,58 @@ public class WhInflowForm  {
      */
 	public static List<WhInflowForm> fromWhInflows(
 			List<WhInflow> whInflows, 
+			int userId,
+			MasterCommonService masterCommonService){
+		List<WhInflowForm> lstWhInflowForm = fromWhInflows(
+				whInflows, masterCommonService);
+		
+		for (WhInflowForm inflowForm : lstWhInflowForm) {
+			if (inflowForm.getApplyPersonId() == userId) {
+				inflowForm.setEdit(true);
+			}
+			
+			if (MstCmnConst.MST_STATUS_APPLY.equals(inflowForm.getStatusKbn())) {
+				inflowForm.setEdit(false);
+			}
+			
+			if (MstCmnConst.MST_STATUS_APPROVE.equals(inflowForm.getStatusKbn())) {
+				inflowForm.setEdit(false);
+			}
+			
+			if (inflowForm.getApprovePerson() == null) {
+				inflowForm.setApprovePerson(new User());
+			}
+		}
+		
+		return lstWhInflowForm;
+	}
+	
+	/**
+     * convert list entities to list form
+     * @author ungtq
+     * @param whInflow
+     * @return WhInflowForm
+     */
+	public static List<WhInflowForm> fromWhInflows(
+			Page<WhInflow> whInflows,
+			MasterCommonService masterCommonService){
+		List<WhInflowForm> lstWhInflowForm = new ArrayList<WhInflowForm>();
+		
+		for (WhInflow whInflow : whInflows) {
+			lstWhInflowForm.add(fromWhInflow(whInflow, masterCommonService));
+		}
+		
+		return lstWhInflowForm;
+	}
+	
+	/**
+     * convert list entities to list form and user id 
+     * @author ungtq
+     * @param whInflow
+     * @return WhInflowForm
+     */
+	public static List<WhInflowForm> fromWhInflows(
+			Page<WhInflow> whInflows, 
 			int userId,
 			MasterCommonService masterCommonService){
 		List<WhInflowForm> lstWhInflowForm = fromWhInflows(

@@ -7,19 +7,7 @@
       <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <title>Warehouse List</title>
-        <script type="text/javascript">
-	        
-	        function showDeleteModal(whId) {
-	        	$('#whInflowId').val(whId);
-	        }
-	        
-	        function deleteWh() {
-	        	var whInflowId = $('#whInflowId').val();
-	        	var url = '/wh/inflow/delete/' + whInflowId;
-				window.location = url;
-	        }
-	        
-	  	</script>
+        <script th:src="@{'/assets/dist/js/inflow.js'}"></script>
     </head>
     <body>
         
@@ -86,6 +74,38 @@
                     
                   </table>
                 </div><!-- /.box-body -->
+                
+                <div class="row">
+			        <div class="form-group col-md-1">
+			            <select class="form-control pagination" id="pageSizeSelect">
+			                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+			                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+			            </select>
+			        </div>
+			        <div th:if="${inflowsPagination.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+			            <ul class="pagination">
+			                <li th:class="${inflowsPagination.number == 0} ? disabled">
+			                    <a class="pageLink" th:href="@{/wh/inflows(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+			                </li>
+			                <li th:class="${inflowsPagination.number == 0} ? disabled">
+			                    <a class="pageLink" th:href="@{/wh/inflows(pageSize=${selectedPageSize}, page=${inflowsPagination.number})}">&larr;</a>
+			                </li>
+			                <li th:class="${inflowsPagination.number == (page - 1)} ? 'active pointer-disabled'"
+			                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+			                    <a class="pageLink" th:href="@{/wh/inflows(pageSize=${selectedPageSize}, page=${page})}"
+			                       th:text="${page}"></a>
+			                </li>
+			                <li th:class="${inflowsPagination.number + 1 == inflowsPagination.totalPages} ? disabled">
+			                    <a class="pageLink"
+			                       th:href="@{/wh/inflows(pageSize=${selectedPageSize}, page=${inflowsPagination.number + 2})}">&rarr;</a>
+			                </li>
+			                <li th:class="${inflowsPagination.number + 1 == inflowsPagination.totalPages} ? disabled">
+			                    <a class="pageLink"
+			                       th:href="@{/wh/inflows(pageSize=${selectedPageSize}, page=${inflowsPagination.totalPages})}">&raquo;</a>
+			                </li>
+			            </ul>
+			        </div>
+			    </div>
                 
               </div><!-- /.box -->
               </div>

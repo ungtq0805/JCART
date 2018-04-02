@@ -2,10 +2,13 @@ package com.cts.jcart.admin.wh.controllers;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cts.jcart.admin.security.SecurityUtil;
+import com.cts.jcart.admin.web.controllers.Pager;
 import com.cts.jcart.admin.web.models.WhInflowForm;
 import com.cts.jcart.admin.web.validators.InflowFormValidator;
 import com.cts.jcart.catalog.CatalogService;
@@ -84,9 +89,22 @@ public class WhInflowsController extends WhAbstractController {
      * apache tiles configuration in the inflows.xml file
      */
     @RequestMapping(value="/wh/inflows", method = RequestMethod.GET)
-    public String showInflows(ModelMap model) {
+    public String showInflows(ModelMap model,
+    		@RequestParam("pageSize") Optional<Integer> pageSize,
+            @RequestParam("page") Optional<Integer> page) {
+    	
+    	// Evaluate page size. If requested parameter is null, return initial
+        // page size
+        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+        
+        // Evaluate page. If requested parameter is null or less than 0 (to
+        // prevent exception), return initial size. Otherwise, return value of
+        // param. decreased by 1.
+        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+        
     	//get all entities
-        List<WhInflow> inflows = inflowsData.get();
+        //List<WhInflow> inflows = inflowsData.get();
+        Page<WhInflow> inflows = inflowsData.get(new PageRequest(evalPage, evalPageSize));
         
         //set to DTO
         List<WhInflowForm> inflowForms = WhInflowForm.fromWhInflows(
@@ -94,8 +112,15 @@ public class WhInflowsController extends WhAbstractController {
         		getCurrentUser().getUser().getId(),
         		masterCommonService);
         
+        Pager pager = new Pager(inflows.getTotalPages(), inflows.getNumber(), BUTTONS_TO_SHOW);
+        
         //set to screen
         model.addAttribute("inflows", inflowForms);
+        model.addAttribute("inflowsPagination", inflows);
+        model.addAttribute("selectedPageSize", evalPageSize);
+        model.addAttribute("pageSizes", PAGE_SIZES);
+        model.addAttribute("pager", pager);
+        
         return viewPrefix + "inflows";
     }
     
