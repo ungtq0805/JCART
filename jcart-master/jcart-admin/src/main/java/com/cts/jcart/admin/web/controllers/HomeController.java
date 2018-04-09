@@ -32,8 +32,6 @@ public class HomeController extends JCartAdminBaseController{
 	@Autowired
     WhRemainsData whRemainsData;
 	
-	private static final String viewPrefix = "layout/admin/";
-	
 	@Override
 	protected String getHeaderTitle() {
 		return "Home";
