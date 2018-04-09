@@ -20,15 +20,15 @@
 	        <p>Welcome <span th:text="${authenticatedUser.user.userName}">User</span>!</p>
 	        
 	        <input type="radio" id="rdCurrentDay" th:name="rdYmd" value="Current Day" checked="checked"
-	        	th:if="${dispatch == 'by_day'}"/> 
+	        	th:if="${dispatch == 'by_day'}" onclick="onClickRdCurrentDay()"/> 
 	        <input type="radio" id="rdCurrentDay" th:name="rdYmd" value="Current Day"
-	        	th:if="${dispatch == 'by_month'}"/>
+	        	th:if="${dispatch == 'by_month'}" onclick="onClickRdCurrentDay()"/>
 	        <label for="rdCurrentDay">Current Day</label>
 	        	 
 	        <input type="radio" id="rdCurrentMonth" th:name="rdYmd" value="Current Month" 
-	        	th:if="${dispatch == 'by_day'}"/> 
-	        	<input type="radio" id="rdCurrentMonth" th:name="rdYmd" value="Current Month" checked="checked" 
-	        	th:if="${dispatch == 'by_month'}"/>
+	        	th:if="${dispatch == 'by_day'}" onclick="onClickRdCurrentMonth()"/> 
+        	<input type="radio" id="rdCurrentMonth" th:name="rdYmd" value="Current Month" checked="checked" 
+	        	th:if="${dispatch == 'by_month'}" onclick="onClickRdCurrentMonth()"/>
 	        <label for="rdCurrentMonth">Current Month</label>
 	        
 	        <h2>REVENUE : <span th:text="${#numbers.formatDecimal(revenue, 0, 'COMMA', 0, 'POINT')}"/></h2>
