@@ -5,8 +5,23 @@
       
       <head>
         <title>Create New WareHouse</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        
+        <script>
+        	function loadBody() {
+        		
+        		var inventoryParentLi = $('#inventoryParentLi');
+        		inventoryParentLi.addClass('class');
+        		inventoryParentLi.attr('class', 'active');
+        		
+	        	var navInventory = $('#navInventory');
+	        	navInventory.addClass('aria-expanded');
+	        	navInventory.attr('aria-expanded', 'true'); 
+        	}
+		</script>
+        
     </head>
-    <body>
+    <body onload="loadBody()">
     	<div layout:fragment="pageHeader">
           	<section class="content-header">
 	        	<h1>
@@ -40,10 +55,9 @@
                     
                     <div class="form-group" th:classappend="${#fields.hasErrors('employees')}? 'has-error'">
                       <label>Employees</label>
-                      <input type="number" class="form-control" name="employees" th:field="*{employees}" placeholder="Enter Number of Employees"/>
+                      <input id="numnber" type="number" class="form-control" name="employees" th:field="*{employees}" placeholder="Enter Number of Employees"/>
                       <p th:if="${#fields.hasErrors('employees')}" th:errors="*{employees}" th:class="text-red">Incorrect data</p>
                     </div>
-    				
 					<div class="box-footer">
 	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>
 	                </div>
