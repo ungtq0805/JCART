@@ -34,7 +34,8 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
-                  <table class="table table-hover">
+                  <!-- <table class="table table-hover"> -->
+                  <table class="table table-striped table-bordered table-hover">
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Name</th>
@@ -46,11 +47,11 @@
                       <td th:text="${cat.name}">Category Name</td>
                       <td th:text="${cat.description}">Category Description</td>
                       <td>
-                      	<a th:href="@{/categories/{id}(id=${cat.id})}" class="btn btn-sm btn-default">
+                      	<a th:href="@{/categories/{id}(id=${cat.id})}" class="btn btn-info">
                       		<i class="fa fa-edit"></i> Edit
                       	</a>
                       	
-                      	<a class="btn btn-sm btn-default open-AddBookDialog" 
+                      	<a class="btn btn-danger" 
                       	  	data-toggle="modal" 
                       	  	data-target="#deleteModal"
                       	  	th:onclick="'showDeleteModal(' + ${cat.id} + ')'">

@@ -22,6 +22,12 @@
 
     <!-- Morris Charts CSS -->
     <link th:href="@{/assets/dist/admin/vendor/morrisjs/morris.css}" rel="stylesheet"/>
+    
+    <!-- DataTables CSS -->
+    <link th:href="@{/assets/dist/admin/vendor/datatables-plugins/dataTables.bootstrap.css}" rel="stylesheet"/>
+
+    <!-- DataTables Responsive CSS -->
+    <link th:href="@{/assets/dist/admin/vendor/datatables-responsive/dataTables.responsive.css}" rel="stylesheet"/>
 
     <!-- Custom Fonts -->
     <link th:href="@{/assets/dist/admin/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
@@ -48,7 +54,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" th:href="@{'/home'}">SB Admin v2.0</a>
+                <a class="navbar-brand" th:href="@{'/home'}">JCART</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -279,6 +285,8 @@
                         <li>
                             <a th:href="@{'/home'}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+                        
+                        <!-- 
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -289,7 +297,6 @@
                                     <a href="morris.html">Morris.js Charts</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
@@ -297,9 +304,36 @@
                         <li>
                             <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                         </li>
+                         -->
+                         
                         <li>
                             <a th:href="@{'/categories'}"><i class="fa fa-folder-open"></i> Categories</a>
                         </li>
+                        
+                        <li>
+                            <a th:href="@{'/products'}"><i class="fa fa-product-hunt"></i> Products</a>
+                        </li>
+                        
+                        <li>
+                            <a th:href="@{'/orders'}"><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                        </li>
+                        
+                        <li>
+                            <a th:href="@{'/customers'}"><i class="fa fa-smile-o"></i> Customers</a>
+                        </li>
+                        
+                        <li>
+                            <a th:href="@{'/users'}"><i class="fa fa-users"></i> Users</a>
+                        </li>
+                        
+                        <li>
+                            <a th:href="@{'/roles'}"><i class="fa fa-user"></i> Roles</a>
+                        </li>
+                        
+                        <li>
+                            <a th:href="@{'/permissions'}"><i class="fa fa-shield"></i> Permissions</a>
+                        </li>
+                        
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -404,6 +438,11 @@
     <!-- Custom Theme JavaScript -->
     <script th:src="@{'/assets/dist/admin/dist/js/sb-admin-2.js'}"></script>
 
+	<!-- DataTables JavaScript -->
+    <script th:src="@{'/assets/dist/admin/vendor/datatables/js/jquery.dataTables.min.js'}"></script>
+    <script th:src="@{'/assets/dist/admin/vendor/datatables-plugins/dataTables.bootstrap.min.js}"></script>
+    <script th:src="@{'/assets/dist/admin/vendor/datatables-responsive/dataTables.responsive.js}"></script>
+    
 </body>
 
 </html>

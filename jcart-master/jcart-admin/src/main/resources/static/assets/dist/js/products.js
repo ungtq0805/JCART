@@ -1,11 +1,11 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
 	changePageAndSize();
-});
+});*/
 
 function changePageAndSize() {
-	$('#pageSizeSelect').change(function(evt) {
-		window.location.replace("/products?pageSize=" + this.value + "&page=1");
-	});
+	//$('#pageSizeSelect').change(function(evt) {
+		window.location.replace("/products?pageSize=" + $('#pageSizeSelect').val() + "&page=1");
+	//});
 }
 
 function showDeleteModal(catId) {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	layout:decorator="layout/mainLayout">
+	layout:decorator="layout/admin/mainLayout">
 
 <head>
 <title>Products</title>
@@ -18,7 +18,7 @@
 						<h3 class="box-title">List of Products</h3>
 						<div class="box-tools">
 							<div class="input-group" style="width: 150px;">
-								<a class="btn btn-sm btn-default" th:href="@{/products/new}"><i
+								<a class="btn btn-primary" th:href="@{/products/new}"><i
 									class="fa fa-plus-circle"></i> New Product</a>
 							</div>
 						</div>
@@ -26,44 +26,47 @@
 					
 					<!-- /.box-header -->
 					<div class="box-body table-responsive no-padding">
-						<table class="table table-hover">
-							<tr>
-								<th style="width: 10px">#</th>
-								<th>Name</th>
-								<th>Description</th>
-								<th>Edit</th>
-							</tr>
-							<tr th:each="product,iterStat : ${products}">
-								<td th:text="${iterStat.count}">1</td>
-								<td th:text="${product.name}">Product Name</td>
-								<td th:text="${product.description}">Product Description</td>
-								<td>
-									<a th:href="@{/products/{id}(id=${product.id})}"
-										class="btn btn-sm btn-default"><i class="fa fa-edit"></i>
-										Edit
-									</a>
-									
-									<a class="btn btn-sm btn-default open-AddBookDialog" 
-			                      	  	data-toggle="modal" 
-			                      	  	data-target="#deleteModal"
-			                      	  	th:onclick="'showDeleteModal(' + ${product.id} + ')'">
-			                      	  	<i class="fa fa-trash"></i> Del
-		                      	  	</a>
-		                      	  	
-		                      	  	<a th:href="@{/products/copy/{id}(id=${product.id})}"
-										class="btn btn-sm btn-default"><i class="fa fa-copy"></i>
-										Copy
-									</a>
-		                      	  	
-								</td>
-							</tr>
-
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th style="width: 10px">#</th>
+									<th>Name</th>
+									<th>Description</th>
+									<th>Edit</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="product,iterStat : ${products}">
+									<td th:text="${iterStat.count}">1</td>
+									<td th:text="${product.name}">Product Name</td>
+									<td th:text="${product.description}">Product Description</td>
+									<td>
+										<a th:href="@{/products/{id}(id=${product.id})}"
+											class="btn btn-info"><i class="fa fa-edit"></i>
+											Edit
+										</a>
+										
+										<a class="btn btn-danger" 
+				                      	  	data-toggle="modal" 
+				                      	  	data-target="#deleteModal"
+				                      	  	th:onclick="'showDeleteModal(' + ${product.id} + ')'">
+				                      	  	<i class="fa fa-trash"></i> Del
+			                      	  	</a>
+			                      	  	
+			                      	  	<a th:href="@{/products/copy/{id}(id=${product.id})}"
+											class="btn btn-outline btn-primary"><i class="fa fa-copy"></i>
+											Copy
+										</a>
+			                      	  	
+									</td>
+								</tr>
+							</tbody>
 						</table>
 					</div>
 					
 					<div class="row">
 				        <div class="form-group col-md-1">
-				            <select class="form-control pagination" id="pageSizeSelect">
+				            <select class="form-control pagination" id="pageSizeSelect" onchange="changePageAndSize()">
 				                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
 				                        th:selected="${pageSize} == ${selectedPageSize}"></option>
 				            </select>

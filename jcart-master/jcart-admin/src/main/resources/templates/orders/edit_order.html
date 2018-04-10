@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	layout:decorator="layout/mainLayout">
+	layout:decorator="layout/admin/mainLayout">
 <head>
 <title>Orders - Edit</title>
 </head>
@@ -28,7 +28,7 @@
 								Order Number : <span th:text="${order.orderNumber}">Number</span>
 							</h3>
 							<h3>Order Item Details</h3>
-							<table class="table table-hover">
+							<table class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
 										<th>Name</th>
