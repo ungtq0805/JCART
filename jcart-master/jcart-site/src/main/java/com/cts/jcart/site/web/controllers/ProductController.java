@@ -71,8 +71,13 @@ public class ProductController extends JCartSiteBaseController
 	public String showProductByCat(@PathVariable String catId, 
 			Model model) {
 		Category category = catalogService.getCategoryById(Integer.parseInt(catId));
-		model.addAttribute("catId", catId);
+		model.addAttribute("catSelectedId", catId);
 		model.addAttribute("products", category.getProducts());
+		
+		//get preview categories
+		List<Category> previewCategories = catalogService.getPreviewCategories();
+		model.addAttribute("categories", previewCategories);
+		
 		return "products";
 	}
 }

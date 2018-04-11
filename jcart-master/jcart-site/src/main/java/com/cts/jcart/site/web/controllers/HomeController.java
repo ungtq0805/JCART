@@ -3,11 +3,7 @@
  */
 package com.cts.jcart.site.web.controllers;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cts.jcart.catalog.CatalogService;
 import com.cts.jcart.entities.Category;
-import com.cts.jcart.entities.Product;
 
 /**
  * @author ungtq
@@ -36,27 +31,8 @@ public class HomeController extends JCartSiteBaseController
 	}
 	
 	@RequestMapping("/home")
-	public String home(Model model)
-	{
-		List<Category> previewCategories = new ArrayList<>();
-		List<Category> categories = catalogService.getAllCategories();
-		for (Category category : categories)
-		{
-			Set<Product> products = category.getProducts();
-			Set<Product> previewProducts = new HashSet<>();
-			int noOfProductsToDisplay = 4;
-			if(products.size() > noOfProductsToDisplay){
-				Iterator<Product> iterator = products.iterator();
-				for (int i = 0; i < noOfProductsToDisplay; i++)
-				{
-					previewProducts.add(iterator.next());
-				}
-			} else {
-				previewProducts.addAll(products);
-			}	
-			category.setProducts(previewProducts);
-			previewCategories.add(category);
-		}
+	public String home(Model model){
+		List<Category> previewCategories = catalogService.getPreviewCategories();
 		model.addAttribute("categories", previewCategories);
 		model.addAttribute("dispatch", "home");
 		return "home";
