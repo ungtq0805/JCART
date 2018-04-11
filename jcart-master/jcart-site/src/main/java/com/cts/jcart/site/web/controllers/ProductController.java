@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cts.jcart.catalog.CatalogService;
+import com.cts.jcart.entities.Category;
 import com.cts.jcart.entities.Product;
 import com.cts.jcart.site.web.utils.WebUtils;
 
@@ -33,8 +34,7 @@ public class ProductController extends JCartSiteBaseController
 	private CatalogService catalogService;
 	
 	@Override
-	protected String getHeaderTitle()
-	{
+	protected String getHeaderTitle(){
 		return "Product";
 	}	
 	
@@ -65,5 +65,14 @@ public class ProductController extends JCartSiteBaseController
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	      
+	}
+	
+	@RequestMapping(value="/products/categories/{catId}", method=RequestMethod.GET)
+	public String showProductByCat(@PathVariable String catId, 
+			Model model) {
+		Category category = catalogService.getCategoryById(Integer.parseInt(catId));
+		model.addAttribute("catId", catId);
+		model.addAttribute("products", category.getProducts());
+		return "products";
 	}
 }
