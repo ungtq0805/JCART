@@ -339,19 +339,19 @@
                         </li>
                         
                         <li id="inventoryParentLi">
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> INVENTORY<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-th"></i> INVENTORY<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level" id="navInventory">
                                 <li>
                                     <a th:href="@{'/warehouses'}"> <i class="fa fa-building-o"></i> WareHouse</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{'/wh/inflows'}"> <i class="fa fa-chevron-right"></i>InFlows</a>
+                                    <a th:href="@{'/wh/inflows'}"> <i class="glyphicon glyphicon-import"></i>InFlows</a>
                                 </li>
                                 <li>
                                     <a th:href="@{'/wh/stocks'}"> <i class="fa fa-cubes"></i>Stocks</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{'/wh/outflows'}"> <i class="fa fa-chevron-left"></i>OutFlows</a>
+                                    <a th:href="@{'/wh/outflows'}"> <i class="glyphicon glyphicon-export"></i>OutFlows</a>
                                 </li>
                                 <li>
                                     <a th:href="@{'/wh/reports/remain'}"><i class="fa fa-hourglass-half"></i> Remaining</a>
@@ -359,7 +359,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
+                        <!-- 
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -382,7 +382,6 @@
                                     <a href="grid.html">Grid</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
@@ -409,10 +408,8 @@
                                             <a href="#">Third Level Item</a>
                                         </li>
                                     </ul>
-                                    <!-- /.nav-third-level -->
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
@@ -424,8 +421,8 @@
                                     <a href="login.html">Login Page</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
                         </li>
+                         -->
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -457,10 +454,12 @@
     <script th:src="@{'/assets/dist/admin/vendor/metisMenu/metisMenu.min.js'}"></script>
 
     <!-- Morris Charts JavaScript -->
+    <!-- 
     <script th:src="@{'/assets/dist/admin/vendor/raphael/raphael.min.js'}"></script>
     <script th:src="@{'/assets/dist/admin/vendor/morrisjs/morris.min.js'}"></script>
     <script th:src="@{'/assets/dist/admin/data/morris-data.js'}"></script>
-
+ 	-->
+ 
     <!-- Custom Theme JavaScript -->
     <script th:src="@{'/assets/dist/admin/dist/js/sb-admin-2.js'}"></script>
 
