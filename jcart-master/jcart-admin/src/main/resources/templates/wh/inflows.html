@@ -8,9 +8,9 @@
       <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <title>Warehouse List</title>
         <script th:src="@{'/assets/dist/js/inflow.js'}"></script>
+        <script th:src="@{'/assets/dist/js/warehouses.js'}"></script>
     </head>
-    <body>
-        
+    <body onload="loadBody()">
     	<div layout:fragment="content">
 	        <div class="row">
             <div class="col-md-12">

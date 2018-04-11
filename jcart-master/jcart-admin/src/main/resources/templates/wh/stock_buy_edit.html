@@ -5,6 +5,7 @@
       
       <head>
         <title>Stock Buy</title>
+        <script th:src="@{'/assets/dist/js/warehouses.js'}"></script>
          <script type="text/javascript">
          	function setOutflowId(whId) {
 	        	$('#whOutflowId').val(whId);
@@ -16,7 +17,7 @@
 	        }
 	  	</script>
     </head>
-    <body>
+    <body onload="loadBody()">
     	<div layout:fragment="pageHeader">
           	<section class="content-header">
 	        	<h1>

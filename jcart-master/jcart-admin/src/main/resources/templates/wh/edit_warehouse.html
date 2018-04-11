@@ -5,8 +5,21 @@
       
       <head>
         <title>Edit WareHouse</title>
+        <script th:src="@{'/assets/dist/js/warehouses.js'}"></script>
+        <script>
+        	function loadBody() {
+        		
+        		var inventoryParentLi = $('#inventoryParentLi');
+        		inventoryParentLi.addClass('class');
+        		inventoryParentLi.attr('class', 'active');
+        		
+	        	var navInventory = $('#navInventory');
+	        	navInventory.addClass('aria-expanded');
+	        	navInventory.attr('aria-expanded', 'true'); 
+        	}
+		</script>
     </head>
-    <body>
+    <body onload="loadBody()">
     	<div layout:fragment="pageHeader">
           	<section class="content-header">
 	        	<h1>

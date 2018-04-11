@@ -6,9 +6,10 @@
       <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet"></link>
       <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      <script th:src="@{'/assets/dist/js/warehouses.js'}"></script>
         <title>Stock List</title>
     </head>
-    <body>
+    <body onload="loadBody()">
         
     	<div layout:fragment="content">
 	        <div class="row">

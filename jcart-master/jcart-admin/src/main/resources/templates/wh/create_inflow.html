@@ -5,15 +5,16 @@
       
       <head>
         <title>Create New Inflow</title>
+        <script th:src="@{'/assets/dist/js/warehouses.js'}"></script>
+        
         <script type="text/javascript">
-	        
 	        function gotoApply() {
 	        	$('#frmCreateInflow').attr('action', "/wh/inflows/create?apply=apply").submit();
 	        }
 	        
 	  	</script>
     </head>
-    <body>
+    <body onload="loadBody()">
     	<div layout:fragment="pageHeader">
           	<section class="content-header">
 	        	<h1>
