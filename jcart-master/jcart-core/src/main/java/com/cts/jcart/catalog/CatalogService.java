@@ -3,7 +3,11 @@
  */
 package com.cts.jcart.catalog;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,5 +163,33 @@ public class CatalogService {
 		productTarget.setId(null);
 		
 		return productTarget;
+	}
+	
+	/**
+	 * @author ungtq
+	 * get Preview for categories on the page
+	 * @return List<Category>
+	 */
+	public List<Category> getPreviewCategories() {
+		List<Category> previewCategories = new ArrayList<>();
+		List<Category> categories = getAllCategories();
+		for (Category category : categories){
+			Set<Product> products = category.getProducts();
+			Set<Product> previewProducts = new HashSet<>();
+			int noOfProductsToDisplay = 4;
+			if(products.size() > noOfProductsToDisplay){
+				Iterator<Product> iterator = products.iterator();
+				for (int i = 0; i < noOfProductsToDisplay; i++)
+				{
+					previewProducts.add(iterator.next());
+				}
+			} else {
+				previewProducts.addAll(products);
+			}	
+			category.setProducts(previewProducts);
+			previewCategories.add(category);
+		}
+		
+		return previewCategories;
 	}
 }
