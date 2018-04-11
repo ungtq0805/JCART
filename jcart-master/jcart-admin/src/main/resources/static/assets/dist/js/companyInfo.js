@@ -51,3 +51,9 @@ var loadEditorDesc = ( function() {
 	}
 } )();
 
+
+function saveCompanyInfo() {
+	var editorDescVal = CKEDITOR.instances.editorDesc.getData();
+	$('#description').val(editorDescVal);
+	$('#frmCompanyInfo').submit();
+}
