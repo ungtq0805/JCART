@@ -11,8 +11,7 @@ import com.cts.jcart.entities.Product;
  * @author ungtq
  *
  */
-public class LineItem
-{
+public class LineItem{
 	private Product product;
 	private int quantity;
 	
@@ -47,6 +46,4 @@ public class LineItem
 	{
 		return product.getPrice().multiply(new BigDecimal(quantity));
 	}
-	
-	
 }
