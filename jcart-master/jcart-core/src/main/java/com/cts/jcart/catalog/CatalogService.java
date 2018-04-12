@@ -174,6 +174,10 @@ public class CatalogService {
 		List<Category> previewCategories = new ArrayList<>();
 		List<Category> categories = getAllCategories();
 		for (Category category : categories){
+			if (category.isDisabled()) {
+				continue;
+			}
+			
 			Set<Product> products = category.getProducts();
 			Set<Product> previewProducts = new HashSet<>();
 //			int noOfProductsToDisplay = 4;
