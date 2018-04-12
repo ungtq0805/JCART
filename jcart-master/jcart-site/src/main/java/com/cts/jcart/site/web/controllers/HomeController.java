@@ -34,13 +34,15 @@ public class HomeController extends JCartSiteBaseController
 	public String home(Model model){
 		List<Category> previewCategories = catalogService.getPreviewCategories();
 		model.addAttribute("categories", previewCategories);
+		
+		//set the first category
+		model.addAttribute("products", previewCategories.get(0).getProducts());
 		model.addAttribute("dispatch", "home");
 		return "home";
 	}
 	
 	@RequestMapping("/categories/{name}")
-	public String category(@PathVariable String name, Model model)
-	{
+	public String category(@PathVariable String name, Model model){
 		Category category = catalogService.getCategoryByName(name);
 		model.addAttribute("category", category);
 		return "category";
