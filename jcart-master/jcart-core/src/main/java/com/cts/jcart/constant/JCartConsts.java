@@ -19,4 +19,10 @@ public class JCartConsts {
 	 * PAYMENT
 	 */
 	public static final String BY_MONTH = "BY_MONTH";
+	
+	/**
+	 * Constant for value TRUE || FALSE
+	 */
+	public static final String CONST_TRUE = "true";
+	public static final String CONST_FALSE = "false";
 }

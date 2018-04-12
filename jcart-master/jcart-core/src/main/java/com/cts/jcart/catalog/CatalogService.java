@@ -176,16 +176,16 @@ public class CatalogService {
 		for (Category category : categories){
 			Set<Product> products = category.getProducts();
 			Set<Product> previewProducts = new HashSet<>();
-			int noOfProductsToDisplay = 4;
-			if(products.size() > noOfProductsToDisplay){
-				Iterator<Product> iterator = products.iterator();
-				for (int i = 0; i < noOfProductsToDisplay; i++)
-				{
-					previewProducts.add(iterator.next());
-				}
-			} else {
+//			int noOfProductsToDisplay = 4;
+//			if(products.size() > noOfProductsToDisplay){
+//				Iterator<Product> iterator = products.iterator();
+//				for (int i = 0; i < noOfProductsToDisplay; i++)
+//				{
+//					previewProducts.add(iterator.next());
+//				}
+//			} else {
 				previewProducts.addAll(products);
-			}	
+//			}	
 			category.setProducts(previewProducts);
 			previewCategories.add(category);
 		}

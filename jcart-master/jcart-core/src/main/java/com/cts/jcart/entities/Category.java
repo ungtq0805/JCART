@@ -13,7 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.cts.jcart.constant.JCartConsts;
 
 /**
  * @author ungtq
@@ -40,6 +43,7 @@ public class Category
 	private boolean disabled;
 	
 	@OneToMany(mappedBy="category")
+	@Where(clause = "disabled = '" + JCartConsts.CONST_FALSE + "'")
 	private Set<Product> products;
 	
 	public Category(){
