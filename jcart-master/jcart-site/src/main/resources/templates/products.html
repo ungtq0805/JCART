@@ -95,8 +95,8 @@
 			          </div>
 			
 			          <div class="row">
-			
-			            <div class="col-lg-4 col-md-6 mb-4">
+						
+			            <!-- <div class="col-lg-4 col-md-6 mb-4">
 			              <div class="card h-100">
 			                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
 			                <div class="card-body">
@@ -190,6 +190,29 @@
 			                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
 			                </div>
 			              </div>
+			            </div> 
+			            ${#numbers.formatDecimal(inflow.price * inflow.amount, 0, 'COMMA', 2, 'POINT')}
+			            -->
+			            
+			            <div class="col-lg-4 col-md-6 mb-4" th:each="product : ${products}">
+			            	<div class="card h-100">
+				                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
+				                <div class="card-body">
+				                  <h4 class="card-title">
+				                    <a href="#" th:text="${product.name}"></a>
+				                  </h4>
+				                  <h5 th:text="${#numbers.formatDecimal(product.price,0, 'COMMA', 2, 'POINT')}">$24.99</h5>
+				                  <p class="card-text" th:text="${product.description}"></p>
+				                </div>
+				                <div class="card-footer">
+				                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+				                </div>
+				                <div class="product-option-shop">
+		                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" 
+		                            	rel="nofollow" href="#"
+		                            	th:onclick="'javascript:addItemToCart(\'' + ${product.sku} + '\');'">Add to cart</a>
+		                        </div>
+				              </div>
 			            </div>
 			          </div>
 			        </div>
