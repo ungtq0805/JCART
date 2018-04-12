@@ -166,8 +166,8 @@ public class CatalogService {
 	}
 	
 	/**
+	 * get Preview for categories on the page all categories
 	 * @author ungtq
-	 * get Preview for categories on the page
 	 * @return List<Category>
 	 */
 	public List<Category> getPreviewCategories() {
@@ -189,6 +189,33 @@ public class CatalogService {
 			category.setProducts(previewProducts);
 			previewCategories.add(category);
 		}
+		
+		return previewCategories;
+	}
+	
+	/**
+	 * get Preview for category by CatId
+	 * @author ungtq
+	 * @return List<Category>
+	 */
+	public List<Category> getPreviewCategoryByCatId(int catId) {
+		List<Category> previewCategories = new ArrayList<>();
+		Category category = getCategoryById(catId);
+		
+		Set<Product> products = category.getProducts();
+		Set<Product> previewProducts = new HashSet<>();
+		int noOfProductsToDisplay = 4;
+		if(products.size() > noOfProductsToDisplay){
+			Iterator<Product> iterator = products.iterator();
+			for (int i = 0; i < noOfProductsToDisplay; i++)
+			{
+				previewProducts.add(iterator.next());
+			}
+		} else {
+			previewProducts.addAll(products);
+		}	
+		category.setProducts(previewProducts);
+		previewCategories.add(category);
 		
 		return previewCategories;
 	}
