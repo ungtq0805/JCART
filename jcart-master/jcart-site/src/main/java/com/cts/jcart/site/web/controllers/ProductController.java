@@ -3,20 +3,22 @@
  */
 package com.cts.jcart.site.web.controllers;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cts.jcart.catalog.CatalogService;
 import com.cts.jcart.entities.Category;
@@ -28,8 +30,7 @@ import com.cts.jcart.site.web.utils.WebUtils;
  *
  */
 @Controller
-public class ProductController extends JCartSiteBaseController
-{	
+public class ProductController extends JCartSiteBaseController{	
 	@Autowired
 	private CatalogService catalogService;
 	
@@ -56,15 +57,15 @@ public class ProductController extends JCartSiteBaseController
 	}
 
 	@RequestMapping(value="/products/images/{productId}", method=RequestMethod.GET)
-	public void showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public byte[] showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			FileSystemResource file = new FileSystemResource(WebUtils.IMAGES_DIR +productId+".jpg");     
-			response.setContentType("image/jpg");
-			org.apache.commons.io.IOUtils.copy(file.getInputStream(), response.getOutputStream());
-			response.flushBuffer();
+			File serverFile = new File(WebUtils.IMAGES_DIR +productId+".jpg");
+		    return Files.readAllBytes(serverFile.toPath());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	      
+			return null;
+		}
 	}
 	
 	@RequestMapping(value="/products/categories/{catId}", method=RequestMethod.GET)
