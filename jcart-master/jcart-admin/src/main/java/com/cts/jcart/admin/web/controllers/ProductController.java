@@ -147,7 +147,7 @@ public class ProductController extends JCartAdminBaseController
 	private void saveProductImageToDisk(ProductForm productForm) {
 		MultipartFile file = productForm.getImage();
 		if (file!= null && !file.isEmpty()) {
-			String name = messageSource.getMessage("spring.jcart.dir.path.products", null, null) + 
+			String name = messageSource.getMessage(WebUtils.IMAGES_PRODUCTS_DIR, null, null) + 
 					productForm.getId() + 
 					".jpg";
 			try {
@@ -187,7 +187,7 @@ public class ProductController extends JCartAdminBaseController
 	@ResponseBody
 	public byte[] showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			File serverFile = new File(WebUtils.IMAGES_DIR +productId+".jpg");
+			File serverFile = new File(messageSource.getMessage(WebUtils.IMAGES_PRODUCTS_DIR, null, null) + productId + ".jpg");
 		    return Files.readAllBytes(serverFile.toPath());
 		} catch (IOException e) {
 			e.printStackTrace();

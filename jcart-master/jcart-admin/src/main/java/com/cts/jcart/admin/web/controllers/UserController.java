@@ -260,7 +260,7 @@ public class UserController extends JCartAdminBaseController
 	private void saveUserImageToDisk(UserForm userForm) {
 		MultipartFile file = userForm.getImage();
 		if (file!= null && !file.isEmpty()) {
-			String name = WebUtils.IMAGES_USER_DIR + userForm.getId() + ".jpg";
+			String name = WebUtils.IMAGES_PRODUCTS_DIR + userForm.getId() + ".jpg";
 			try {
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(name)));
@@ -285,7 +285,7 @@ public class UserController extends JCartAdminBaseController
 			HttpServletRequest request, 
 			HttpServletResponse response) {
 		try {
-			File serverFile = new File(WebUtils.IMAGES_USER_DIR +id+".jpg");
+			File serverFile = new File(WebUtils.IMAGES_PRODUCTS_DIR +id+".jpg");
 		    return Files.readAllBytes(serverFile.toPath());
 		} catch (IOException e) {
 			e.printStackTrace();
