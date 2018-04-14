@@ -58,6 +58,7 @@ public class HomeController extends JCartAdminBaseController{
 		return "home";
 	}
 	
+	
 	/**
 	 * load image with login user
 	 * @param productId
