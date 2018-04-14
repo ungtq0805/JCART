@@ -46,7 +46,8 @@ public class WhInflowsDataImpl implements WhInflowsData {
     }
     
 	public Page<WhInflow> get(Pageable pageable) {
-        return whInflowsRepository.findAllDesc(pageable);
+		Page<WhInflow> pageInflow = whInflowsRepository.findAllDesc(pageable);
+		return pageInflow;
     }
     
     /**
