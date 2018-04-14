@@ -69,7 +69,7 @@ public class HomeController extends JCartAdminBaseController{
 	@ResponseBody
 	public static byte[] showUserImage(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			File serverFile = new File(WebUtils.IMAGES_USER_DIR + getCurrentUser().getUser().getId()+".jpg");
+			File serverFile = new File(WebUtils.IMAGES_USERS_DIR + getCurrentUser().getUser().getId()+".jpg");
 		    return Files.readAllBytes(serverFile.toPath());
 		} catch (IOException e) {
 			e.printStackTrace();
