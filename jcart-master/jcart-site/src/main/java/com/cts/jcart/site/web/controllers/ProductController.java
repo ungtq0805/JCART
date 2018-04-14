@@ -60,7 +60,7 @@ public class ProductController extends JCartSiteBaseController{
 	@ResponseBody
 	public byte[] showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			File serverFile = new File(WebUtils.IMAGES_DIR +productId+".jpg");
+			File serverFile = new File(messageSource.getMessage(WebUtils.IMAGES_DIR, null, null) +productId+".jpg");
 		    return Files.readAllBytes(serverFile.toPath());
 		} catch (IOException e) {
 			e.printStackTrace();

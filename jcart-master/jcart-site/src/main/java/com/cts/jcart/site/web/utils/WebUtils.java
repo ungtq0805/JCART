@@ -15,7 +15,7 @@ public class WebUtils
 	{
 	}
 	public static final String IMAGES_PREFIX = "/products/images/";
-	public static final String IMAGES_DIR = "D:/jcart/products/";
+	public static final String IMAGES_DIR = "img.product.path.dir";
 	
 	public static String getURLWithContextPath(HttpServletRequest request)
 	{
