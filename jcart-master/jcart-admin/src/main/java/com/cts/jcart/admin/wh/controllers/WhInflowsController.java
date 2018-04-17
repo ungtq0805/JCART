@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cts.jcart.admin.security.SecurityUtil;
+import com.cts.jcart.admin.session.keys.JCartAdminSessionKeys;
 import com.cts.jcart.admin.web.controllers.Pager;
 import com.cts.jcart.admin.web.models.WhInflowForm;
+import com.cts.jcart.admin.web.models.WhInflowListForm;
 import com.cts.jcart.admin.web.validators.InflowFormValidator;
 import com.cts.jcart.catalog.CatalogService;
 import com.cts.jcart.catalog.MasterCommonService;
@@ -89,10 +92,24 @@ public class WhInflowsController extends WhAbstractController {
      * apache tiles configuration in the inflows.xml file
      */
     @RequestMapping(value="/wh/inflows", method = RequestMethod.GET)
-    public String showInflows(ModelMap model,
+    public String showInflows(Model model,
     		@RequestParam("pageSize") Optional<Integer> pageSize,
-            @RequestParam("page") Optional<Integer> page) {
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("dispatch") Optional<String> dispatch,
+            HttpServletRequest request) {
     	
+    	WhInflowListForm whInflowListForm = (WhInflowListForm) 
+				request.getSession().getAttribute(JCartAdminSessionKeys.ADMIN_LIST_OF_INFLOWS_SESSION_KEYS);
+		
+		if ((dispatch.isPresent() && "changePageAndSize".equals(dispatch.get())) || 
+			whInflowListForm == null) {
+			//save session list form at the present
+			WhInflowListForm.saveSessionForm(model, pageSize, page, request);
+		} else {
+			pageSize = whInflowListForm.getPageSize();
+			page = whInflowListForm.getPage();
+		}
+		
     	// Evaluate page size. If requested parameter is null, return initial
         // page size
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
@@ -367,4 +384,9 @@ public class WhInflowsController extends WhAbstractController {
     	
     	return "redirect:/wh/inflows";
     }
+    
+    @RequestMapping(value="/inflows/back", method=RequestMethod.POST)
+	public String backToList(Model model) {
+		return "redirect:/wh/inflows";
+	}
 }

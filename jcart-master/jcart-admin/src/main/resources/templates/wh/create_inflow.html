@@ -6,10 +6,11 @@
       <head>
         <title>Create New Inflow</title>
         <script th:src="@{'/assets/dist/js/warehouses.js'}"></script>
+        <script th:src="@{'/assets/dist/js/inflow.js'}"></script>
         
         <script type="text/javascript">
 	        function gotoApply() {
-	        	$('#frmCreateInflow').attr('action', "/wh/inflows/create?apply=apply").submit();
+	        	$('#frmInflow').attr('action', "/wh/inflows/create?apply=apply").submit();
 	        }
 	        
 	  	</script>
@@ -30,7 +31,7 @@
                   <h3 class="box-title">Create New Inflow</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form id="frmCreateInflow" role="form" th:action="@{/wh/inflows/create}" th:object="${inflow}" method="post">
+                  <form id="frmInflow" role="form" th:action="@{/wh/inflows/create}" th:object="${inflow}" method="post">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                   	
                     <div class="form-group" th:classappend="${#fields.hasErrors('productId')}? 'has-error'">
@@ -102,6 +103,8 @@
 	                    <a class="btn btn-primary"
                       	  	data-toggle="modal"
                       	  	data-target="#confirmModal">Apply</a>
+                      	  	
+                      	<a class="btn btn-primary" onclick="backToList()">Back</a>
 	                </div>
                   </form>
                 </div><!-- /.box-body -->

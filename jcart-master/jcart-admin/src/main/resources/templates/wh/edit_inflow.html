@@ -6,6 +6,7 @@
       <head>
         <title>Edit Inflow</title>
         <script th:src="@{'/assets/dist/js/warehouses.js'}"></script>
+        <script th:src="@{'/assets/dist/js/inflow.js'}"></script>
          <script type="text/javascript">
          	function setInflowId(whId) {
 	        	$('#whInflowId').val(whId);
@@ -13,7 +14,7 @@
 	        
 	        function gotoApply() {
 	        	var whInflowId = $('#whInflowId').val();
-	        	$('#frmUpdateInflow').attr('action', "/wh/inflow/update/" + whInflowId + "?apply=apply").submit();
+	        	$('#frmInflow').attr('action', "/wh/inflow/update/" + whInflowId + "?apply=apply").submit();
 	        }
 	  	</script>
     </head>
@@ -33,7 +34,7 @@
                   <h3 class="box-title">Edit Inflow</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" id="frmUpdateInflow" th:action="@{/wh/inflow/update/{id}(id=${inflow.id})}" th:object="${inflow}" method="post">
+                  <form role="form" id="frmInflow" th:action="@{/wh/inflow/update/{id}(id=${inflow.id})}" th:object="${inflow}" method="post">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                   	
                     <div class="form-group" th:classappend="${#fields.hasErrors('productId')}? 'has-error'">
@@ -103,6 +104,8 @@
                       	  	data-toggle="modal"
                       	  	data-target="#confirmModal"
                       	  	th:onclick="'setInflowId(' + ${inflow.id} + ')'">Apply</a>
+                      	  	
+                      	<a class="btn btn-primary" onclick="backToList()">Back</a>
 	                </div>
                   </form>
                 </div><!-- /.box-body -->
