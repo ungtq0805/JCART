@@ -5,6 +5,7 @@
       
       <head>
         <title>Categories - Edit</title>
+        <script th:src="@{'/assets/dist/js/category.js'}"></script>
     </head>
     <body>
     	        
@@ -15,12 +16,12 @@
                   <h3 class="box-title">Edit Category</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" th:action="@{/categories/{id}(id=${category.id})}" th:object="${category}" method="post">
+                  <form id="frmCat" role="form" th:action="@{/categories/{id}(id=${category.id})}" th:object="${category}" method="post">
                   <p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                     <!-- text input -->
                     <div class="form-group">
                       <label>Name</label>
-                      <input type="text" class="form-control" name="name" th:field="*{name}" readonly="readonly"/>
+                      <input type="text" class="form-control" name="name" th:field="*{name}" placeholder="Enter Category Name"/>
                     </div>
                     
                     <div class="form-group">
@@ -34,7 +35,12 @@
                     </div>
     				
 					<div class="box-footer">
-	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>
+	                    <button type="submit" 
+	                    	data-toggle="modal" 
+	                    	data-target="#waitingModal" 
+	                    	class="btn btn-primary">Submit</button>
+	                    	
+	                    <a class="btn btn-primary" onclick="backToList()">Back</a>
 	                </div>
                   </form>
                 </div><!-- /.box-body -->

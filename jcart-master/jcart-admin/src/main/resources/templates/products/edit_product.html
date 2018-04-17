@@ -75,6 +75,17 @@
 					  	<p th:if="${#fields.hasErrors('unitId')}" th:errors="*{unitId}" th:class="text-red">Incorrect data</p>
 						</div>
     				</div>
+    				
+    				<div class="form-group">
+						<label>Hot</label>
+						<div>
+						  <p>
+						    <input type="checkbox" th:field="*{isHot}" id="isHot"/>
+						    <label for="isHot">Product is hot or not</label>
+						  </p>
+						</div>
+						
+    				</div>
 					    				
 					<div class="box-footer">
 	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>

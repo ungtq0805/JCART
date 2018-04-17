@@ -80,10 +80,16 @@ public class CategoryController extends JCartAdminBaseController
 	}
 	
 	@RequestMapping(value="/categories/{id}", method=RequestMethod.POST)
-	public String updateCategory(Category category, Model model, RedirectAttributes redirectAttributes) {
+	public String updateCategory(@Valid @ModelAttribute("category") Category category, 
+			Model model, RedirectAttributes redirectAttributes) {
 		Category persistedCategory = catalogService.updateCategory(category);
 		logger.debug("Updated category with id : {} and name : {}", persistedCategory.getId(), persistedCategory.getName());
 		redirectAttributes.addFlashAttribute("info", "Category updated successfully");
+		return "redirect:/categories";
+	}
+	
+	@RequestMapping(value="/categories/back", method=RequestMethod.POST)
+	public String backToList(Model model) {
 		return "redirect:/categories";
 	}
 	

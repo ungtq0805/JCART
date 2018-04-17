@@ -5,6 +5,7 @@
       
       <head>
         <title>Categories - New</title>
+        <script th:src="@{'/assets/dist/js/category.js'}"></script>
     </head>
     <body>
         
@@ -15,7 +16,7 @@
                   <h3 class="box-title">Create New Category</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" th:action="@{/categories}" th:object="${category}" method="post">
+                  <form id="frmCat" role="form" th:action="@{/categories}" th:object="${category}" method="post">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                     <!-- text input -->
                     <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
@@ -38,6 +39,8 @@
 					    				
 					<div class="box-footer">
 	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>
+	                    
+	                    <a class="btn btn-primary" onclick="backToList()">Back</a>
 	                </div>
                   </form>
                 </div><!-- /.box-body -->

@@ -44,6 +44,8 @@ public class ProductForm
 	@NotNull
 	private Integer unitId;
 	
+	private Boolean isHot;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -107,6 +109,13 @@ public class ProductForm
 		this.unitId = unitId;
 	}
 	
+	public Boolean getIsHot() {
+		return isHot;
+	}
+	public void setIsHot(Boolean isHot) {
+		this.isHot = isHot;
+	}
+	
 	public Product toProduct() {
 		Product p = new Product();
 		p.setId(id);
@@ -120,6 +129,8 @@ public class ProductForm
 		//p.setImageUrl(WebUtils.IMAGES_PREFIX+id+".jpg");
 		
 		p.setUnit(new MstCommon(unitId));
+		
+		p.setIsHot(isHot);
 		
 		return p;
 	}
@@ -138,7 +149,8 @@ public class ProductForm
 		if (product.getUnit() != null) {
 			p.setUnitId(product.getUnit().getId());
 		}
-		//p.setImageUrl(WebUtils.IMAGES_PREFIX+product.getId()+".jpg");
+		
+		p.setIsHot(product.getIsHot());
 		
 		return p;
 	}
