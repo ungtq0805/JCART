@@ -82,6 +82,8 @@ public class CatalogService {
 		persistedCategory.setDescription(category.getDescription());
 		persistedCategory.setDisplayOrder(category.getDisplayOrder());
 		persistedCategory.setDisabled(category.isDisabled());
+		persistedCategory.setName(category.getName());
+		
 		return categoryRepository.save(persistedCategory);
 	}
 
@@ -110,6 +112,7 @@ public class CatalogService {
 		persistedProduct.setDescription(product.getDescription());
 		persistedProduct.setDisabled(product.isDisabled());
 		persistedProduct.setPrice(product.getPrice());
+		persistedProduct.setIsHot(product.getIsHot());
 		
 		if (product.getCategory() != null) {
 			persistedProduct.setCategory(getCategoryById(product.getCategory().getId()));

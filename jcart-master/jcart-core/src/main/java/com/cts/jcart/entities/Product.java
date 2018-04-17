@@ -57,6 +57,11 @@ public class Product implements Serializable
 	@JoinColumn(name="unit_id")
 	private MstCommon unit;
 	
+	/**
+	 * product is hot or Not
+	 */
+	private Boolean isHot = false;
+	
 	public Product() {
 		super();
 	}
@@ -146,5 +151,13 @@ public class Product implements Serializable
 	}
 	public void setUnit(MstCommon unit) {
 		this.unit = unit;
+	}
+
+	public Boolean getIsHot() {
+		return isHot;
+	}
+
+	public void setIsHot(Boolean isHot) {
+		this.isHot = isHot;
 	}
 }
