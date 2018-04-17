@@ -33,7 +33,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cts.jcart.JCartException;
 import com.cts.jcart.admin.security.SecurityUtil;
+import com.cts.jcart.admin.session.keys.JCartAdminSessionKeys;
 import com.cts.jcart.admin.web.models.ProductForm;
+import com.cts.jcart.admin.web.models.ProductListForm;
 import com.cts.jcart.admin.web.utils.WebUtils;
 import com.cts.jcart.admin.web.validators.ProductFormValidator;
 import com.cts.jcart.catalog.CatalogService;
@@ -79,7 +81,21 @@ public class ProductController extends JCartAdminBaseController
 	@RequestMapping(value="/products", method=RequestMethod.GET)
 	public String listProducts(Model model,
 			@RequestParam("pageSize") Optional<Integer> pageSize,
-            @RequestParam("page") Optional<Integer> page) {
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("dispatch") Optional<String> dispatch,
+            HttpServletRequest request) {
+		
+		ProductListForm productListForm = (ProductListForm) 
+				request.getSession().getAttribute(JCartAdminSessionKeys.ADMIN_LIST_OF_PRODUCTS_SESSION_KEYS);
+		
+		if ( (dispatch.isPresent() && "changePageAndSize".equals(dispatch.get())) || 
+			productListForm == null) {
+			//save session list form at the present
+			ProductListForm.saveSessionForm(model, pageSize, page, request);
+		} else {
+			pageSize = productListForm.getPageSize();
+			page = productListForm.getPage();
+		}
 		
 		// Evaluate page size. If requested parameter is null, return initial
         // page size
@@ -110,8 +126,10 @@ public class ProductController extends JCartAdminBaseController
 	}
 
 	@RequestMapping(value="/products", method=RequestMethod.POST)
-	public String createProduct(@Valid @ModelAttribute("product") ProductForm productForm, BindingResult result, 
-			Model model, RedirectAttributes redirectAttributes) {
+	public String createProduct(@Valid @ModelAttribute("product") ProductForm productForm, 
+			BindingResult result, 
+			Model model, 
+			RedirectAttributes redirectAttributes) {
 		productFormValidator.validate(productForm, result);
 		if(result.hasErrors()){
 			return viewPrefix+"create_product";
@@ -207,5 +225,10 @@ public class ProductController extends JCartAdminBaseController
 		Product product = catalogService.cloneProductById(id);
 		model.addAttribute("product",ProductForm.fromProduct(product));
 		return viewPrefix+"create_product";
+	}
+	
+	@RequestMapping(value="/products/back", method=RequestMethod.POST)
+	public String backToList(Model model) {
+		return "redirect:/products";
 	}
 }
