@@ -5,7 +5,8 @@
       
       <head>
         <title>Users - New</title>
-    </head>
+        <script th:src="@{'/assets/dist/js/users.js'}"></script>
+      </head>
     <body>
     	<div layout:fragment="pageHeader">
           	<section class="content-header">
@@ -22,7 +23,7 @@
                   <h3 class="box-title">Create New User</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" th:action="@{/users}" th:object="${user}" method="post" enctype="multipart/form-data">
+                  <form id="frmUser" role="form" th:action="@{/users}" th:object="${user}" method="post" enctype="multipart/form-data">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                     <!-- text input -->
                     <div class="form-group" th:classappend="${#fields.hasErrors('userName')}? 'has-error'">
@@ -87,6 +88,7 @@
     				
 					<div class="box-footer">
 	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>
+	                    <a class="btn btn-primary" onclick="backToList()">Back</a>
 	                </div>
                   </form>
                 </div><!-- /.box-body -->

@@ -60,23 +60,23 @@
 			        <div th:if="${users.totalPages != 1}" class="form-group col-md-11 pagination-centered">
 			            <ul class="pagination">
 			                <li th:class="${users.number == 0} ? disabled">
-			                    <a class="pageLink" th:href="@{/users(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+			                    <a class="pageLink" th:href="@{/users(pageSize=${selectedPageSize}, page=1, dispatch='changePageAndSize')}">&laquo;</a>
 			                </li>
 			                <li th:class="${users.number == 0} ? disabled">
-			                    <a class="pageLink" th:href="@{/users(pageSize=${selectedPageSize}, page=${users.number})}">&larr;</a>
+			                    <a class="pageLink" th:href="@{/users(pageSize=${selectedPageSize}, page=${users.number}, dispatch='changePageAndSize')}">&larr;</a>
 			                </li>
 			                <li th:class="${users.number == (page - 1)} ? 'active pointer-disabled'"
 			                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-			                    <a class="pageLink" th:href="@{/users(pageSize=${selectedPageSize}, page=${page})}"
+			                    <a class="pageLink" th:href="@{/users(pageSize=${selectedPageSize}, page=${page}, dispatch='changePageAndSize')}"
 			                       th:text="${page}"></a>
 			                </li>
 			                <li th:class="${users.number + 1 == users.totalPages} ? disabled">
 			                    <a class="pageLink"
-			                       th:href="@{/users(pageSize=${selectedPageSize}, page=${users.number + 2})}">&rarr;</a>
+			                       th:href="@{/users(pageSize=${selectedPageSize}, page=${users.number + 2}, dispatch='changePageAndSize')}">&rarr;</a>
 			                </li>
 			                <li th:class="${users.number + 1 == users.totalPages} ? disabled">
 			                    <a class="pageLink"
-			                       th:href="@{/users(pageSize=${selectedPageSize}, page=${users.totalPages})}">&raquo;</a>
+			                       th:href="@{/users(pageSize=${selectedPageSize}, page=${users.totalPages}, dispatch='changePageAndSize')}">&raquo;</a>
 			                </li>
 			            </ul>
 			        </div>

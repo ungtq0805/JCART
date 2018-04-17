@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 function changePageAndSize() {
 	$('#pageSizeSelect').change(function(evt) {
-		window.location.replace("/users?pageSize=" + this.value + "&page=1");
+		window.location.replace("/users?pageSize=" + this.value + "&page=1&dispatch=changePageAndSize");
 	});
 }
 
@@ -16,4 +16,8 @@ function deleteUser() {
 	 var userId = $('#userId').val();
 	 var url = '/users/remove/' + userId;
 	 window.location = url;
+}
+
+function backToList() {
+	$('#frmUser').attr('action', "/users/back").submit();
 }

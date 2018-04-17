@@ -38,7 +38,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cts.jcart.JCartException;
 import com.cts.jcart.admin.security.CustomUserDetailsService;
 import com.cts.jcart.admin.security.SecurityUtil;
+import com.cts.jcart.admin.session.keys.JCartAdminSessionKeys;
 import com.cts.jcart.admin.web.models.UserForm;
+import com.cts.jcart.admin.web.models.UserListForm;
 import com.cts.jcart.admin.web.utils.WebUtils;
 import com.cts.jcart.admin.web.validators.UserValidator;
 import com.cts.jcart.entities.Role;
@@ -75,7 +77,21 @@ public class UserController extends JCartAdminBaseController
 	@RequestMapping(value="/users", method=RequestMethod.GET)
 	public String listUsers(Model model,
 			@RequestParam("pageSize") Optional<Integer> pageSize,
-            @RequestParam("page") Optional<Integer> page) {
+            @RequestParam("page") Optional<Integer> page,
+            @RequestParam("dispatch") Optional<String> dispatch,
+            HttpServletRequest request) {
+		UserListForm userListForm = (UserListForm) 
+				request.getSession().getAttribute(JCartAdminSessionKeys.ADMIN_LIST_OF_USERS_SESSION_KEYS);
+		
+		if ( (dispatch.isPresent() && "changePageAndSize".equals(dispatch.get())) || 
+			userListForm == null) {
+			//save session list form at the present
+			UserListForm.saveSessionForm(model, pageSize, page, request);
+		} else {
+			pageSize = userListForm.getPageSize();
+			page = userListForm.getPage();
+		}
+		
 		// Evaluate page size. If requested parameter is null, return initial
         // page size
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
@@ -291,5 +307,10 @@ public class UserController extends JCartAdminBaseController
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	@RequestMapping(value="/users/back", method=RequestMethod.POST)
+	public String backToList(Model model) {
+		return "redirect:/users";
 	}
 }
