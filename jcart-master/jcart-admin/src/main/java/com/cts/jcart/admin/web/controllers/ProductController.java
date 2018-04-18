@@ -203,7 +203,10 @@ public class ProductController extends JCartAdminBaseController
 	 */
 	@RequestMapping(value="/products/images/{productId}", method=RequestMethod.GET)
 	@ResponseBody
-	public byte[] showProductImage(@PathVariable String productId, HttpServletRequest request, HttpServletResponse response) {
+	public byte[] showProductImage(
+			@PathVariable String productId, 
+			HttpServletRequest request, 
+			HttpServletResponse response) {
 		try {
 			File serverFile = new File(messageSource.getMessage(WebUtils.IMAGES_PRODUCTS_DIR, null, null) + productId + ".jpg");
 		    return Files.readAllBytes(serverFile.toPath());

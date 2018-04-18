@@ -30,6 +30,7 @@
 							<thead>
 								<tr>
 									<th style="width: 10px">#</th>
+									<th>Image</th>
 									<th>Name</th>
 									<th>Description</th>
 									<th>Edit</th>
@@ -38,6 +39,13 @@
 							<tbody>
 								<tr th:each="product,iterStat : ${products}">
 									<td th:text="${iterStat.count}">1</td>
+									<td>
+										<img alt="" 
+											src="image.jpg" 
+											th:src="@{'/products/images/{imageUrl}.jpg'(imageUrl=${product.id})}" 
+											height="50" 
+											width="50"/>
+									</td>
 									<td th:text="${product.name}">Product Name</td>
 									<td th:text="${product.description}">Product Description</td>
 									<td>
