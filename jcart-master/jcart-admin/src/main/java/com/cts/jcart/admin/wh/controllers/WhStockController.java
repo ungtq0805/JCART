@@ -45,8 +45,29 @@ public class WhStockController extends WhAbstractController {
      */
     @RequestMapping(value = "/wh/stocks", method = RequestMethod.GET)
     public String showInflows(ModelMap model) {
-        List<WhInflow> inflows = inflowsData.getInFlowsActive();
+        return loadStocks(model);
+    }
+    
+    /**
+     * @author ungtq
+     * lOAD STOCKS
+     * @param model
+     * @return String
+     */
+    private String loadStocks(ModelMap model){
+    	List<WhInflow> inflows = inflowsData.getInFlowsActive();
         model.addAttribute("inflows", inflows);
         return viewPrefix + "stock";
+    }
+    
+    /**
+     * Gets inflows (with the amount left, i.e. without outflow data) and renders them
+     * @param model map collection of parameters which can be used in the jsp file
+     * @return name which will be resolved into the jsp page using
+     * apache tiles configuration in the stock.xml file
+     */
+    @RequestMapping(value = "/wh/stocks/back", method = RequestMethod.POST)
+    public String backInStock(ModelMap model) {
+        return loadStocks(model);
     }
 }

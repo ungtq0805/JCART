@@ -15,3 +15,7 @@ function backToList() {
 function backToListInflow() {
 	$('#frmUpdateInflow').attr('action', "/inflows/back").submit();
 }
+
+function backToListInStock() {
+	$('#frmCreateOutflow').attr('action', "/wh/stocks/back").submit();
+}
