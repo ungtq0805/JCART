@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,11 +38,15 @@ public class ProductController extends JCartSiteBaseController{
 	@Override
 	protected String getHeaderTitle(){
 		return "Product";
-	}	
+	}
+	
+	@ModelAttribute("categories")
+	public List<Category> categoriesList(){
+		return catalogService.getPreviewCategories();
+	}
 	
 	@RequestMapping("/products/{sku}")
-	public String product(@PathVariable String sku, Model model)
-	{
+	public String product(@PathVariable String sku, Model model){
 		Product product = catalogService.getProductBySku(sku);
 		model.addAttribute("product", product);
 		return "product";
@@ -74,11 +79,6 @@ public class ProductController extends JCartSiteBaseController{
 		Category category = catalogService.getCategoryById(Integer.parseInt(catId));
 		model.addAttribute("catSelectedId", catId);
 		model.addAttribute("products", category.getProducts());
-		
-		//get preview categories
-		List<Category> previewCategories = catalogService.getPreviewCategories();
-		model.addAttribute("categories", previewCategories);
-		
 		return "products";
 	}
 }

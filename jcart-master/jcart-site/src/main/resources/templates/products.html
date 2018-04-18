@@ -223,7 +223,7 @@
 				                </a>
 				                <div class="card-body">
 				                  <h4 class="card-title">
-				                    <a href="#" th:text="${product.name}"></a>
+				                    <a href="#" th:text="${product.name}" th:href="@{/products/{sku}(sku=${product.sku})}"></a>
 				                  </h4>
 				                  <h5 th:text="${#numbers.formatDecimal(product.price,0, 'COMMA', 2, 'POINT')}">$24.99</h5>
 				                  <p class="card-text" th:text="${product.description}"></p>
