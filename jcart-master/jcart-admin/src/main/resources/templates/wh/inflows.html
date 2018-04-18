@@ -75,7 +75,7 @@
                   </table>
                 </div><!-- /.box-body -->
                 
-                <div class="row" th:if="${not #lists.isEmpty(inflows)}">
+                <div class="row" th:if="${not #lists.isEmpty(inflows)}" onchange="changePageAndSize()">
 			        <div class="form-group col-md-1">
 			            <select class="form-control pagination" id="pageSizeSelect">
 			                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"

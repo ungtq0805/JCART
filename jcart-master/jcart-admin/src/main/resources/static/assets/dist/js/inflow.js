@@ -1,11 +1,5 @@
-$(document).ready(function() {
-	changePageAndSize();
-});
-
 function changePageAndSize() {
-	$('#pageSizeSelect').change(function(evt) {
-		window.location.replace("/wh/inflows?pageSize=" + this.value + "&page=1&dispatch=changePageAndSize");
-	});
+	window.location.replace("/wh/inflows?pageSize=" + $('#pageSizeSelect').val() + "&page=1&dispatch=changePageAndSize");
 }
 
 function showDeleteModal(whId) {

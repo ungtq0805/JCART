@@ -121,4 +121,9 @@ public class WhWarehousesController extends WhAbstractController {
         warehousesData.removeById((long)id);
         return "redirect:/warehouses";
     }
+    
+    @RequestMapping(value="/warehouse/back", method=RequestMethod.POST)
+	public String backToList(Model model) {
+		return "redirect:/warehouses";
+	}
 }

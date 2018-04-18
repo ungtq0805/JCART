@@ -7,3 +7,11 @@ function loadBody() {
 	navInventory.addClass('aria-expanded');
 	navInventory.attr('aria-expanded', 'true'); 
 }
+
+function backToList() {
+	$('#whWareHouseForm').attr('action', "/warehouse/back").submit();
+}
+
+function backToListInflow() {
+	$('#frmUpdateInflow').attr('action', "/inflows/back").submit();
+}

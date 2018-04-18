@@ -35,7 +35,7 @@
                   <h3 class="box-title">Edit WareHouse</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form" th:action="@{/wh/update/{id}(id=${warehouse.id})}" th:object="${warehouse}" method="post">
+                  <form id="whWareHouseForm" role="form" th:action="@{/wh/update/{id}(id=${warehouse.id})}" th:object="${warehouse}" method="post">
                   	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}" th:class="text-red">Incorrect data</p>
                   	
                     <!-- text input -->
@@ -59,6 +59,7 @@
     				
 					<div class="box-footer">
 	                    <button type="submit" data-toggle="modal" data-target="#waitingModal" class="btn btn-primary">Submit</button>
+	                    <a class="btn btn-primary" onclick="backToList()">Back</a>
 	                </div>
                   </form>
                 </div><!-- /.box-body -->
