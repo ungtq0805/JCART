@@ -85,21 +85,28 @@ public class ProductController extends JCartAdminBaseController
             @RequestParam("selectedCat") Optional<Integer> selectedCat,
             HttpServletRequest request) {
 		
+		//get the session
 		ProductListForm productListForm = (ProductListForm) 
 				request.getSession().getAttribute(JCartAdminSessionKeys.ADMIN_LIST_OF_PRODUCTS_SESSION_KEYS);
 		
+		//declare cateId default
 		Integer catId = null;
 
+		//if on change or select on the page size
 		if ((dispatch.isPresent() && "changePageAndSize".equals(dispatch.get())) || 
 			productListForm == null) {
 			
+			//change category combox on products List
 			if ((dispatch.isPresent() && "changePageAndSize".equals(dispatch.get()))) {
-				catId = selectedCat.get();
+				if (selectedCat.isPresent()) {
+					catId = selectedCat.get();
+				}
 			}
 			
 			//save session list form at the present
 			ProductListForm.saveSessionForm(model, pageSize, page, request, catId);
 		} else {
+			//get session and set to variable
 			pageSize = productListForm.getPageSize();
 			page = productListForm.getPage();
 			catId = productListForm.getSelectedCatId();
