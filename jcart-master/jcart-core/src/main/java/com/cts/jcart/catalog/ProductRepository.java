@@ -34,4 +34,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 	
 	@Query("select p from Product p where p.disabled = false")
 	Page<Product> findActiveProducts(Pageable pageable);
+	
+	@Query("select p from Product p where p.disabled = false and p.category.id=?1")
+	Page<Product> findActiveProductsByCatId(Pageable pageable, int catId);
 }

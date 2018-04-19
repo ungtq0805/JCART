@@ -35,6 +35,16 @@ public class CatalogService {
 		return categoryRepository.findAll();
 	}
 	
+	public List<Category> findAllActiveCategories(boolean isAddBlankObject) {
+		List<Category> lstCat = categoryRepository.findAllActive();
+		
+		if (isAddBlankObject) {
+			lstCat.add(0, new Category(-1));
+		}
+		
+		return lstCat;
+	}
+	
 	public List<Product> getAllProducts() {
 		return productRepository.findAll();
 	}
@@ -56,6 +66,23 @@ public class CatalogService {
 	 */
 	public Page<Product> findActiveProducts(Pageable pageable) {
 		return productRepository.findActiveProducts(pageable);
+	}
+	
+	/**
+	 * Find active product
+	 * @author ungtq
+	 * @param pageable
+	 * @return Page<Product>
+	 */
+	public Page<Product> findActiveProductsByCatId(Pageable pageable, Integer catId) {
+		Page<Product> pageProduct = null;
+		if (catId == null || catId == -1) {
+			pageProduct = findActiveProducts(pageable);
+		} else {
+			pageProduct = productRepository.findActiveProductsByCatId(pageable, catId);
+		}
+		 
+		return pageProduct;
 	}
 
 	public Category getCategoryByName(String name) {
