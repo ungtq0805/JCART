@@ -63,14 +63,13 @@ public class ProductController extends JCartAdminBaseController
 	private MasterCommonService masterCommonService;
 	
 	@Override
-	protected String getHeaderTitle()
-	{
+	protected String getHeaderTitle(){
 		return "Manage Products";
 	}
 	
 	@ModelAttribute("categoriesList")
 	public List<Category> categoriesList(){
-		return catalogService.getAllCategories();
+		return catalogService.findAllActiveCategories(true);
 	}
 	
 	@ModelAttribute("unitsList")
@@ -83,18 +82,27 @@ public class ProductController extends JCartAdminBaseController
 			@RequestParam("pageSize") Optional<Integer> pageSize,
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("dispatch") Optional<String> dispatch,
+            @RequestParam("selectedCat") Optional<Integer> selectedCat,
             HttpServletRequest request) {
 		
 		ProductListForm productListForm = (ProductListForm) 
 				request.getSession().getAttribute(JCartAdminSessionKeys.ADMIN_LIST_OF_PRODUCTS_SESSION_KEYS);
 		
-		if ( (dispatch.isPresent() && "changePageAndSize".equals(dispatch.get())) || 
+		Integer catId = null;
+
+		if ((dispatch.isPresent() && "changePageAndSize".equals(dispatch.get())) || 
 			productListForm == null) {
+			
+			if ((dispatch.isPresent() && "changePageAndSize".equals(dispatch.get()))) {
+				catId = selectedCat.get();
+			}
+			
 			//save session list form at the present
-			ProductListForm.saveSessionForm(model, pageSize, page, request);
+			ProductListForm.saveSessionForm(model, pageSize, page, request, catId);
 		} else {
 			pageSize = productListForm.getPageSize();
 			page = productListForm.getPage();
+			catId = productListForm.getSelectedCatId();
 		}
 		
 		// Evaluate page size. If requested parameter is null, return initial
@@ -106,7 +114,8 @@ public class ProductController extends JCartAdminBaseController
         // param. decreased by 1.
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
         
-        Page<Product> products = catalogService.findActiveProducts(new PageRequest(evalPage, evalPageSize));
+        Page<Product> products = catalogService.findActiveProductsByCatId(
+        			new PageRequest(evalPage, evalPageSize), catId);
         
 		Pager pager = new Pager(products.getTotalPages(), products.getNumber(), BUTTONS_TO_SHOW);
 		
@@ -114,6 +123,7 @@ public class ProductController extends JCartAdminBaseController
         model.addAttribute("selectedPageSize", evalPageSize);
         model.addAttribute("pageSizes", PAGE_SIZES);
         model.addAttribute("pager", pager);
+        model.addAttribute("catId", catId);
 		
 		return viewPrefix+"products";
 	}

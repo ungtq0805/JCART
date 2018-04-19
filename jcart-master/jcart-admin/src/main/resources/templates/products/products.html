@@ -8,7 +8,7 @@
 <title>Products</title>
 	<script th:src="@{'/assets/dist/js/products.js'}"></script>
 </head>
-<body>
+<body onload="loadProduct()">
 
 	<div layout:fragment="content">
 		<div class="row">
@@ -22,6 +22,20 @@
 									class="fa fa-plus-circle"></i> New Product</a>
 							</div>
 						</div>
+						<br/>
+						<div class="form-group">
+							<label>Category</label>
+							<div>
+								<select id="selectedCat" 
+									class="form-control" 
+									onchange="changeCateOnProducts()">
+								  <option th:each="cat : ${categoriesList}" 
+								          th:value="${cat.id}" 
+								          th:text="${cat.name}">Category</option>
+								</select>
+							</div>
+							<input type="hidden" id="catId" th:value="${catId}"/>
+	    				</div>
 					</div>
 					
 					<!-- /.box-header -->
@@ -82,23 +96,23 @@
 				        <div th:if="${products.totalPages != 1}" class="form-group col-md-11 pagination-centered">
 				            <ul class="pagination">
 				                <li th:class="${products.number == 0} ? disabled">
-				                    <a class="pageLink" th:href="@{/products(pageSize=${selectedPageSize}, page=1, dispatch='changePageAndSize')}">&laquo;</a>
+				                    <a class="pageLink" th:href="@{/products(pageSize=${selectedPageSize}, page=1, dispatch='changePageAndSize', selectedCat=${catId})}">&laquo;</a>
 				                </li>
 				                <li th:class="${products.number == 0} ? disabled">
-				                    <a class="pageLink" th:href="@{/products(pageSize=${selectedPageSize}, page=${products.number}, dispatch='changePageAndSize')}">&larr;</a>
+				                    <a class="pageLink" th:href="@{/products(pageSize=${selectedPageSize}, page=${products.number}, dispatch='changePageAndSize', selectedCat=${catId})}">&larr;</a>
 				                </li>
 				                <li th:class="${products.number == (page - 1)} ? 'active pointer-disabled'"
 				                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-				                    <a class="pageLink" th:href="@{/products(pageSize=${selectedPageSize}, page=${page}, dispatch='changePageAndSize')}"
+				                    <a class="pageLink" th:href="@{/products(pageSize=${selectedPageSize}, page=${page}, dispatch='changePageAndSize', selectedCat=${catId})}"
 				                       th:text="${page}"></a>
 				                </li>
 				                <li th:class="${products.number + 1 == products.totalPages} ? disabled">
 				                    <a class="pageLink"
-				                       th:href="@{/products(pageSize=${selectedPageSize}, page=${products.number + 2}, dispatch='changePageAndSize')}">&rarr;</a>
+				                       th:href="@{/products(pageSize=${selectedPageSize}, page=${products.number + 2}, dispatch='changePageAndSize', selectedCat=${catId})}">&rarr;</a>
 				                </li>
 				                <li th:class="${products.number + 1 == products.totalPages} ? disabled">
 				                    <a class="pageLink"
-				                       th:href="@{/products(pageSize=${selectedPageSize}, page=${products.totalPages}, dispatch='changePageAndSize')}">&raquo;</a>
+				                       th:href="@{/products(pageSize=${selectedPageSize}, page=${products.totalPages}, dispatch='changePageAndSize', selectedCat=${catId})}">&raquo;</a>
 				                </li>
 				            </ul>
 				        </div>

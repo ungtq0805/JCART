@@ -19,6 +19,7 @@ public class ProductListForm {
 	private Model model;
 	private Optional<Integer> pageSize;
 	private Optional<Integer> page;
+	private Integer selectedCatId;
 	
 	public Model getModel() {
 		return model;
@@ -38,7 +39,12 @@ public class ProductListForm {
 	public void setPage(Optional<Integer> page) {
 		this.page = page;
 	}
-	
+	public Integer getSelectedCatId() {
+		return selectedCatId;
+	}
+	public void setSelectedCatId(Integer selectedCatId) {
+		this.selectedCatId = selectedCatId;
+	}
 	/**
 	 * save session list form
 	 * @param request
@@ -46,7 +52,8 @@ public class ProductListForm {
 	public static void saveSessionForm(Model model, 
 			Optional<Integer> pageSize,
 			Optional<Integer> page,
-			HttpServletRequest request) {
+			HttpServletRequest request,
+			Integer catId) {
 		ProductListForm productListForm = (ProductListForm) 
 				request.getSession().getAttribute(JCartAdminSessionKeys.ADMIN_LIST_OF_PRODUCTS_SESSION_KEYS);
 		if (productListForm == null || 
@@ -56,6 +63,7 @@ public class ProductListForm {
 		productListForm.setModel(model);
 		productListForm.setPageSize(pageSize);
 		productListForm.setPage(page);
+		productListForm.setSelectedCatId(catId);
 		request.getSession().setAttribute(JCartAdminSessionKeys.ADMIN_LIST_OF_PRODUCTS_SESSION_KEYS, 
 			productListForm);
 	}
