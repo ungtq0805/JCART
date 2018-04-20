@@ -64,6 +64,13 @@ https://github.com/Colptha/spring-warehouse-demo(recommend)
 https://github.com/michal21386/OrderingSystem
 
 
+////File management system
+https://github.com/crai9/DocMan (Spring + MYSQL)
+https://github.com/Levu93/DocumentManagmentSystem
+
+
+
+
 JAVAFX
 https://github.com/playerony/Warehouse-Desktop
 https://github.com/playerony/Warehouse.JavaFX-Hibernate
@@ -113,3 +120,106 @@ applyDate
 approvePerson
 approveDate
 
+
+
+-------------------------CAU 1---------------------------
+- SPACECHARTの プロジェクト ：
+1) Exkeihi - Cosmo
+2) Daito
+
+- D-Circle のプロジェクト：
+1) Get Result List
+2) Order By
+3) Test V3 SMart UI
+4) Test Web API
+
+-------------------------CAU 2---------------------------
+L2 プロジェクト
+
+-------------------------CAU 3---------------------------
+- Kỹ năng viết báo cáo.
+- Kỹ năng lập kế hoạch cho bản thân.
+- Kỹ năng trình bày.
+- Kỹ năng tự tìm hiểu và giải quyết vấn đề.
+- Kỹ năng làm việc nhóm.
+
+-------------------------CAU 4---------------------------
+- Xây dựng 1 môi trường làm việc mà ai cũng muốn đến để làm việc:
+1) Lương bổng - cái này tế nhị nhưng tui thấy mới mức lương như vậy là OK, không thấp cũng không cao.
+2) KPI - đánh giá nhân viên phải rõ ràng và khách quan, hiện tại thì quy trình đánh giá nhân viên theo quý dường như là nhân viên không biết tại sao mình lại bị đánh giá A B C D, .... 
+Phải giải thích được tại sao lại đánh giá như vậy?
+3) Văn phòng làm việc: hơi nóng nhưng mà tạm ổn. 
+4) Đa dạng dự án để theo kịp sự tiến bộ của ngành IT. VD có những dự án về kỹ thuật Spring, NoSQL, ... để khi khách hàng yêu cầu thì còn kịp đáp ứng.
+Không những chỉ làm dự án offshore cho các khách hàng Nhật mà còn làm dự án cho những khách hàng ngoài nước Nhật.
+Hoặc là 1 tháng bộ phận training làm slide nho nhỏ giới thiệu về những kỹ thuật mới để chia sẻ với các lập trình viên của AIT.
+
+-------------------------CAU 5---------------------------
+Hiện tại ở AIT tui có 3 điều muốn làm:
+1) Nâng cao tiếng Nhật thông qua quá trình làm việc của các dự án
+Cụ thể: 
+- Học tiếng Nhật ở ngoài công ty sau giờ làm việc. 
+- Đọc mail của khách hàng gửi thông qua các yêu cầu của dự án. 
+- Đọc và làm việc trên tài liệu tiếng Nhật, ko hiểu thì hỏi phiên dịch hoặc người nào có năng lực tiếng Nhật cao hơn. 
+2) Làm những dự án về Java, tìm hiểu về các sản phẩm của AIT là POWER-EGG
+3) Làm tốt nhiệm vụ của mình ở vị trí hiện tại
+
+-------------------------CAU 6---------------------------
+- Chưa biết
+
+-------------------------CAU 7---------------------------
+- Chưa biết
+
+-------------------------CAU 8---------------------------
+- Tiếng Nhật N3 sau 3 năm
+
+-------------------------CAU 9---------------------------
+
+-------------------------CAU 10---------------------------
+
+
+Chị Trang ơi, hỗ trợ giúp em cái trường hợp này với.
+S:\(BiMat)Projects\VNSIDEV1\XDBX_ScenarioTestSpec VN.xlsx
+-> sheet ScenarioTest (準備内容)
+-> dòng 87 đến 105
+em không biết cách tạo 通知 thông báo ứng với 
+a) ②　Khi 対応状況 tình trạng đối ứng  đa ở trạng thái 「対応済 đã đối ứng」 
+b) ③　Khi 承認状況 tình trạng approve  đã được ở trạng thái 「承認 approve」
+c) ④　Khi 承認状況 tình trạng approve ở trạng thái 「差戻し send back」
+d) ⑤　Khi đã đăng ký コメント comment 
+
+
+Trong quá trình test thì lại phát sinh 1 hiện tượng sau:
+
+*[Hiện tượng]*
+- Không search được hạng mục 個人用絞り込み ở SMARTPHONE.
+
+[Trình tự tái hiện]
+1. Ở bảng WEB, Search 個人用絞り込み thì ra được 1 dòng.
+2. Ở bảng SMARTPHONE, search 個人用絞り込み thì ra được toàn bộ các dòng. 
+(Chi tiết có thể tham khảo Hardcopy XDBX_ScenarioTestSpec VN_43_個人用絞り込み.xlsx)
+
+[Mong muốn]
+- Ở bảng SMARTPHONE, search 個人用絞り込み hiển thị dữ liệu search giống như bên bảng WEB.
+
+
+Phần A-140F - Function test ước tính còn 40%
+P3-2-2: còn lại phần apply đa năng bên nhóm PE chưa phát triển xong nên chưa test.
+P4-2-1: phần chọn điều kiện hiển thị layout bên nhóm PE chưa phát triển xong nên chưa test.
+P4-2-2: còn lại phần apply đa năng bên nhóm PE chưa phát triển xong nên chưa test.
+
+Phần XDBX ScenarioTest test tước tính còn 40%
+Dự định phần này em sẽ xong vào ngày thứ 6 tuần này.
+D:\Exkeihi\properties,D:\Exkeihi\resource,D:\PE_GIT\v_2_10c\pe4j\properties,D:\PE_GIT\v_2_10c\pe4j\properties
+
+
+URL:	http://localhost:8080/pe4j/QST/QST0101l.jsf
+DB:	pe211c_20180417
+Login:	ooishi
+
+145,480
+
+
+日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社
+日之出食品株式会社日之出食品株式会社
+日之出食品株式会社日之出食品株式会社
+日之出食品株式会社日之出食品株式会社
