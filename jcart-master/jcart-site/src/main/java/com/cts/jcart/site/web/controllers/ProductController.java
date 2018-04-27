@@ -48,6 +48,7 @@ public class ProductController extends JCartSiteBaseController{
 	@RequestMapping("/products/{sku}")
 	public String product(@PathVariable String sku, Model model){
 		Product product = catalogService.getProductBySku(sku);
+		model.addAttribute("catSelectedId", product.getCategory().getId());
 		model.addAttribute("product", product);
 		return "product";
 	}

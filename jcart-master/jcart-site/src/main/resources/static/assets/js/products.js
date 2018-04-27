@@ -1,4 +1,4 @@
-function onLoadProducts() {
+function selectedGroupCat() {
 	var catSelectedIdVal = $("#catSelectedId").val();
 	var selectedGroupCat = $("#cat" + catSelectedIdVal);
 	
@@ -6,3 +6,10 @@ function onLoadProducts() {
 	selectedGroupCat.attr('class', 'list-group-item active');
 }
 
+function onLoadProducts() {
+	selectedGroupCat();
+}
+
+function onLoadProductDetail() {
+	selectedGroupCat();
+}
