@@ -37,19 +37,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home
+            <li id="navMainPageHome" class="nav-item active">
+              <a class="nav-link" th:href="@{'/home'}">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+            <li id="navMainPageAbout" class="nav-item">
+              <a class="nav-link" th:href="@{'/about'}">About</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
+            <li id="navMainPageServices" class="nav-item">
+              <a class="nav-link" th:href="@{'/services'}">Services</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+            <li id="navMainPageContact" class="nav-item">
+              <a class="nav-link" th:href="@{'/contact'}">Contact</a>
             </li>
           </ul>
         </div>

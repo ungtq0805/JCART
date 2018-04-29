@@ -25,8 +25,7 @@ public class HomeController extends JCartSiteBaseController
 	private CatalogService catalogService;
 	
 	@Override
-	protected String getHeaderTitle()
-	{
+	protected String getHeaderTitle(){
 		return "Home";
 	}
 	
@@ -48,4 +47,18 @@ public class HomeController extends JCartSiteBaseController
 		return "category";
 	}
 	
+	@RequestMapping("/about")
+	public String gotoAbout(){
+		return "about";
+	}
+	
+	@RequestMapping("/services")
+	public String gotoServices(){
+		return "services";
+	}
+	
+	@RequestMapping("/contact")
+	public String gotoContact(){
+		return "contact";
+	}
 }
