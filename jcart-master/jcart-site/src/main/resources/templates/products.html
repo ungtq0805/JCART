@@ -218,8 +218,10 @@
 				                	<!-- 
 				                	<img class="card-img-top" src="http://placehold.it/700x400" alt=""/>
 				                	 -->
-				                	<img alt="" src="image.jpg" style="height: 144px; width: 252px" 
-				                		th:src="@{'/products/images/{imageUrl}.jpg'(imageUrl=${product.id})}"/>
+				                	  <a th:href="@{/products/{sku}(sku=${product.sku})}">
+				                		<img alt="" src="image.jpg" style="height: 144px; width: 252px" 
+				                			th:src="@{'/products/images/{imageUrl}.jpg'(imageUrl=${product.id})}"/>
+				                	   </a>
 				                </a>
 				                <div class="card-body">
 				                  <h4 class="card-title">
