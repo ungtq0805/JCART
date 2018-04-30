@@ -38,6 +38,7 @@ public class Product implements Serializable
 	@Column(nullable=false)
 	private String name;
 	
+	@Column(columnDefinition="text", length=65535)
 	private String description;
 	
 	@Column(nullable=false)
