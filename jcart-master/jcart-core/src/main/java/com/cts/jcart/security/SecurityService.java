@@ -162,6 +162,16 @@ public class SecurityService
 		return userRepository.findActiveUsers(pageable);
 	}
 	
+	/**
+	 * @author ungtq
+	 * Find active users with chat group
+	 * @param pageable
+	 * @return Page<User>
+	 */
+	public Page<User> findActiveUsersWithChat(Pageable pageable, String userName) {
+		return userRepository.findActiveUsersWithChat(pageable, userName);
+	}
+	
 	public User createUser(User user)
 	{
 		User userByEmail = findUserByEmail(user.getEmail());

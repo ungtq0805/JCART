@@ -60,4 +60,12 @@ public interface UserRepository extends JpaRepository<User, Integer>
 	 */
 	@Query("select u from User u where u.disabled = false")
 	Page<User> findActiveUsers(Pageable pageable);
+	
+	/**
+	 * get all user with disabled = false
+	 * @param pageable
+	 * @return
+	 */
+	@Query("select u from User u where u.disabled = false and u.userName != :userName")
+	Page<User> findActiveUsersWithChat(Pageable pageable, @Param("userName") String userName);
 }
