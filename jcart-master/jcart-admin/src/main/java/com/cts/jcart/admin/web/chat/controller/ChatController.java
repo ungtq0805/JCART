@@ -7,12 +7,13 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 import com.cts.jcart.admin.web.chat.model.ChatMessage;
+import com.cts.jcart.admin.web.controllers.JCartAdminBaseController;
 
 /**
  * Created by rajeevkumarsingh on 24/07/17.
  */
 @Controller
-public class ChatController {
+public class ChatController extends JCartAdminBaseController {
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
@@ -28,5 +29,11 @@ public class ChatController {
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;
     }
+
+	@Override
+	protected String getHeaderTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

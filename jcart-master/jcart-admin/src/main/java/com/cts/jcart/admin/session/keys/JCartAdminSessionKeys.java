@@ -23,4 +23,9 @@ public class JCartAdminSessionKeys {
 	 * LIST OF WH INFLOW FORM SESSION KEYS
 	 */
 	public static final String ADMIN_LIST_OF_INFLOWS_SESSION_KEYS = "ADMIN_LIST_OF_INFLOWS_SESSION_KEYS";
+	
+	/**
+	 * LIST OF USERS FORM SESSION KEYS - CHAT
+	 */
+	public static final String CHAT_LIST_OF_USERS_SESSION_KEYS = "CHAT_LIST_OF_USERS_SESSION_KEYS";
 }

@@ -59,4 +59,25 @@ public class UserListForm {
 		request.getSession().setAttribute(JCartAdminSessionKeys.ADMIN_LIST_OF_USERS_SESSION_KEYS, 
 			userListForm);
 	}
+	
+	/**
+	 * save session list form
+	 * @param request
+	 */
+	public static void saveSessionFormWithChat(Model model, 
+			Optional<Integer> pageSize,
+			Optional<Integer> page,
+			HttpServletRequest request) {
+		UserListForm userListForm = (UserListForm) 
+				request.getSession().getAttribute(JCartAdminSessionKeys.CHAT_LIST_OF_USERS_SESSION_KEYS);
+		if (userListForm == null || 
+			userListForm.getModel() == null) {
+			userListForm = new UserListForm();
+		}
+		userListForm.setModel(model);
+		userListForm.setPageSize(pageSize);
+		userListForm.setPage(page);
+		request.getSession().setAttribute(JCartAdminSessionKeys.CHAT_LIST_OF_USERS_SESSION_KEYS, 
+			userListForm);
+	}
 }

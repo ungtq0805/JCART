@@ -39,8 +39,7 @@ public class CategoryController extends JCartAdminBaseController
 	@Autowired private CategoryValidator categoryValidator;
 	
 	@Override
-	protected String getHeaderTitle()
-	{
+	protected String getHeaderTitle(){
 		return "Manage Categories";
 	}
 	
