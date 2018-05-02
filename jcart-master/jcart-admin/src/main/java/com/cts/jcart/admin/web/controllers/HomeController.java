@@ -101,4 +101,9 @@ public class HomeController extends JCartAdminBaseController{
 		model.addAttribute("revenue", whRemainsData.getRevenueByDateOrYm(JCartConsts.BY_MONTH, 
 				StringUtils.formatYearMonth(Calendar.getInstance().getTime()).replaceAll("/", "")));
 	}
+	
+	@RequestMapping("/chat")
+	public String gotoChatGroup(){
+		return "chat/index";
+	}
 }
