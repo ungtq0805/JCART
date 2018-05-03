@@ -15,6 +15,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,5 +90,18 @@ public class UsersListController extends JCartAdminBaseController
         model.addAttribute("pager", pager);
 		
 		return viewPrefix + "users_list";
+	}
+	
+	@RequestMapping(value="/chat/users/{id}", method=RequestMethod.GET)
+	public String gotoChatting(Model model,
+			@PathVariable Integer id,
+            HttpServletRequest request) {
+		
+		User user = securityService.getUserById(id);
+		model.addAttribute("userNameToChat", user.getUserName());
+		
+		model.addAttribute("loginUserName", getCurrentUser().getUser().getUserName());
+		
+		return viewPrefix + "chatWithUser";
 	}
 }
