@@ -40,7 +40,7 @@
                       <td th:text="${user.userName}">Name</td>
                       <td th:text="${user.email}">Email</td>
                       <td>
-                      	  <a id="editLink" th:href="@{/users/{id}(id=${user.id})}" class="btn btn-info">
+                      	  <a id="chatGroup" th:href="@{/chat/users/{id}(id=${user.id})}" class="btn btn-info">
                       	  	<i class="fa fa-wechat"></i> Chat
                       	  </a>
                       </td>
