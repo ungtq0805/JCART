@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	  layout:decorator="layout/admin/mainLayout">
   <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
       <title>Spring Boot WebSocket Chat Application | CalliCoder</title>
+      
       <link th:href="@{/assets/dist/chat/css/main.css}" rel="stylesheet"/>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+      <script th:src="@{'/assets/dist/chat/js/main.js'}"></script>
+      
+      
   </head>
   <body onload="onLoadChatWithUser()">
     <noscript>
@@ -25,32 +33,31 @@
 	        </div>
 	    </div>
 	 	-->
-	 
-	    <div id="chat-page" class="hidden">
+	 	
+	 <div layout:fragment="content">
+	    <div id="chat-page">
 	        <div class="chat-container">
 	            <div class="chat-header">
 	                <h2>Spring WebSocket Chat Demo</h2>
 	            </div>
-	            <div class="connecting">
+	            <div id="connecting" class="connecting">
 	                Connecting...
 	            </div>
-	            <ul id="messageArea">
+	            <ul id="messageArea" style="height: 400px">
 	
 	            </ul>
 	            <form id="messageForm" name="messageForm" nameForm="messageForm">
 	                <div class="form-group">
 	                    <div class="input-group clearfix">
 	                        <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
-	                        <button type="submit" class="primary">Send</button>
+	                        <button type="submit" class="primary" onclick="sendMessage(); return false;">Send</button>
 	                    </div>
 	                </div>
 	            </form>
 	        </div>
-	        <input type="hidden" id="userNameToChat" value="${userNameToChat}"/>
-	        <input type="hidden" id="loginUserName" value="${loginUserName}"/>
+	        <input type="hidden" id="userNameToChat" th:value="${userNameToChat}"/>
+	        <input type="hidden" id="loginUserName" th:value="${loginUserName}"/>
 	    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script th:src="@{'/assets/dist/chat/js/main.js'}"></script>
+	</div>
   </body>
 </html>
