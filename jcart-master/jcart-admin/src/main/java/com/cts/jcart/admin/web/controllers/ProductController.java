@@ -206,6 +206,37 @@ public class ProductController extends JCartAdminBaseController
 		}
 	}
 	
+//	/**
+//	 * Save Product to assets
+//	 * @param productForm
+//	 */
+//	private void saveProductImageToDisk(ProductForm productForm,
+//			HttpServletRequest request) {
+//		String pathFile = request.getRealPath("") + "images\\products\\";
+//		
+//		File path = new File(pathFile);
+//		if (!path.exists()) {
+//			if (path.mkdirs()) {
+//				System.out.println("Create OK");
+//			}
+//		}
+//		
+//		MultipartFile file = productForm.getImage();
+//		if (file!= null && !file.isEmpty()) {
+//			String name = pathFile + //messageSource.getMessage(WebUtils.IMAGES_PRODUCTS_DIR, null, null) + 
+//					productForm.getId() + 
+//					".jpg";
+//			try {
+//				byte[] bytes = file.getBytes();
+//				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(name)));
+//				stream.write(bytes);
+//				stream.close();
+//			} catch (Exception e) {
+//				throw new JCartException(e);
+//			}
+//		}
+//	}
+	
 	/**
 	 * @author ungtq
 	 * Remove Product 
