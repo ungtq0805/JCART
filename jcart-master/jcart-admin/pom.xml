@@ -10,6 +10,7 @@
 		<version>1.0</version>
 	</parent>
 	<artifactId>jcart-admin</artifactId>
+	<packaging>war</packaging> 
 
 	<build>
 		<plugins>

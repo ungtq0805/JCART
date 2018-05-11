@@ -146,7 +146,8 @@ public class ProductController extends JCartAdminBaseController
 	public String createProduct(@Valid @ModelAttribute("product") ProductForm productForm, 
 			BindingResult result, 
 			Model model, 
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes,
+			HttpServletRequest request) {
 		productFormValidator.validate(productForm, result);
 		if(result.hasErrors()){
 			return viewPrefix+"create_product";
@@ -154,7 +155,7 @@ public class ProductController extends JCartAdminBaseController
 		Product product = productForm.toProduct();
 		Product persistedProduct = catalogService.createProduct(product);
 		productForm.setId(product.getId());
-		this.saveProductImageToDisk(productForm);
+		this.saveProductImageToDisk(productForm, request);
 		logger.debug("Created new product with id : {} and name : {}", persistedProduct.getId(), persistedProduct.getName());
 		redirectAttributes.addFlashAttribute("info", "Product created successfully");
 		return "redirect:/products";
@@ -168,18 +169,27 @@ public class ProductController extends JCartAdminBaseController
 	}
 	
 	@RequestMapping(value="/products/{id}", method=RequestMethod.POST)
-	public String updateProduct(@Valid @ModelAttribute("product") ProductForm productForm, BindingResult result, 
-			Model model, RedirectAttributes redirectAttributes) {
+	public String updateProduct(@Valid @ModelAttribute("product") ProductForm productForm, 
+			BindingResult result, 
+			Model model, 
+			RedirectAttributes redirectAttributes,
+			HttpServletRequest request) {
 		
 		Product product = productForm.toProduct();
 		Product persistedProduct = catalogService.updateProduct(product);
-		this.saveProductImageToDisk(productForm);
+		this.saveProductImageToDisk(productForm, request);
 		logger.debug("Updated product with id : {} and name : {}", persistedProduct.getId(), persistedProduct.getName());
 		redirectAttributes.addFlashAttribute("info", "Product updated successfully");
 		return "redirect:/products";
 	}
 	
-	private void saveProductImageToDisk(ProductForm productForm) {
+	/**
+	 * Save Product to assets
+	 * @param productForm
+	 */
+	private void saveProductImageToDisk(ProductForm productForm,
+			HttpServletRequest request) {
+		System.out.println(request.getRealPath("/images/"));
 		MultipartFile file = productForm.getImage();
 		if (file!= null && !file.isEmpty()) {
 			String name = messageSource.getMessage(WebUtils.IMAGES_PRODUCTS_DIR, null, null) + 
