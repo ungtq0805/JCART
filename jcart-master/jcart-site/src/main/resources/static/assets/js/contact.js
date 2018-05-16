@@ -3,6 +3,10 @@ function loadContact() {
 	selectedMain.addClass('class');
 	selectedMain.attr('class', 'nav-item');
 	
+	var selectedProducts = $("#navMainPageProducts");
+	selectedProducts.addClass('class');
+	selectedProducts.attr('class', 'nav-item');
+	
 	var selectedAbout = $("#navMainPageAbout");
 	selectedAbout.addClass('class');
 	selectedAbout.attr('class', 'nav-item');
