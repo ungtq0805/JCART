@@ -177,17 +177,6 @@ Cụ thể:
 -------------------------CAU 10---------------------------
 
 
-Chị Trang ơi, hỗ trợ giúp em cái trường hợp này với.
-S:\(BiMat)Projects\VNSIDEV1\XDBX_ScenarioTestSpec VN.xlsx
--> sheet ScenarioTest (準備内容)
--> dòng 87 đến 105
-em không biết cách tạo 通知 thông báo ứng với 
-a) ②　Khi 対応状況 tình trạng đối ứng  đa ở trạng thái 「対応済 đã đối ứng」 
-b) ③　Khi 承認状況 tình trạng approve  đã được ở trạng thái 「承認 approve」
-c) ④　Khi 承認状況 tình trạng approve ở trạng thái 「差戻し send back」
-d) ⑤　Khi đã đăng ký コメント comment 
-
-
 Trong quá trình test thì lại phát sinh 1 hiện tượng sau:
 
 *[Hiện tượng]*
@@ -217,16 +206,9 @@ DB:	pe211c_20180417
 Login:	ooishi
 
 145,480
+	
 
 
-日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社日之出食品株式会社
-日之出食品株式会社日之出食品株式会社
-日之出食品株式会社日之出食品株式会社
-日之出食品株式会社日之出食品株式会社
+WEBSITE TỔNG HỢP CÁC opensource E-COMMERCE
+https://www.ecommwar.com/ 
 
-KSC00010UI
-KRS00010UI
-
-KSC00010UI
-KSC00020UI
-KSC00030UI
