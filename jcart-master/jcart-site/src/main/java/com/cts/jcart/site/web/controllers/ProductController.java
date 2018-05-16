@@ -54,11 +54,24 @@ public class ProductController extends JCartSiteBaseController{
 	}
 	
 	@RequestMapping("/products")
-	public String searchProducts(@RequestParam(name="q", defaultValue="") String query, Model model)
-	{
-		List<Product> products = catalogService.searchProducts(query);
-		model.addAttribute("products", products);
+	public String searchProducts(@RequestParam(name="q", defaultValue="") String query, Model model){
+		
+		//Default search ALL
+//		List<Product> products = catalogService.searchProducts(query);
+//		model.addAttribute("products", products);
+//		model.addAttribute("dispatch", "product");
+		
+		
+		//Fix bug search default the first Cat
+		List<Category> lstCat = categoriesList();
+		if (lstCat != null && lstCat.size() > 0) {
+			model.addAttribute("catSelectedId", lstCat.get(0).getId());
+		}
+		
+		Category category = catalogService.getCategoryById(lstCat.get(0).getId());
+		model.addAttribute("products", category.getProducts());
 		model.addAttribute("dispatch", "product");
+		
 		return "products";
 	}
 
