@@ -18,11 +18,16 @@ Implementing contents:
 - Permission with INFLOW (with apply person and approve person), the idea base on WORKFLOW systems.
 - Pagination
 
+You should use sql-scripts/dump.sql to dump data and get the user to login
+![alt tag](image/dump_data_get_user.png)
+
+Default user is ungtq and password is P@ss0805. 
 ![alt tag](image/login.png)
 
-You should use sql-scripts/dump.sql to dump data and get the user to login
+And you should look like below screen Home for Administrator
+![alt tag](image/Admin_Home.png)
 
-![alt tag](image/dump_data_get_user.png)
+
 
 
 
