@@ -219,11 +219,15 @@ public class WhRemainsDataImpl implements WhRemainsData {
     	BigDecimal payment = null;
     	
     	if (byType.equals(JCartConsts.BY_DAY)) {
-    		payment = (BigDecimal)em.createNativeQuery(getSqlPayment(JCartConsts.BY_DAY))
-    				.setParameter("dateYmd", dateYmd).getSingleResult();
+    		payment = (BigDecimal)em.createNativeQuery(
+    				getSqlPayment(JCartConsts.BY_DAY))
+//    				.setParameter("dateYmd", dateYmd)
+    				.getSingleResult();
     	} else {
-    		payment = (BigDecimal)em.createNativeQuery(getSqlPayment(JCartConsts.BY_MONTH))
-    				.setParameter("dateYmd", dateYmd).getSingleResult();
+    		payment = (BigDecimal)em.createNativeQuery(
+    				getSqlPayment(JCartConsts.BY_MONTH))
+//    				.setParameter("dateYmd", dateYmd)
+    				.getSingleResult();
     	}
     	
     	return payment;
@@ -239,12 +243,12 @@ public class WhRemainsDataImpl implements WhRemainsData {
     	
     	if (byType.equals(JCartConsts.BY_DAY)) {
     		builder.append("SELECT COALESCE(SUM(I.amount * I.price), 0) from WH_INFLOWS I  ")
-    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMMDD') = :dateYmd ")
-    		.append(" AND I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
+//    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMMDD') = :dateYmd ")
+    		.append(" WHERE I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
     	} else {
     		builder.append("SELECT COALESCE(SUM(I.amount * I.price), 0) from WH_INFLOWS I  ")
-    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMM') = :dateYmd ")
-    		.append(" AND I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
+//    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMM') = :dateYmd ")
+    		.append(" WHERE I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
     	}
     	
     	return builder.toString();
@@ -262,11 +266,15 @@ public class WhRemainsDataImpl implements WhRemainsData {
     	BigDecimal payment = null;
     	
     	if (byType.equals(JCartConsts.BY_DAY)) {
-    		payment = (BigDecimal)em.createNativeQuery(getSqlRevenue(JCartConsts.BY_DAY))
-    				.setParameter("dateYmd", dateYmd).getSingleResult();
+    		payment = (BigDecimal)em.createNativeQuery(
+    				getSqlRevenue(JCartConsts.BY_DAY))
+//    				.setParameter("dateYmd", dateYmd)
+    				.getSingleResult();
     	} else {
-    		payment = (BigDecimal)em.createNativeQuery(getSqlRevenue(JCartConsts.BY_MONTH))
-    				.setParameter("dateYmd", dateYmd).getSingleResult();
+    		payment = (BigDecimal)em.createNativeQuery(
+    				getSqlRevenue(JCartConsts.BY_MONTH))
+//    				.setParameter("dateYmd", dateYmd)
+    				.getSingleResult();
     	}
     	
     	return payment;
@@ -283,12 +291,12 @@ public class WhRemainsDataImpl implements WhRemainsData {
     	
     	if (byType.equals(JCartConsts.BY_DAY)) {
     		builder.append("SELECT COALESCE(SUM(I.amount * I.price), 0) from WH_OUTFLOWS I  ")
-    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMMDD') = :dateYmd ")
-    		.append(" AND I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
+//    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMMDD') = :dateYmd ")
+    		.append(" WHERE I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
     	} else {
     		builder.append("SELECT COALESCE(SUM(I.amount * I.price), 0) from WH_OUTFLOWS I  ")
-    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMM') = :dateYmd ")
-    		.append(" AND I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
+//    		.append(" WHERE TO_CHAR(I.LAST_UPD_DATE, 'YYYYMM') = :dateYmd ")
+    		.append(" WHERE I.STATUSKBN ='").append(MstCmnConst.MST_STATUS_APPROVE).append("'");
     	}
     	
     	return builder.toString();
