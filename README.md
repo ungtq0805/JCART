@@ -18,8 +18,11 @@ Implementing contents:
 - Permission with INFLOW (with apply person and approve person), the idea base on WORKFLOW systems.
 - Pagination
 
-![alt tag](image/1.png)
+![alt tag](image/login.png)
 
+You should use sql-scripts/dump.sql to dump data and get the user to login
+
+![alt tag](image/dump_data_and_get_user.PNG.png)
 
 
 
