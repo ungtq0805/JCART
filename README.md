@@ -27,7 +27,8 @@ Default user is ungtq and password is P@ss0805.
 And you should look like below screen Home for Administrator
 ![alt tag](image/Admin_Home.png)
 
-
-
-
+This is category screens
+![alt tag](image/Admin_Cate_List.png)
+![alt tag](image/Admin_Cate_Delete.png)
+![alt tag](image/Admin_Cate_Edit.png)
 
