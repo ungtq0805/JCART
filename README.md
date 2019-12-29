@@ -5,6 +5,29 @@ Again I want to thank you for Mr.Sivaprasadreddy
 
 My email: ungtq0805@gmail.com
 
+**Technologies:**
+
+SpringBoot
+
+Spring Data JPA
+
+Spring Security.
+
+Bootstrap
+
+Thymeleaf.
+
+MySQL.
+
+Log4j2
+
+Junit
+
+Mockito
+
+Java Coding Coverage
+
+
 Implementing contents:
 - Connect with MySQL DB (Done)
 - Make a sequence and add it into entities (Sample with Category Entity) (Done)
