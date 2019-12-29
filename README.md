@@ -22,7 +22,10 @@ You should use sql-scripts/dump.sql to dump data and get the user to login
 ![alt tag](image/dump_data_get_user.png)
 
 Use the URL **https://localhost:9443** to connect
-Default **user** is **ungtq** and **password** is **P@ss0805**. 
+
+Default **user** is **ungtq** 
+
+**password** is **P@ss0805**. 
 ![alt tag](image/login.png)
 
 And you should look like below screen Home for Administrator
