@@ -37,3 +37,11 @@ This is category screens
 ![alt tag](image/Admin_Cate_Edit.png)
 
 **GLOBAL SITE**
+
+Use the URL **http://localhost:8080** to connect
+
+And you should look like below screen Home for Global Site
+![alt tag](image/Global_Site_Home.png)
+
+This is Product screens
+![alt tag](image/Global_Site_Product.png)
