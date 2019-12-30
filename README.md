@@ -25,7 +25,8 @@ You should use sql-scripts/dump.sql to dump data and get the user to login
 
 Use the URL **https://localhost:9443** to connect
 
-Default 
+Login information 
+
 **user** : **ungtq** 
 
 **password** is **P@ss0805**. 
