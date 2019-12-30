@@ -27,9 +27,9 @@ Use the URL **https://localhost:9443** to connect
 
 Login information 
 
-**user** : **ungtq** 
+**user**     : **ungtq** 
 
-**password** is **P@ss0805**. 
+**password** : **P@ss0805**. 
 
 ![alt tag](image/login.png)
 
