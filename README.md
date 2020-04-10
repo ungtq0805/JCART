@@ -1,11 +1,7 @@
 # JCART - This is a simple e-commerce application built with Spring.
 You should referrence in this -> https://github.com/sivaprasadreddy/jcart
 
-Again I want to thank you for Mr.Sivaprasadreddy - already
-Thanks
-
-
-Go to the next step
+Again I want to thank you for Mr.Sivaprasadreddy
 
 My email: ungtq0805@gmail.com
 
