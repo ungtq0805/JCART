@@ -1,12 +1,8 @@
 # JCART - This is a simple e-commerce application built with Spring.
 You should referrence in this -> https://github.com/sivaprasadreddy/jcart
 
-Again I want to thank you for Mr.Sivaprasadreddy - many thanks for .... test aaaaa
-Thanks
+Again I want to thank you for Mr.Sivaprasadreddy
 
-My email: ungtq0805@gmail.com
-My email: ungtq0805@gmail.com
-My email: ungtq0805@gmail.com
 My email: ungtq0805@gmail.com
 
 **Technologies:** SpringBoot, Spring Data JPA, Spring Security, Bootstrap, Thymeleaf, MySQL, Log4j2, Junit, Mockito, Java Coding Coverage.
